@@ -11,10 +11,14 @@ public class ToolController {
 
     private List<String> books;
     private Map result;
+    private ArrayList idsRemovedList;
+    private ArrayList list;
 
     public ToolController() {
 
         result = new HashMap();
+        idsRemovedList = new ArrayList();
+        list = new ArrayList();
 
         Map map = new HashMap();
 
@@ -33,11 +37,9 @@ public class ToolController {
         map1.put("category", "blended2");
 
 
-        ArrayList list = new ArrayList();
         list.add(map);
         list.add(map1);
 
-        result = new HashMap();
         result.put("table_items", list);
 
         books = new ArrayList<>();
@@ -79,37 +81,18 @@ public class ToolController {
     @DeleteMapping
     public void deleteMap(@RequestParam String id) {
 
-        result.remove("table_items");
+        HashMap mainHashMap = new HashMap();
+       for (Object o : list) {
 
-        result = new HashMap();
+          HashMap hashMap = (HashMap) o;
 
-        Map map = new HashMap();
-
-        map.put("id", "1");
-        map.put("name", "name1");
-        map.put("run_date", "2020-08-08");
-        map.put("created_date", "2019-08-08");
-        map.put("category", "blended1");
+           if(hashMap.get("id").equals(id)) {
+               mainHashMap = hashMap;
+           }
+       }
 
 
-        Map map1 = new HashMap();
-
-        map1.put("id", "2");
-        map1.put("name", "name2");
-        map1.put("run_date", "2020-08-08");
-        map1.put("created_date", "2019-08-08");
-        map1.put("category", "blended2");
-
-
-        ArrayList list = new ArrayList();
-
-        if (id.equals("1")) {
-            list.add(map1);
-        } else {
-            list.add(map);
-        }
-
-        result.put("table_items", list);
+        list.remove(mainHashMap);
 
     }
 
