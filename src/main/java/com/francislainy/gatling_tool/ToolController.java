@@ -5,19 +5,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @CrossOrigin
-@RequestMapping("/gatling_tool")
+@RequestMapping("/gatling-tool")
 @RestController
+
+/**
+ * Test commit
+ */
 public class ToolController {
 
-    private List<String> books;
+    private List<String> categories;
     private Map result;
-    private ArrayList idsRemovedList;
     private ArrayList list;
 
     public ToolController() {
 
         result = new HashMap();
-        idsRemovedList = new ArrayList();
         list = new ArrayList();
 
         Map map = new HashMap();
@@ -42,30 +44,34 @@ public class ToolController {
 
         result.put("table_items", list);
 
-        books = new ArrayList<>();
-        books.add("Hacking with Spring Boot 2.3");
-        books.add("97 Things Every Java Programmer Should Know");
-        books.add("Spring Boot: Up and Running");
+        categories = new ArrayList<>();
+        categories.add("Blended");
+        categories.add("CRS");
+        categories.add("None");
     }
+
 
     @GetMapping
     public List<String> list() {
-        return books;
+        return categories;
     }
+
 
     @PostMapping
     public void create(@RequestBody Map<String, String> payload) {
-        books.add(payload.get("title"));
+        categories.add(payload.get("title"));
     }
+
 
     @PutMapping
     public void update(@RequestBody Map<String, String> payload) {
         String oldTitle = payload.get("oldtitle");
         String newTitle = payload.get("newtitle");
-        if (books.contains(oldTitle)) {
-            books.set(books.indexOf(oldTitle), newTitle);
+        if (categories.contains(oldTitle)) {
+            categories.set(categories.indexOf(oldTitle), newTitle);
         }
     }
+
 
     //    http://localhost:8081/gatling_tool?title=TEST
 //    @DeleteMapping
@@ -82,24 +88,41 @@ public class ToolController {
     public void deleteMap(@RequestParam String id) {
 
         HashMap mainHashMap = new HashMap();
-       for (Object o : list) {
+        for (Object o : list) {
 
-          HashMap hashMap = (HashMap) o;
+            HashMap hashMap = (HashMap) o;
 
-           if(hashMap.get("id").equals(id)) {
-               mainHashMap = hashMap;
-           }
-       }
-
+            if (hashMap.get("id").equals(id)) {
+                mainHashMap = hashMap;
+            }
+        }
 
         list.remove(mainHashMap);
 
     }
 
-    @GetMapping("/table_items")
+
+    @GetMapping("/table-items")
     public Map getTableItems() {
 
         return result;
     }
 
+
+    @GetMapping("/get-categories")
+    public Map getCategories() {
+
+        Map result = new HashMap();
+        result.put("categories", categories);
+        return result;
+    }
+
+
+    @PostMapping("/create-category")
+    public void createCategory(@RequestBody Map<String, String> payload) {
+        categories.add(payload.get("category_name"));
+    }
+
 }
+
+
