@@ -8,9 +8,6 @@ import java.util.*;
 @RequestMapping("/gatling-tool")
 @RestController
 
-/**
- * Test commit
- */
 public class ToolController {
 
     private List<String> categories;
