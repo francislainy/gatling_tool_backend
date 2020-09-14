@@ -1,4 +1,4 @@
-package com.francislainy.gatling_tool;
+package com.francislainy.gatling_tool.controller;
 
 import org.springframework.web.bind.annotation.*;
 
