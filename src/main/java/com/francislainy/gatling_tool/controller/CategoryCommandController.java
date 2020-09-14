@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @CrossOrigin
-@RequestMapping("/api/gatling-tool")
+@RequestMapping("/api/gatling-tool/category")
 @RestController
 public class CategoryCommandController {
 

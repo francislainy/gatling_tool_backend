@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @CrossOrigin
-@RequestMapping("/api/gatling-tool")
+@RequestMapping("/api/gatling-tool/category")
 @RestController
 public class CategoryQueryController {
 
