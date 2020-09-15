@@ -11,4 +11,6 @@ public interface CategoryCommandService {
     UUID createCategory(CategoryCreateDto categoryCreateDto);
 
     CategoryQueryDto updateCategory(UUID id, CategoryUpdateDto categoryUpdateDto);
+
+    void deleteCategory(UUID id);
 }

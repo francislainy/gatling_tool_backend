@@ -8,7 +8,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @CrossOrigin
@@ -21,9 +23,15 @@ public class CategoryQueryController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<CategoryQueryDto>> listAllCategories() {
-        return new ResponseEntity<>(categoryQueryService.listAllCategories(), HttpStatus.OK);
+    public Map<String, List<CategoryQueryDto>> listAllCategories() {
+
+        Map result = new HashMap();
+        result.put("categories", categoryQueryService.listAllCategories());
+        return result;
+
+//        return new ResponseEntity<>(categoryQueryService.listAllCategories(), HttpStatus.OK);
     }
+
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)

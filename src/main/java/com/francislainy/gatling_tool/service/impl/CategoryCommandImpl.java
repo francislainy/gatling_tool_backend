@@ -47,5 +47,18 @@ public class CategoryCommandImpl implements CategoryCommandService {
         }
     }
 
+    @Override
+    public void deleteCategory(UUID id) {
+
+        if (categoryRepository.findById(id).isPresent()) {
+
+            CategoryEntity existingCategory = categoryRepository.findById(id).get();
+
+            categoryRepository.delete(existingCategory);
+
+        } //todo: see if needed - 14/09/2020
+
+    }
+
 
 }

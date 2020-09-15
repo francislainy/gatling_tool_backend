@@ -35,4 +35,12 @@ public class CategoryCommandController {
         return new ResponseEntity<>(categoryCommandService.updateCategory(id, categoryUpdateDto), HttpStatus.OK);
     }
 
+
+    @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteCategory(@PathVariable(value = "id") UUID id) {
+
+        categoryCommandService.deleteCategory(id);
+    }
+
 }
