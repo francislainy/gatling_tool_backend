@@ -47,6 +47,7 @@ public class CategoryCommandImpl implements CategoryCommandService {
         }
     }
 
+
     @Override
     public void deleteCategory(UUID id) {
 
@@ -56,7 +57,7 @@ public class CategoryCommandImpl implements CategoryCommandService {
 
             categoryRepository.delete(existingCategory);
 
-        } //todo: see if needed - 14/09/2020
+        }
 
     }
 
