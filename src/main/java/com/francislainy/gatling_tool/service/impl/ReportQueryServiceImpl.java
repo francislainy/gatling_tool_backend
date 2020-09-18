@@ -28,12 +28,25 @@ public class ReportQueryServiceImpl implements ReportQueryService {
         }
     }
 
+//    @Override
+//    public List<ReportQueryDto> listAllReports() {
+//
+//        List<ReportQueryDto> reportList = new ArrayList<>();
+//
+//        reportRepository.findAll().forEach(report -> {
+//            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategoryTitle(), report.getCategory().getId()));
+//        });
+//
+//        return reportList;
+//    }
+
+
     @Override
     public List<ReportQueryDto> listAllReports() {
 
         List<ReportQueryDto> reportList = new ArrayList<>();
 
-        reportRepository.findAll().forEach(report -> {
+        reportRepository.findReportWithCategoryName().forEach(report -> {
             reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategoryTitle(), report.getCategory().getId()));
         });
 
