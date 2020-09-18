@@ -16,6 +16,7 @@ public class ReportQueryDto {
     private String runDate;
     private String createdDate;
     private String categoryTitle;
+    private UUID categoryId;
 
     public ReportQueryDto(String reportTitle) {
         this.reportTitle = reportTitle;

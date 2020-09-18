@@ -22,4 +22,8 @@ public class Report {
     @Column(name = "category_title", nullable = false)
     private String categoryTitle;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
 }
