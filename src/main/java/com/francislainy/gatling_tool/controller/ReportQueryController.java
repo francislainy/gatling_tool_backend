@@ -23,10 +23,10 @@ public class ReportQueryController {
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    public Map<String, List<ReportQueryDto>> listAllReports() {
+    public Map<String, List<ReportQueryDto>> listAllReportsIncludingCategory() {
 
         Map result = new HashMap();
-        result.put("reports", reportQueryService.listAllReports());
+        result.put("reports", reportQueryService.listAllReportsIncludingCategory());
         return result;
         
     }
@@ -35,7 +35,7 @@ public class ReportQueryController {
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ReportQueryDto> getReport(@PathVariable(value = "id") UUID id) {
-        return new ResponseEntity<>(reportQueryService.getReport(id), HttpStatus.OK);
+        return new ResponseEntity<>(reportQueryService.getReportIncludingCategory(id), HttpStatus.OK);
     }
 
 }

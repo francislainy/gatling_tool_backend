@@ -28,17 +28,17 @@ public class ReportQueryServiceImpl implements ReportQueryService {
         }
     }
 
-//    @Override
-//    public List<ReportQueryDto> listAllReports() {
-//
-//        List<ReportQueryDto> reportList = new ArrayList<>();
-//
-//        reportRepository.findAll().forEach(report -> {
-//            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategoryTitle(), report.getCategory().getId()));
-//        });
-//
-//        return reportList;
-//    }
+
+    @Override
+    public ReportQueryDto getReportIncludingCategory(UUID id) {
+
+        if (reportRepository.findReportItemWithCategoryName(id) != null) {
+            Report report = reportRepository.findReportItemWithCategoryName(id);
+            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategoryTitle(), report.getCategory().getId());
+        } else {
+            return null;
+        }
+    }
 
 
     @Override
@@ -46,7 +46,20 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 
         List<ReportQueryDto> reportList = new ArrayList<>();
 
-        reportRepository.findReportWithCategoryName().forEach(report -> {
+        reportRepository.findAll().forEach(report -> {
+            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategoryTitle(), report.getCategory().getId()));
+        });
+
+        return reportList;
+    }
+
+
+    @Override
+    public List<ReportQueryDto> listAllReportsIncludingCategory() {
+
+        List<ReportQueryDto> reportList = new ArrayList<>();
+
+        reportRepository.findReportListWithCategoryName().forEach(report -> {
             reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategoryTitle(), report.getCategory().getId()));
         });
 
