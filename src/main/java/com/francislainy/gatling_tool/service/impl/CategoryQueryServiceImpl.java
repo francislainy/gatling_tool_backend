@@ -1,7 +1,7 @@
 package com.francislainy.gatling_tool.service.impl;
 
 import com.francislainy.gatling_tool.dto.CategoryQueryDto;
-import com.francislainy.gatling_tool.model.entity.CategoryEntity;
+import com.francislainy.gatling_tool.model.entity.Category;
 import com.francislainy.gatling_tool.repository.CategoryRepository;
 import com.francislainy.gatling_tool.service.CategoryQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class CategoryQueryServiceImpl implements CategoryQueryService {
     public CategoryQueryDto getCategory(UUID id) {
 
         if (categoryRepository.findById(id).isPresent()) {
-            CategoryEntity categoryEntity = categoryRepository.findById(id).get();
-            return new CategoryQueryDto(categoryEntity.getId(), categoryEntity.getCategoryTitle());
+            Category category = categoryRepository.findById(id).get();
+            return new CategoryQueryDto(category.getId(), category.getCategoryTitle());
         } else {
             return null;
         }
@@ -35,8 +35,8 @@ public class CategoryQueryServiceImpl implements CategoryQueryService {
 
         List<CategoryQueryDto> categoryList = new ArrayList<>();
 
-        categoryRepository.findAll().forEach(categoryEntity -> {
-            categoryList.add(new CategoryQueryDto(categoryEntity.getId(), categoryEntity.getCategoryTitle()));
+        categoryRepository.findAll().forEach(category -> {
+            categoryList.add(new CategoryQueryDto(category.getId(), category.getCategoryTitle()));
         });
 
         return categoryList;

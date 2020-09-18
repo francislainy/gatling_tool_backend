@@ -1,7 +1,7 @@
 package com.francislainy.gatling_tool.service.impl;
 
 import com.francislainy.gatling_tool.dto.ReportQueryDto;
-import com.francislainy.gatling_tool.model.entity.ReportEntity;
+import com.francislainy.gatling_tool.model.entity.Report;
 import com.francislainy.gatling_tool.repository.ReportRepository;
 import com.francislainy.gatling_tool.service.ReportQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class ReportQueryServiceImpl implements ReportQueryService {
     public ReportQueryDto getReport(UUID id) {
 
         if (reportRepository.findById(id).isPresent()) {
-            ReportEntity reportEntity = reportRepository.findById(id).get();
-            return new ReportQueryDto(reportEntity.getId(), reportEntity.getReportTitle(), reportEntity.getRun_date(), reportEntity.getCreated_date(), reportEntity.getCategoryTitle());
+            Report report = reportRepository.findById(id).get();
+            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategoryTitle());
         } else {
             return null;
         }
@@ -33,8 +33,8 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 
         List<ReportQueryDto> reportList = new ArrayList<>();
 
-        reportRepository.findAll().forEach(reportEntity -> {
-            reportList.add(new ReportQueryDto(reportEntity.getId(), reportEntity.getReportTitle(), reportEntity.getRun_date(), reportEntity.getCreated_date(), reportEntity.getCategoryTitle()));
+        reportRepository.findAll().forEach(report -> {
+            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategoryTitle()));
         });
 
         return reportList;
