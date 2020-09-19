@@ -1,5 +1,6 @@
 package com.francislainy.gatling_tool.dto;
 
+import com.francislainy.gatling_tool.model.entity.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +16,8 @@ public class ReportUpdateDto {
     private String reportTitle;
     private String runDate;
     private String createdDate;
-    private String categoryTitle;
-    private UUID categoryId;
+
+    private Category category;
 
     public ReportUpdateDto(String reportTitle) {
         this.reportTitle = reportTitle;

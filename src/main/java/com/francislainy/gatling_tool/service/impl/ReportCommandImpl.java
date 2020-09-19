@@ -27,8 +27,8 @@ public class ReportCommandImpl implements ReportCommandService {
         newReport.setReportTitle(reportCreateDto.getReportTitle());
 
         Category category = new Category();
-        category.setId(reportCreateDto.getCategoryId());
-        category.setCategoryTitle(reportCreateDto.getCategoryTitle());
+        category.setId(reportCreateDto.getCategory().getId());
+        category.setCategoryTitle(reportCreateDto.getCategory().getCategoryTitle());
         newReport.setCategory(category);
 
         return reportRepository.save(newReport).getId();
@@ -47,8 +47,8 @@ public class ReportCommandImpl implements ReportCommandService {
             existingReport.setCreated_date(reportUpdateDto.getCreatedDate());
 
             Category category = new Category();
-            category.setId(reportUpdateDto.getCategoryId());
-            category.setCategoryTitle(reportUpdateDto.getCategoryTitle());
+            category.setId(reportUpdateDto.getCategory().getId());
+            category.setCategoryTitle(reportUpdateDto.getCategory().getCategoryTitle());
             existingReport.setCategory(category);
 
             Report updatedReport = reportRepository.save(existingReport);
