@@ -20,8 +20,8 @@ public class Report {
     @Column(name = "created_date", nullable = false)
     private String created_date;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "category_id",  nullable = false)
     private Category category;
 
 }
