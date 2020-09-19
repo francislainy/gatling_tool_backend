@@ -1,6 +1,7 @@
 package com.francislainy.gatling_tool.service.impl;
 
 import com.francislainy.gatling_tool.dto.ReportQueryDto;
+import com.francislainy.gatling_tool.model.entity.Category;
 import com.francislainy.gatling_tool.model.entity.Report;
 import com.francislainy.gatling_tool.repository.ReportRepository;
 import com.francislainy.gatling_tool.service.ReportQueryService;
@@ -22,10 +23,17 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 
         if (reportRepository.findById(id).isPresent()) {
             Report report = reportRepository.findById(id).get();
-            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategory().getCategoryTitle(), report.getCategory().getId());
+
+            Category category = new Category();
+            category.setId(report.getCategory().getId());
+            category.setCategoryTitle(report.getCategory().getCategoryTitle());
+
+            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category);
+
         } else {
             return null;
         }
+
     }
 
 
@@ -34,7 +42,12 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 
         if (reportRepository.findReportItemWithCategoryName(id) != null) {
             Report report = reportRepository.findReportItemWithCategoryName(id);
-            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategory().getCategoryTitle(), report.getCategory().getId());
+
+            Category category = new Category();
+            category.setId(report.getCategory().getId());
+            category.setCategoryTitle(report.getCategory().getCategoryTitle());
+
+            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category);
         } else {
             return null;
         }
@@ -47,7 +60,13 @@ public class ReportQueryServiceImpl implements ReportQueryService {
         List<ReportQueryDto> reportList = new ArrayList<>();
 
         reportRepository.findAll().forEach(report -> {
-            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategory().getCategoryTitle(), report.getCategory().getId()));
+
+            Category category = new Category();
+            category.setId(report.getCategory().getId());
+            category.setCategoryTitle(report.getCategory().getCategoryTitle());
+
+            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category));
+
         });
 
         return reportList;
@@ -60,7 +79,13 @@ public class ReportQueryServiceImpl implements ReportQueryService {
         List<ReportQueryDto> reportList = new ArrayList<>();
 
         reportRepository.findReportListWithCategoryName().forEach(report -> {
-            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategory().getCategoryTitle(), report.getCategory().getId()));
+
+            Category category = new Category();
+            category.setId(report.getCategory().getId());
+            category.setCategoryTitle(report.getCategory().getCategoryTitle());
+
+            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category));
+
         });
 
         return reportList;
@@ -72,7 +97,13 @@ public class ReportQueryServiceImpl implements ReportQueryService {
         List<ReportQueryDto> reportList = new ArrayList<>();
 
         reportRepository.findByCategory_Id(id).forEach(report -> {
-            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategory().getCategoryTitle(), report.getCategory().getId()));
+
+            Category category = new Category();
+            category.setId(report.getCategory().getId());
+            category.setCategoryTitle(report.getCategory().getCategoryTitle());
+
+            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category));
+
         });
 
         return reportList;

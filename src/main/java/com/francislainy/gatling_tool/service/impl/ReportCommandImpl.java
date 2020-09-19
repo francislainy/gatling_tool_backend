@@ -53,11 +53,12 @@ public class ReportCommandImpl implements ReportCommandService {
 
             Report updatedReport = reportRepository.save(existingReport);
 
-            return new ReportQueryDto(updatedReport.getId(), updatedReport.getReportTitle(), updatedReport.getRun_date(), updatedReport.getCreated_date(), updatedReport.getCategory().getCategoryTitle(), updatedReport.getCategory().getId());
+            return new ReportQueryDto(updatedReport.getId(), updatedReport.getReportTitle(), updatedReport.getRun_date(), updatedReport.getCreated_date(), category);
 
         } else {
             return null;
         }
+
     }
 
 
