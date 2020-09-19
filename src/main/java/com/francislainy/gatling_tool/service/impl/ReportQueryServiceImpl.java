@@ -22,7 +22,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 
         if (reportRepository.findById(id).isPresent()) {
             Report report = reportRepository.findById(id).get();
-            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategoryTitle(), report.getCategory().getId());
+            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategory().getCategoryTitle(), report.getCategory().getId());
         } else {
             return null;
         }
@@ -34,7 +34,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 
         if (reportRepository.findReportItemWithCategoryName(id) != null) {
             Report report = reportRepository.findReportItemWithCategoryName(id);
-            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategoryTitle(), report.getCategory().getId());
+            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategory().getCategoryTitle(), report.getCategory().getId());
         } else {
             return null;
         }
@@ -47,7 +47,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
         List<ReportQueryDto> reportList = new ArrayList<>();
 
         reportRepository.findAll().forEach(report -> {
-            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategoryTitle(), report.getCategory().getId()));
+            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategory().getCategoryTitle(), report.getCategory().getId()));
         });
 
         return reportList;
@@ -60,9 +60,27 @@ public class ReportQueryServiceImpl implements ReportQueryService {
         List<ReportQueryDto> reportList = new ArrayList<>();
 
         reportRepository.findReportListWithCategoryName().forEach(report -> {
-            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategoryTitle(), report.getCategory().getId()));
+            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategory().getCategoryTitle(), report.getCategory().getId()));
         });
 
         return reportList;
     }
+
+
+    public List<ReportQueryDto> listAllReportsByCategory(UUID id) {
+
+        List<ReportQueryDto> reportList = new ArrayList<>();
+
+        reportRepository.findByCategory_Id(id).forEach(report -> {
+            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), report.getCategory().getCategoryTitle(), report.getCategory().getId()));
+        });
+
+        return reportList;
+    }
+
 }
+
+
+
+
+

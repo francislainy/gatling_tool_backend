@@ -16,4 +16,7 @@ public interface ReportQueryService {
     List<ReportQueryDto> listAllReports();
 
     List<ReportQueryDto> listAllReportsIncludingCategory();
+
+    List<ReportQueryDto> listAllReportsByCategory(UUID id);
+
 }

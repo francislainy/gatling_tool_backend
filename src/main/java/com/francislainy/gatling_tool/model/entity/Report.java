@@ -19,8 +19,6 @@ public class Report {
     private String run_date;
     @Column(name = "created_date", nullable = false)
     private String created_date;
-    @Column(name = "category_title", nullable = false)
-    private String categoryTitle;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")

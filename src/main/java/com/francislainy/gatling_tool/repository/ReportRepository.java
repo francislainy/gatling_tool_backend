@@ -10,6 +10,8 @@ import java.util.UUID;
 
 public interface ReportRepository extends CrudRepository<Report, UUID> {
 
+    List<Report> findByCategory_Id(UUID categoryId);
+
     List<Report> findByReportTitle(@Param("reportTitle") String reportTitle);
 
     String queryReportListAndCategoryName = "SELECT report.id, report.report_title, report.created_date, report.run_date, report.category_id, category.category_title\n" +

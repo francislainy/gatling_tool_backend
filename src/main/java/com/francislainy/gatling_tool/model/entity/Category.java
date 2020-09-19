@@ -17,7 +17,4 @@ public class Category {
     @Column(name = "category_title", nullable = false)
     private String categoryTitle;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Report> reportList;
-
 }

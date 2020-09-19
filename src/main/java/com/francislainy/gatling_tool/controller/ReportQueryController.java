@@ -28,7 +28,7 @@ public class ReportQueryController {
         Map result = new HashMap();
         result.put("reports", reportQueryService.listAllReportsIncludingCategory());
         return result;
-        
+
     }
 
 
@@ -36,6 +36,16 @@ public class ReportQueryController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ReportQueryDto> getReport(@PathVariable(value = "id") UUID id) {
         return new ResponseEntity<>(reportQueryService.getReportIncludingCategory(id), HttpStatus.OK);
+    }
+
+
+    @GetMapping(value = "/{id}/category", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public Map<String, List<ReportQueryDto>> getReportByCategory(@PathVariable(value = "id") UUID id) {
+
+        Map result = new HashMap();
+        result.put("reports", reportQueryService.listAllReportsByCategory(id));
+        return result;
     }
 
 }
