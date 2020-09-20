@@ -2,6 +2,7 @@ package com.francislainy.gatling_tool.controller;
 
 import com.francislainy.gatling_tool.dto.CategoryQueryDto;
 import com.francislainy.gatling_tool.service.CategoryQueryService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -21,7 +22,8 @@ public class CategoryQueryController {
     @Autowired
     private CategoryQueryService categoryQueryService;
 
-    @GetMapping
+    @Operation(summary = "Get the complete list of categories")
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public Map<String, List<CategoryQueryDto>> listAllCategories() {
 
@@ -29,10 +31,9 @@ public class CategoryQueryController {
         result.put("categories", categoryQueryService.listAllCategories());
         return result;
 
-//        return new ResponseEntity<>(categoryQueryService.listAllCategories(), HttpStatus.OK);
     }
 
-
+    @Operation(summary = "Get a category")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<CategoryQueryDto> getCategory(@PathVariable(value = "id") UUID id) {

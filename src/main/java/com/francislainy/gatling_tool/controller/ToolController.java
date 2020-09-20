@@ -6,7 +6,7 @@ import java.util.*;
 
 @CrossOrigin
 @RequestMapping("/gatling-tool")
-@RestController
+//@RestController
 
 public class ToolController {
 
