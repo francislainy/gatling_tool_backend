@@ -1,13 +1,14 @@
 package com.francislainy.gatling_tool.controller;
 
 import org.springframework.web.bind.annotation.*;
+import io.swagger.v3.oas.annotations.*;
 
 import java.util.*;
 
 @CrossOrigin
 @RequestMapping("/gatling-tool")
 @RestController
-
+@Hidden
 public class ToolController {
 
     private List<String> categories;

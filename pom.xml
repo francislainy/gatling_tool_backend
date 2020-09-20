@@ -19,6 +19,8 @@
         <spring-cloud.version>Hoxton.SR8</spring-cloud.version>
         <openapi-ui.version>1.2.32</openapi-ui.version>
         <spring-devtools.version>2.3.4.RELEASE</spring-devtools.version>
+        <swagger-annotations.version>1.5.21</swagger-annotations.version>
+        <swagger-core.version>2.1.4</swagger-core.version>
     </properties>
 
     <dependencies>
@@ -67,6 +69,16 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <version>${spring-devtools.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-core.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger-annotations.version}</version>
         </dependency>
     </dependencies>
 
