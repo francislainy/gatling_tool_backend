@@ -9,5 +9,5 @@ import java.util.UUID;
 
 public interface CategoryRepository extends CrudRepository<Category, UUID> {
 
-    List<Category> findByCategoryTitle(@Param("categoryTitle") String categoryTitle);
+    List<Category> findByTitle(@Param("categoryTitle") String categoryTitle);
 }

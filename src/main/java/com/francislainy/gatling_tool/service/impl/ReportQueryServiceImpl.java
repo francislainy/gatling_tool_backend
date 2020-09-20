@@ -26,7 +26,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 
             Category category = new Category();
             category.setId(report.getCategory().getId());
-            category.setCategoryTitle(report.getCategory().getCategoryTitle());
+            category.setTitle(report.getCategory().getTitle());
 
             return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category);
 
@@ -45,7 +45,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 
             Category category = new Category();
             category.setId(report.getCategory().getId());
-            category.setCategoryTitle(report.getCategory().getCategoryTitle());
+            category.setTitle(report.getCategory().getTitle());
 
             return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category);
         } else {
@@ -63,7 +63,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 
             Category category = new Category();
             category.setId(report.getCategory().getId());
-            category.setCategoryTitle(report.getCategory().getCategoryTitle());
+            category.setTitle(report.getCategory().getTitle());
 
             reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category));
 
@@ -82,7 +82,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 
             Category category = new Category();
             category.setId(report.getCategory().getId());
-            category.setCategoryTitle(report.getCategory().getCategoryTitle());
+            category.setTitle(report.getCategory().getTitle());
 
             reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category));
 
@@ -100,7 +100,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
 
             Category category = new Category();
             category.setId(report.getCategory().getId());
-            category.setCategoryTitle(report.getCategory().getCategoryTitle());
+            category.setTitle(report.getCategory().getTitle());
 
             reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category));
 

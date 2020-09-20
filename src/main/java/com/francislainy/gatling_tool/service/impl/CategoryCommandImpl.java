@@ -23,7 +23,7 @@ public class CategoryCommandImpl implements CategoryCommandService {
 
         Category newCategory = new Category();
         newCategory.setId(UUID.randomUUID());
-        newCategory.setCategoryTitle(categoryCreateDto.getCategoryTitle());
+        newCategory.setTitle(categoryCreateDto.getTitle());
 
         return categoryRepository.save(newCategory).getId();
     }
@@ -36,11 +36,11 @@ public class CategoryCommandImpl implements CategoryCommandService {
 
             Category existingCategory = categoryRepository.findById(id).get();
 
-            existingCategory.setCategoryTitle(categoryUpdateDto.getCategoryTitle());
+            existingCategory.setTitle(categoryUpdateDto.getTitle());
 
             Category updatedCategory = categoryRepository.save(existingCategory);
 
-            return new CategoryQueryDto(updatedCategory.getId(), updatedCategory.getCategoryTitle());
+            return new CategoryQueryDto(updatedCategory.getId(), updatedCategory.getTitle());
 
         } else {
             return null;

@@ -12,10 +12,10 @@ import java.util.UUID;
 public class CategoryQueryDto {
 
     private UUID id;
-    private String categoryTitle;
+    private String title;
 
-    public CategoryQueryDto(String categoryTitle) {
-        this.categoryTitle = categoryTitle;
+    public CategoryQueryDto(String title) {
+        this.title = title;
     }
 
 }

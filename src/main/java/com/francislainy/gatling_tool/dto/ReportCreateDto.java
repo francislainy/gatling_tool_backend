@@ -13,14 +13,14 @@ import java.util.UUID;
 public class ReportCreateDto {
 
     private UUID id;
-    private String reportTitle;
+    private String title;
     private String runDate;
     private String createdDate;
 
     private Category category;
 
-    public ReportCreateDto(String reportTitle) {
-        this.reportTitle = reportTitle;
+    public ReportCreateDto(String title) {
+        this.title = title;
     }
 
 }
