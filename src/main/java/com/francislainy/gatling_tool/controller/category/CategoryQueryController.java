@@ -1,7 +1,9 @@
 package com.francislainy.gatling_tool.controller.category;
 
 import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
+import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
 import com.francislainy.gatling_tool.service.category.CategoryQueryService;
+import com.francislainy.gatling_tool.service.report.ReportQueryService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +24,9 @@ public class CategoryQueryController {
     @Autowired
     private CategoryQueryService categoryQueryService;
 
+    @Autowired
+    private ReportQueryService reportQueryService;
+
     @Operation(summary = "Get the complete list of categories")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
@@ -38,6 +43,16 @@ public class CategoryQueryController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<CategoryQueryDto> getCategory(@PathVariable(value = "id") UUID id) {
         return new ResponseEntity<>(categoryQueryService.getCategory(id), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Get the list of reports for a category")
+    @GetMapping(value = "/{id}/include-reports", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public Map<String, CategoryQueryDto> getReportByCategory(@PathVariable(value = "id") UUID id) {
+
+        Map result = new HashMap();
+        result.put("category", categoryQueryService.listCategoryWithAllReports(id));
+        return result;
     }
 
 }

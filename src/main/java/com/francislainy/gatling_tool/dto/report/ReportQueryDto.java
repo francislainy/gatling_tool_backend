@@ -23,4 +23,10 @@ public class ReportQueryDto {
         this.title = title;
     }
 
+    public ReportQueryDto(UUID id, String title, String runDate, String createdDate) {
+        this.id = id;
+        this.title = title;
+        this.runDate = runDate;
+        this.createdDate = createdDate;
+    }
 }

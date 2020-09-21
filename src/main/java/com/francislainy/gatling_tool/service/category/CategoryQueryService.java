@@ -12,4 +12,7 @@ public interface CategoryQueryService {
     CategoryQueryDto getCategory(UUID id);
 
     List<CategoryQueryDto> listAllCategories();
+
+    CategoryQueryDto listCategoryWithAllReports(UUID id);
+
 }
