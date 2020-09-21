@@ -1,6 +1,6 @@
-package com.francislainy.gatling_tool.dto;
+package com.francislainy.gatling_tool.dto.report;
 
-import com.francislainy.gatling_tool.model.entity.Category;
+import com.francislainy.gatling_tool.model.entity.category.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class ReportCreateDto {
+public class ReportUpdateDto {
 
     private UUID id;
     private String title;
@@ -19,7 +19,7 @@ public class ReportCreateDto {
 
     private Category category;
 
-    public ReportCreateDto(String title) {
+    public ReportUpdateDto(String title) {
         this.title = title;
     }
 

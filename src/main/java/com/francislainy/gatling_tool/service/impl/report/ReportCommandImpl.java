@@ -1,10 +1,12 @@
-package com.francislainy.gatling_tool.service.impl;
+package com.francislainy.gatling_tool.service.impl.report;
 
-import com.francislainy.gatling_tool.dto.*;
-import com.francislainy.gatling_tool.model.entity.Category;
-import com.francislainy.gatling_tool.model.entity.Report;
-import com.francislainy.gatling_tool.repository.ReportRepository;
-import com.francislainy.gatling_tool.service.ReportCommandService;
+import com.francislainy.gatling_tool.dto.report.ReportCreateDto;
+import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
+import com.francislainy.gatling_tool.dto.report.ReportUpdateDto;
+import com.francislainy.gatling_tool.model.entity.category.Category;
+import com.francislainy.gatling_tool.model.entity.report.Report;
+import com.francislainy.gatling_tool.repository.report.ReportRepository;
+import com.francislainy.gatling_tool.service.report.ReportCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

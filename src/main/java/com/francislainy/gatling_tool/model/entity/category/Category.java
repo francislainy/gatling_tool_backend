@@ -1,4 +1,4 @@
-package com.francislainy.gatling_tool.model.entity;
+package com.francislainy.gatling_tool.model.entity.category;
 
 import lombok.Data;
 

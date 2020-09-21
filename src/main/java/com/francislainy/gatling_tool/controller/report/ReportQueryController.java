@@ -1,7 +1,7 @@
-package com.francislainy.gatling_tool.controller;
+package com.francislainy.gatling_tool.controller.report;
 
-import com.francislainy.gatling_tool.dto.ReportQueryDto;
-import com.francislainy.gatling_tool.service.ReportQueryService;
+import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
+import com.francislainy.gatling_tool.service.report.ReportQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

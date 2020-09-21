@@ -1,6 +1,6 @@
-package com.francislainy.gatling_tool.service;
+package com.francislainy.gatling_tool.service.report;
 
-import com.francislainy.gatling_tool.dto.ReportQueryDto;
+import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

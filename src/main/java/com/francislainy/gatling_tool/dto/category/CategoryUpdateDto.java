@@ -1,4 +1,4 @@
-package com.francislainy.gatling_tool.dto;
+package com.francislainy.gatling_tool.dto.category;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,12 +9,12 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CategoryCreateDto {
+public class CategoryUpdateDto {
 
     private UUID id;
     private String title;
 
-    public CategoryCreateDto(String title) {
+    public CategoryUpdateDto(String title) {
         this.title = title;
     }
 

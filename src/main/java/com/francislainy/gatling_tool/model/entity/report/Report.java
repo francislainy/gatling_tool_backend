@@ -1,5 +1,6 @@
-package com.francislainy.gatling_tool.model.entity;
+package com.francislainy.gatling_tool.model.entity.report;
 
+import com.francislainy.gatling_tool.model.entity.category.Category;
 import lombok.Data;
 
 import javax.persistence.*;

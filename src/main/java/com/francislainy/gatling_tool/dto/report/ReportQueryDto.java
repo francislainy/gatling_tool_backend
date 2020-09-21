@@ -1,6 +1,6 @@
-package com.francislainy.gatling_tool.dto;
+package com.francislainy.gatling_tool.dto.report;
 
-import com.francislainy.gatling_tool.model.entity.Category;
+import com.francislainy.gatling_tool.model.entity.category.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

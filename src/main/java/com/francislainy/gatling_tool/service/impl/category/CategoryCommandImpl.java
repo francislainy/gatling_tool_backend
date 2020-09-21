@@ -1,11 +1,11 @@
-package com.francislainy.gatling_tool.service.impl;
+package com.francislainy.gatling_tool.service.impl.category;
 
-import com.francislainy.gatling_tool.dto.CategoryCreateDto;
-import com.francislainy.gatling_tool.dto.CategoryQueryDto;
-import com.francislainy.gatling_tool.dto.CategoryUpdateDto;
-import com.francislainy.gatling_tool.model.entity.Category;
-import com.francislainy.gatling_tool.repository.CategoryRepository;
-import com.francislainy.gatling_tool.service.CategoryCommandService;
+import com.francislainy.gatling_tool.dto.category.CategoryCreateDto;
+import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
+import com.francislainy.gatling_tool.dto.category.CategoryUpdateDto;
+import com.francislainy.gatling_tool.model.entity.category.Category;
+import com.francislainy.gatling_tool.repository.category.CategoryRepository;
+import com.francislainy.gatling_tool.service.category.CategoryCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,6 +1,6 @@
-package com.francislainy.gatling_tool.repository;
+package com.francislainy.gatling_tool.repository.report;
 
-import com.francislainy.gatling_tool.model.entity.Report;
+import com.francislainy.gatling_tool.model.entity.report.Report;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

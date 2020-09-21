@@ -1,6 +1,6 @@
-package com.francislainy.gatling_tool.repository;
+package com.francislainy.gatling_tool.repository.category;
 
-import com.francislainy.gatling_tool.model.entity.Category;
+import com.francislainy.gatling_tool.model.entity.category.Category;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 

@@ -1,7 +1,7 @@
-package com.francislainy.gatling_tool.controller;
+package com.francislainy.gatling_tool.controller.category;
 
-import com.francislainy.gatling_tool.dto.CategoryQueryDto;
-import com.francislainy.gatling_tool.service.CategoryQueryService;
+import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
+import com.francislainy.gatling_tool.service.category.CategoryQueryService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

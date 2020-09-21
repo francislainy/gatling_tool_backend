@@ -1,6 +1,6 @@
-package com.francislainy.gatling_tool.service;
+package com.francislainy.gatling_tool.service.category;
 
-import com.francislainy.gatling_tool.dto.CategoryQueryDto;
+import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

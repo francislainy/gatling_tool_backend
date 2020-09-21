@@ -1,7 +1,9 @@
-package com.francislainy.gatling_tool.controller;
+package com.francislainy.gatling_tool.controller.report;
 
-import com.francislainy.gatling_tool.dto.*;
-import com.francislainy.gatling_tool.service.ReportCommandService;
+import com.francislainy.gatling_tool.dto.report.ReportCreateDto;
+import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
+import com.francislainy.gatling_tool.dto.report.ReportUpdateDto;
+import com.francislainy.gatling_tool.service.report.ReportCommandService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
