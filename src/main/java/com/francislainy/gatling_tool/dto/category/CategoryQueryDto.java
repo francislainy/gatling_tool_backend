@@ -16,7 +16,7 @@ public class CategoryQueryDto {
     private UUID id;
     private String title;
 
-    private List<ReportQueryDto> reportQueryDtoList;
+    private List<ReportQueryDto> reports;
 
     public CategoryQueryDto(String title) {
         this.title = title;

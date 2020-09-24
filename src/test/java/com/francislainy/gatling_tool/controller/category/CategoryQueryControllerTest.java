@@ -1,24 +1,16 @@
 package com.francislainy.gatling_tool.controller.category;
 
-import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
 import com.francislainy.gatling_tool.model.entity.category.Category;
 import com.francislainy.gatling_tool.repository.category.CategoryRepository;
-import com.francislainy.gatling_tool.service.category.CategoryQueryService;
-import com.francislainy.gatling_tool.service.impl.category.CategoryQueryServiceImpl;
 import com.google.gson.Gson;
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
@@ -26,36 +18,22 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.UUID;
 
-import static org.hamcrest.Matchers.is;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@RunWith(SpringRunner.class)
-//@SpringBootTest
-@WebMvcTest(CategoryQueryController.class)
+@SpringBootTest
+@AutoConfigureMockMvc
 class CategoryQueryControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private CategoryQueryServiceImpl categoryQueryServiceImpl;
-
-    @Mock
     CategoryRepository categoryRepository;
 
     @Before
-    public void setupAll(){
-        MockitoAnnotations.initMocks(this);
-    }
-
-
-    @BeforeEach
-    public void setup(){
+    public void setupAll() {
         MockitoAnnotations.initMocks(this);
     }
 
@@ -90,7 +68,6 @@ class CategoryQueryControllerTest {
 
     @Test
     public void listAllCategories() throws Exception {
-
 
 
         when(categoryRepository.findAll()).thenReturn(null);
