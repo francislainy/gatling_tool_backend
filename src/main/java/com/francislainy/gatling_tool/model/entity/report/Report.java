@@ -1,11 +1,15 @@
 package com.francislainy.gatling_tool.model.entity.report;
 
 import com.francislainy.gatling_tool.model.entity.category.Category;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.UUID;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "report")
 @Data
