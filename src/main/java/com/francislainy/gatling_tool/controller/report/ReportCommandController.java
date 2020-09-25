@@ -44,4 +44,13 @@ public class ReportCommandController {
         reportCommandService.deleteReport(id);
     }
 
+
+    @Operation(summary = "Import a report")
+    @DeleteMapping(value = "/import", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public void importReport(@PathVariable(value = "id") UUID id) {
+
+
+    }
+
 }
