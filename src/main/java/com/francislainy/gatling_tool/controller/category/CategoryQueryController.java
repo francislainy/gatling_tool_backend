@@ -1,5 +1,6 @@
 package com.francislainy.gatling_tool.controller.category;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
 import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
 import com.francislainy.gatling_tool.service.category.CategoryQueryService;
@@ -41,7 +42,7 @@ public class CategoryQueryController {
     @Operation(summary = "Get a category")
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<CategoryQueryDto> getCategory(@PathVariable(value = "id") UUID id) {
+    public ResponseEntity<CategoryQueryDto> getCategory(@PathVariable(value = "id") UUID id) throws JsonProcessingException {
         return new ResponseEntity<>(categoryQueryService.getCategory(id), HttpStatus.OK);
     }
 
