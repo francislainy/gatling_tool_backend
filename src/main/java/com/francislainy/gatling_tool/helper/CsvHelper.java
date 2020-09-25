@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -33,20 +34,20 @@ public class CsvHelper {
     }
 
     public static List<Tutorial> csvToTutorials(InputStream is) {
-        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
              CSVParser csvParser = new CSVParser(fileReader,
                      CSVFormat.DEFAULT.withDelimiter(',').withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim())) {
 
             List<Tutorial> tutorials = new ArrayList<Tutorial>();
 
-            Iterable<CSVRecord> csvRecords = csvParser.getRecords();
+            List<CSVRecord> csvRecords = csvParser.getRecords();
 
             for (CSVRecord csvRecord : csvRecords) {
                 Tutorial tutorial = new Tutorial(
-                        Long.parseLong(csvRecord.get("id")),
-                        csvRecord.get("title"),
-                        csvRecord.get("description"),
-                        Boolean.parseBoolean(csvRecord.get("published"))
+                        Long.parseLong(csvRecord.get(0)),
+                        csvRecord.get(1),
+                        csvRecord.get(2),
+                        Boolean.parseBoolean(csvRecord.get(3))
                 );
 
                 tutorials.add(tutorial);
