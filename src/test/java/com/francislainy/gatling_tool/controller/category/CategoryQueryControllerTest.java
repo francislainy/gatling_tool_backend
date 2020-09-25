@@ -1,6 +1,8 @@
 package com.francislainy.gatling_tool.controller.category;
 
+import Util.Util;
 import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
+import com.francislainy.gatling_tool.model.Categories;
 import com.francislainy.gatling_tool.model.entity.category.Category;
 import com.francislainy.gatling_tool.model.entity.report.Report;
 import com.francislainy.gatling_tool.repository.category.CategoryRepository;
@@ -18,9 +20,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.UUID;
+import java.util.*;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -56,13 +56,16 @@ class CategoryQueryControllerTest {
         when(categoryRepository.findById(UUID.fromString(categoryId))).thenReturn(java.util.Optional.of(category));
 
         RequestBuilder request = MockMvcRequestBuilders
-                .get("/api/gatling-tool/category/"+categoryId)
+                .get("/api/gatling-tool/category/" + categoryId)
                 .accept(MediaType.APPLICATION_JSON);
+
+        CategoryQueryDto categoryQueryDto = new CategoryQueryDto(UUID.fromString(categoryId), "My another category", null);
+        String json = Util.createJsonFromClassObject(categoryQueryDto);
+
 
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().json("\n" +
-                        "{\"id\":\"cdb02322-a8a6-4acf-9644-ddf8b24af9e6\",\"title\":\"My another category\",\"reports\":null}"))
+                .andExpect(content().json(json, false))
                 .andReturn();
 
     }
@@ -82,10 +85,20 @@ class CategoryQueryControllerTest {
                 .accept(MediaType.APPLICATION_JSON);
         mockMvc.perform(request).andReturn();
 
+        CategoryQueryDto categoryQueryDto = new CategoryQueryDto(UUID.fromString(categoryId), "My another category", null);
+        ArrayList categoriesList = new ArrayList();
+        categoriesList.add(categoryQueryDto);
+
+        Categories categories = new Categories(categoriesList);
+
+
+        String json = Util.createJsonFromClassObject(categories);
+
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("{\"categories\":[{\"id\":\"cdb02322-a8a6-4acf-9644-ddf8b24af9e6\",\"title\":\"My another category\",\"reports\":null}]}"))
+                .andExpect(content().json(json))
                 .andReturn();
+
 
     }
 
@@ -97,21 +110,33 @@ class CategoryQueryControllerTest {
         category.setId(UUID.fromString(categoryId));
         category.setTitle("My another category");
         when(categoryRepository.findById(UUID.fromString(categoryId))).thenReturn(java.util.Optional.of(category));
-        Report report = new Report(UUID.fromString(reportId), "My saturday report", "today", "today", category);
+
+
+        Report report = new Report(UUID.fromString(reportId), "My saturday report", "today", "today", null);
         ArrayList reports = new ArrayList();
         reports.add(report);
         when(reportRepository.findByCategory_Id(category.getId())).thenReturn(reports);
 
+
+        CategoryQueryDto categoryQueryDto = new CategoryQueryDto(UUID.fromString(categoryId), "My another category", reports);
+
+
+        Map map = new HashMap();
+        map.put("category", categoryQueryDto);
+
+
+        CategoryQueryDto categoryQueryDto1 = Util.createClassFromMap((HashMap) map, CategoryQueryDto.class);
+
+        String json = Util.createJsonFromClassObject(categoryQueryDto1);
+
         RequestBuilder request = MockMvcRequestBuilders
-                .get("/api/gatling-tool/category/"+categoryId+"/include-reports")
+                .get("/api/gatling-tool/category/" + categoryId + "/include-reports")
                 .accept(MediaType.APPLICATION_JSON);
         mockMvc.perform(request).andReturn();
 
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json("{\"category\":{\"id\":\"cdb02322-a8a6-4acf-9644-ddf8b24af9e6\"," +
-                        "\"title\":\"My another category\",\"reports\":[{\"id\":\"68b2acc7-2905-443e-881e-20cc627a3f34\"," +
-                        "\"title\":\"My saturday report\",\"runDate\":\"today\",\"createdDate\":\"today\",\"category\":null}]}}"))
+                .andExpect(content().json(json, false))
                 .andReturn();
     }
 
