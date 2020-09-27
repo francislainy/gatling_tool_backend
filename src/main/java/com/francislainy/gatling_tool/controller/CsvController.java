@@ -21,9 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-@CrossOrigin("http://localhost:8081")
+@CrossOrigin()
 @Controller
-@RequestMapping("/api/csv")
+@RequestMapping("/api/gatling-tool/csv")
 public class CsvController {
 
     @Autowired
