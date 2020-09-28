@@ -1,6 +1,7 @@
 package com.francislainy.gatling_tool.dto.category;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
 import com.google.gson.annotations.Expose;
 import lombok.AllArgsConstructor;
@@ -20,7 +21,7 @@ public class CategoryQueryDto {
     @Expose()
     private String title;
 
-    @JsonIgnore
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<ReportQueryDto> reports;
 
     public CategoryQueryDto(String title) {

@@ -1,5 +1,6 @@
 package com.francislainy.gatling_tool.dto.report;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.francislainy.gatling_tool.model.entity.category.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class ReportQueryDto {
     private String runDate;
     private String createdDate;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Category category;
 
     public ReportQueryDto(String title) {

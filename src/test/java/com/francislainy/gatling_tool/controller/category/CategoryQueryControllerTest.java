@@ -1,6 +1,7 @@
 package com.francislainy.gatling_tool.controller.category;
 
 import Util.Util;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
 import com.francislainy.gatling_tool.model.Categories;
 import com.francislainy.gatling_tool.model.entity.category.Category;
@@ -47,6 +48,8 @@ class CategoryQueryControllerTest {
     String categoryId = "cdb02322-a8a6-4acf-9644-ddf8b24af9e6";
     String reportId = "68b2acc7-2905-443e-881e-20cc627a3f34";
 
+    ObjectMapper mapper = new ObjectMapper();
+
     @Test
     public void getCategory() throws Exception {
 
@@ -59,13 +62,13 @@ class CategoryQueryControllerTest {
                 .get("/api/gatling-tool/category/" + categoryId)
                 .accept(MediaType.APPLICATION_JSON);
 
-        CategoryQueryDto categoryQueryDto = new CategoryQueryDto(UUID.fromString(categoryId), "My another category", null);
-        String json = Util.createJsonFromClassObject(categoryQueryDto);
-
+        CategoryQueryDto categoryQueryDto = new CategoryQueryDto(UUID.fromString(categoryId), "My another category");
+//        String json = Util.createJsonFromClassObject(categoryQueryDto);
+        String json = mapper.writeValueAsString(categoryQueryDto);
 
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().isOk())
-                .andExpect(content().json(json, false))
+                .andExpect(content().json(json, true))
                 .andReturn();
 
     }
