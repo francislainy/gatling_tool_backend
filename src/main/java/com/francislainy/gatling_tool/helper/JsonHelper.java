@@ -1,13 +1,18 @@
 package com.francislainy.gatling_tool.helper;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.francislainy.gatling_tool.model.entity.JsonTutorial;
 import com.francislainy.gatling_tool.model.entity.Tutorial;
+import com.francislainy.gatling_tool.model.entity.Tutorials;
 import com.google.gson.Gson;
 import org.apache.commons.csv.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 
 public class JsonHelper {
@@ -23,48 +28,39 @@ public class JsonHelper {
         return true;
     }
 
-    public static List<JsonTutorial> jsonToTutorials(InputStream is) {
-        try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-             CSVParser csvParser = new CSVParser(fileReader,
-                     CSVFormat.DEFAULT.withDelimiter(',').withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim())) {
+    public static List<JsonTutorial> jsonToTutorials(MultipartFile file) {
 
+        try {
             Gson gson = new Gson();
-//            BufferedReader br = new BufferedReader(
-//                    new FileReader("/Users/camposf/IdeaProjects/gatling_tool/file.json"));
-            BufferedReader br = new BufferedReader(
-                    new InputStreamReader(is));
 
-            //convert the json string back to object
-            Tutorial obj = gson.fromJson(br, Tutorial.class);
+            File myFile = convertMultiPartToFile(file);
 
-            System.out.println(obj);
+            BufferedReader br = new BufferedReader(new FileReader(myFile));
 
+            Tutorials tutorials = gson.fromJson(br, Tutorials.class);
 
-//            List<JsonTutorial> tutorials = new ArrayList<>();
-
-            Tutorial[] statesModels = gson.fromJson(fileReader, Tutorial[].class);
+            List<JsonTutorial> tutorialsList = new ArrayList<>();
 
 
+            for (JsonTutorial jsonTutorial : tutorials.getTutorials()) {
 
-
-            List<CSVRecord> csvRecords = csvParser.getRecords();
-
-            for (CSVRecord csvRecord : csvRecords) {
-                JsonTutorial tutorial = new JsonTutorial(
-                        Long.parseLong(csvRecord.get(0)),
-                        csvRecord.get(1),
-                        csvRecord.get(2),
-                        Boolean.parseBoolean(csvRecord.get(3))
-                );
-
-//                tutorials.add(tutorial);
+                tutorialsList.add(jsonTutorial);
             }
 
-//            return tutorials;
-            return null;
+            return tutorialsList;
+
         } catch (IOException e) {
             throw new RuntimeException("fail to parse json file: " + e.getMessage());
         }
+    }
+
+
+    private static File convertMultiPartToFile(MultipartFile file) throws IOException {
+        File convFile = new File(file.getOriginalFilename());
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
+        return convFile;
     }
 
     public static ByteArrayInputStream tutorialsToJson(List<JsonTutorial> tutorials) {

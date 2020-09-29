@@ -7,5 +7,5 @@ import java.util.List;
 @Data
 public class Tutorials {
 
-    private List<Tutorial> tutorials;
+    private List<JsonTutorial> tutorials;
 }

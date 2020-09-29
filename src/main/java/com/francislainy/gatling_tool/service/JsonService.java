@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,12 +19,8 @@ public class JsonService {
     JsonTutorialRepository repository;
 
     public void save(MultipartFile file) {
-        try {
-            List<JsonTutorial> tutorials = JsonHelper.jsonToTutorials(file.getInputStream());
-            repository.saveAll(tutorials);
-        } catch (IOException e) {
-            throw new RuntimeException("fail to store csv data: " + e.getMessage());
-        }
+        List<JsonTutorial> tutorials = JsonHelper.jsonToTutorials(file);
+        repository.saveAll(tutorials);
     }
 
     public ByteArrayInputStream load() {

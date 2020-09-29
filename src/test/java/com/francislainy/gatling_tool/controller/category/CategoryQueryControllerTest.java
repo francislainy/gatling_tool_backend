@@ -96,7 +96,7 @@ class CategoryQueryControllerTest {
 
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json(json))
+                .andExpect(content().json(json, true))
                 .andReturn();
 
 
@@ -136,7 +136,7 @@ class CategoryQueryControllerTest {
 
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json(json, false))
+                .andExpect(content().json(json, true))
                 .andReturn();
     }
 
