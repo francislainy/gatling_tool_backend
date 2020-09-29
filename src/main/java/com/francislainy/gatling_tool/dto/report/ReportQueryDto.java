@@ -18,7 +18,6 @@ public class ReportQueryDto {
     private String runDate;
     private String createdDate;
 
-    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Category category;
 
     public ReportQueryDto(String title) {

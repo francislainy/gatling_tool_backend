@@ -1,7 +1,5 @@
 package com.francislainy.gatling_tool.controller.category;
 
-import Util.Util;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
 import com.francislainy.gatling_tool.model.Categories;
 import com.francislainy.gatling_tool.model.entity.category.Category;
@@ -20,12 +18,14 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import util.Utils;
 
 import java.util.*;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static util.Utils.createJsonFromClassObject;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -48,8 +48,6 @@ class CategoryQueryControllerTest {
     String categoryId = "cdb02322-a8a6-4acf-9644-ddf8b24af9e6";
     String reportId = "68b2acc7-2905-443e-881e-20cc627a3f34";
 
-    ObjectMapper mapper = new ObjectMapper();
-
     @Test
     public void getCategory() throws Exception {
 
@@ -63,8 +61,7 @@ class CategoryQueryControllerTest {
                 .accept(MediaType.APPLICATION_JSON);
 
         CategoryQueryDto categoryQueryDto = new CategoryQueryDto(UUID.fromString(categoryId), "My another category");
-//        String json = Util.createJsonFromClassObject(categoryQueryDto);
-        String json = mapper.writeValueAsString(categoryQueryDto);
+        String json = createJsonFromClassObject(categoryQueryDto);
 
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().isOk())
@@ -95,7 +92,7 @@ class CategoryQueryControllerTest {
         Categories categories = new Categories(categoriesList);
 
 
-        String json = Util.createJsonFromClassObject(categories);
+        String json = createJsonFromClassObject(categories);
 
         MvcResult result = mockMvc.perform(request)
                 .andExpect(status().is2xxSuccessful())
@@ -128,9 +125,9 @@ class CategoryQueryControllerTest {
         map.put("category", categoryQueryDto);
 
 
-        CategoryQueryDto categoryQueryDto1 = Util.createClassFromMap((HashMap) map, CategoryQueryDto.class);
+        CategoryQueryDto categoryQueryDto1 = Utils.createClassFromMap((HashMap) map, CategoryQueryDto.class);
 
-        String json = Util.createJsonFromClassObject(categoryQueryDto1);
+        String json = createJsonFromClassObject(categoryQueryDto1);
 
         RequestBuilder request = MockMvcRequestBuilders
                 .get("/api/gatling-tool/category/" + categoryId + "/include-reports")
