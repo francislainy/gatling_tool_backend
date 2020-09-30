@@ -16,7 +16,7 @@ public class StatsJsonService {
     StatsJsonRepository repository;
 
     public void save(MultipartFile file) {
-        StatsEntity statsEntity = StatsJsonHelper.jsonToTutorials(file);
+        StatsEntity statsEntity = StatsJsonHelper.jsonToStats(file);
         repository.save(statsEntity);
     }
 

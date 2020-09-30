@@ -20,7 +20,7 @@ public class StatsJsonHelper {
         return true;
     }
 
-    public static StatsEntity jsonToTutorials(MultipartFile file) {
+    public static StatsEntity jsonToStats(MultipartFile file) {
 
         try {
             Gson gson = new Gson();
@@ -53,7 +53,6 @@ public class StatsJsonHelper {
             statsEntity.setMaxResponseTimeOk(stats.stats.maxResponseTime.ok);
             statsEntity.setMaxResponseTimeTotal(stats.stats.maxResponseTime.total);
 
-
             statsEntity.setMeanNumberOfRequestsPerSecondKo(stats.stats.meanNumberOfRequestsPerSecond.ko);
             statsEntity.setMeanNumberOfRequestsPerSecondOk(stats.stats.meanNumberOfRequestsPerSecond.ok);
             statsEntity.setMeanNumberOfRequestsPerSecondTotal(stats.stats.meanNumberOfRequestsPerSecond.total);
@@ -62,11 +61,14 @@ public class StatsJsonHelper {
             statsEntity.setMeanResponseTimeOk(stats.stats.meanResponseTime.ok);
             statsEntity.setMeanResponseTimeTotal(stats.stats.meanResponseTime.total);
 
-
             statsEntity.setMinResponseTimeKo(stats.stats.minResponseTime.ko);
             statsEntity.setMinResponseTimeOk(stats.stats.minResponseTime.ok);
             statsEntity.setMinResponseTimeTotal(stats.stats.minResponseTime.total);
 
+            statsEntity.setName(stats.name);
+            statsEntity.setNumberOfRequestsKo(stats.stats.numberOfRequests.ko);
+            statsEntity.setNumberOfRequestOk(stats.stats.numberOfRequests.ok);
+            statsEntity.setNumberOfRequestsTotal(stats.stats.numberOfRequests.total);
 
             statsEntity.setPercentiles1Ko(stats.stats.percentiles1.ko);
             statsEntity.setPercentiles1Ok(stats.stats.percentiles1.ok);
@@ -87,8 +89,6 @@ public class StatsJsonHelper {
             statsEntity.setStandardDeviationKo(stats.stats.standardDeviation.ko);
             statsEntity.setStandardDeviationOk(stats.stats.standardDeviation.ok);
             statsEntity.setStandardDeviationTotal(stats.stats.standardDeviation.total);
-
-            statsEntity.setName(stats.name);
 
 
             return statsEntity;
