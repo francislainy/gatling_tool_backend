@@ -64,40 +64,40 @@ public class StatsEntity {
     @Column(name = "standard_deviation_ko")
     private int standardDeviationKo;
 
-    @Column(name = "percenciles1_total")
+    @Column(name = "percentiles1_total")
     private int percentiles1Total;
 
-    @Column(name = "percenciles1_ok")
+    @Column(name = "percentiles1_ok")
     private int percentiles1Ok;
 
-    @Column(name = "percenciles1_ko")
+    @Column(name = "percentiles1_ko")
     private int percentiles1Ko;
 
-    @Column(name = "percenciles2_total")
+    @Column(name = "percentiles2_total")
     private int percentiles2Total;
 
-    @Column(name = "percenciles2_ok")
+    @Column(name = "percentiles2_ok")
     private int percentiles2Ok;
 
-    @Column(name = "percenciles2_ko")
+    @Column(name = "percentiles2_ko")
     private int percentiles2Ko;
 
-    @Column(name = "percenciles3_total")
+    @Column(name = "percentiles3_total")
     private int percentiles3Total;
 
-    @Column(name = "percenciles3_ok")
+    @Column(name = "percentiles3_ok")
     private int percentiles3Ok;
 
-    @Column(name = "percenciles3_ko")
+    @Column(name = "percentiles3_ko")
     private int percentiles3Ko;
 
-    @Column(name = "percenciles4_total")
+    @Column(name = "percentiles4_total")
     private int percentiles4Total;
 
-    @Column(name = "percenciles4_ok")
+    @Column(name = "percentiles4_ok")
     private int percentiles4Ok;
 
-    @Column(name = "percenciles4_ko")
+    @Column(name = "percentiles4_ko")
     private int percentiles4Ko;
 
     @Column(name = "group1_name")
