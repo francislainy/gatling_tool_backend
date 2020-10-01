@@ -3,6 +3,7 @@ package com.francislainy.gatling_tool.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -12,7 +13,7 @@ public class StatsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private UUID id;
 
     @Column(name = "name")
     private String name;
@@ -144,5 +145,5 @@ public class StatsEntity {
     private double meanNumberOfRequestsPerSecondKo;
 
     @Column(name = "category_id")
-    private int categoryId;
+    private UUID categoryId;
 }
