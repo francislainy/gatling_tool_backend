@@ -1,7 +1,7 @@
 package com.francislainy.gatling_tool.helper;
 
 import com.francislainy.gatling_tool.dto.stats.Stats;
-import com.francislainy.gatling_tool.model.entity.StatsEntity;
+import com.francislainy.gatling_tool.model.entity.stats.StatsEntity;
 import com.google.gson.Gson;
 import org.springframework.web.multipart.MultipartFile;
 
