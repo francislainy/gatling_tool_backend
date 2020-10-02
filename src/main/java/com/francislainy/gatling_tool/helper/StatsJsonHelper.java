@@ -1,6 +1,5 @@
 package com.francislainy.gatling_tool.helper;
 
-import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
 import com.francislainy.gatling_tool.dto.stats.Stats;
 import com.francislainy.gatling_tool.model.entity.StatsEntity;
 import com.google.gson.Gson;
@@ -11,7 +10,7 @@ import java.util.UUID;
 
 public class StatsJsonHelper {
 
-    public static String TYPE = "multiform/data";
+    public static String TYPE = "application/json";
 
     public static boolean hasJsonFormat(MultipartFile file) {
 
@@ -92,7 +91,7 @@ public class StatsJsonHelper {
             statsEntity.setStandardDeviationOk(stats.stats.standardDeviation.ok);
             statsEntity.setStandardDeviationTotal(stats.stats.standardDeviation.total);
 
-            statsEntity.setId(id);
+            statsEntity.setCategoryId(id);
 
             return statsEntity;
 
