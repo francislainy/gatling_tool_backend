@@ -1,15 +1,17 @@
 package com.francislainy.gatling_tool.helper;
 
+import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
 import com.francislainy.gatling_tool.dto.stats.Stats;
 import com.francislainy.gatling_tool.model.entity.StatsEntity;
 import com.google.gson.Gson;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.util.UUID;
 
 public class StatsJsonHelper {
 
-    public static String TYPE = "application/json";
+    public static String TYPE = "multiform/data";
 
     public static boolean hasJsonFormat(MultipartFile file) {
 
@@ -20,7 +22,7 @@ public class StatsJsonHelper {
         return true;
     }
 
-    public static StatsEntity jsonToStats(MultipartFile file) {
+    public static StatsEntity jsonToStats(MultipartFile file, UUID id) {
 
         try {
             Gson gson = new Gson();
@@ -90,6 +92,7 @@ public class StatsJsonHelper {
             statsEntity.setStandardDeviationOk(stats.stats.standardDeviation.ok);
             statsEntity.setStandardDeviationTotal(stats.stats.standardDeviation.total);
 
+            statsEntity.setId(id);
 
             return statsEntity;
 
