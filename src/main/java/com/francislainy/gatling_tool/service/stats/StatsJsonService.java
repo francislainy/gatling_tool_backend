@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class StatsJsonService {
@@ -15,8 +16,8 @@ public class StatsJsonService {
     @Autowired
     StatsJsonRepository repository;
 
-    public void save(MultipartFile file) {
-        StatsEntity statsEntity = StatsJsonHelper.jsonToStats(file);
+    public void save(MultipartFile file, UUID id) {
+        StatsEntity statsEntity = StatsJsonHelper.jsonToStats(file, id);
         repository.save(statsEntity);
     }
 

@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.util.UUID;
 
 public class StatsJsonHelper {
 
@@ -20,7 +21,7 @@ public class StatsJsonHelper {
         return true;
     }
 
-    public static StatsEntity jsonToStats(MultipartFile file) {
+    public static StatsEntity jsonToStats(MultipartFile file, UUID id) {
 
         try {
             Gson gson = new Gson();
@@ -89,6 +90,8 @@ public class StatsJsonHelper {
             statsEntity.setStandardDeviationKo(stats.stats.standardDeviation.ko);
             statsEntity.setStandardDeviationOk(stats.stats.standardDeviation.ok);
             statsEntity.setStandardDeviationTotal(stats.stats.standardDeviation.total);
+
+            statsEntity.setCategoryId(id);
 
 
             return statsEntity;
