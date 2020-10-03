@@ -1,10 +1,8 @@
 package com.francislainy.gatling_tool.debug;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.francislainy.gatling_tool.debug.model.Contents;
-import com.francislainy.gatling_tool.debug.model.Contents_;
-import com.francislainy.gatling_tool.debug.model.Group;
-import com.francislainy.gatling_tool.debug.model.ReqAuthorize;
+import com.francislainy.gatling_tool.debug.model_manual.Group;
+import com.francislainy.gatling_tool.debug.model_manual.ReqAuthorize;
+import com.francislainy.gatling_tool.debug.model_manual.Stats;
 import com.google.gson.Gson;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -18,79 +16,140 @@ public class TestParseHtml {
 
     public static void main(String[] args) throws IOException {
 
-        parseJson2();
+        parseJson3();
     }
 
 
-    private static void parseJson2() throws IOException {
+    private static void parseJson3() throws IOException {
 
         Gson gson = new Gson();
 
-        ObjectMapper mapper = new ObjectMapper();
-        Map map = mapper.readValue(new File("/Users/camposf/IdeaProjects/gatling_tool/stats2.json"), Map.class);
-        
+        BufferedReader br = new BufferedReader(new FileReader("/Users/camposf/IdeaProjects/gatling_tool/stats2.json"));
+
+        Map map = gson.fromJson(br, Map.class);
+
+
         String contentsJson = gson.toJson(map.get("contents"));
 
         Map contentsMap = gson.fromJson(contentsJson, Map.class);
         MyLinkedMap myLinkedContentsMap = new MyLinkedMap(contentsMap);
 
         System.out.println(myLinkedContentsMap.getEntry(0));
-        String jsonGroup = gson.toJson(myLinkedContentsMap.getValue(0));
-        Group group = gson.fromJson(jsonGroup, Group.class);
 
-        System.out.println(group.stats);
+        for (int a = 0; a < myLinkedContentsMap.size(); a++) {
+
+            String jsonGroup = gson.toJson(myLinkedContentsMap.getValue(a));
+            Map groupsMap = gson.fromJson(jsonGroup, Map.class);
+            MyLinkedMap myLinkedGroupMap = new MyLinkedMap(groupsMap);
+
+            Group group = gson.fromJson(jsonGroup, Group.class);
+
+            if (myLinkedGroupMap.get("contents") != null) {
+
+                String contents_Json = gson.toJson(myLinkedGroupMap.get("contents"));
+                Map contents_group_Map = gson.fromJson(contents_Json, Map.class);
+
+                MyLinkedMap myLinkedMap = new MyLinkedMap(contents_group_Map);
 
 
-        Contents_ contents_ = group.contents;
-        String jsonContents_ = gson.toJson(contents_);
+                for (int i = 0; i < contents_group_Map.size(); i++) {
+
+                    String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
+                    ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
+
+                    Stats stats = reqAuthorize.stats;
+
+                    System.out.println(stats.name);
+
+                }
+
+            } else {
+
+                Stats stats = group.stats;
+
+                System.out.println(stats.name);
+
+            }
 
 
-        Map contents_Map = gson.fromJson(jsonContents_, Map.class);
-
-        MyLinkedMap myLinkedMap = new MyLinkedMap(contents_Map);
-
-
-        for (int i = 0; i < myLinkedMap.size(); i++) {
-
-            String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
-            ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
-            System.out.println(reqAuthorize);
         }
 
     }
 
 
-    private static void parseJson1() throws IOException {
+//    private static void parseJson2() throws IOException {
+//
+//        Gson gson = new Gson();
+//
+//        BufferedReader br = new BufferedReader(new FileReader("/Users/camposf/IdeaProjects/gatling_tool/stats2.json"));
+//
+//        Map map = gson.fromJson(br, Map.class);
+//
+//
+//        String contentsJson = gson.toJson(map.get("contents"));
+//
+//        Map contentsMap = gson.fromJson(contentsJson, Map.class);
+//        MyLinkedMap myLinkedContentsMap = new MyLinkedMap(contentsMap);
+//
+//        System.out.println(myLinkedContentsMap.getEntry(0));
+//        String jsonGroup = gson.toJson(myLinkedContentsMap.getValue(0));
+//        Group group = gson.fromJson(jsonGroup, Group.class);
+//
+//
+//        Contents_ contents_ = group.contents;
+//        String jsonContents_ = gson.toJson(contents_);
+//
+//
+//        Map contents_Map = gson.fromJson(jsonContents_, Map.class);
+//
+//        MyLinkedMap myLinkedMap = new MyLinkedMap(contents_Map);
+//
+//
+//        for (int i = 0; i < myLinkedMap.size(); i++) {
+//
+//            String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
+//            ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
+//
+//            String map1statsJson = gson.toJson(map.get("stats"));
+//            Stats stats = gson.fromJson(map1statsJson, Stats.class);
+//
+//            System.out.println(stats.stats.group1);
+//        }
+//
+//    }
 
-        Gson gson = new Gson();
 
-        ObjectMapper mapper = new ObjectMapper();
-        Map map = mapper.readValue(new File("/Users/camposf/IdeaProjects/gatling_tool/stats.json"), Map.class);
-
-        for (Object key : map.keySet()) {
-            System.out.printf("key=%s, value=%s\n", key, map.get(key));
-        }
-
-        String contentsJson = gson.toJson(map.get("contents"));
-        Contents contents = gson.fromJson(contentsJson, Contents.class);
-
-        Contents_ contents_ = contents.contents;
-        String jsonContents_ = gson.toJson(contents_);
-
-
-        Map contents_Map = gson.fromJson(jsonContents_, Map.class);
-
-        MyLinkedMap myLinkedMap = new MyLinkedMap(contents_Map);
-
-
-        for (int i = 0; i < myLinkedMap.size(); i++) {
-
-            String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
-            ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
-            System.out.println(reqAuthorize);
-        }
-
-    }
+//    private static void parseJson1() throws IOException {
+//
+//        Gson gson = new Gson();
+//
+//        ObjectMapper mapper = new ObjectMapper();
+//        Map map = mapper.readValue(new File("/Users/camposf/IdeaProjects/gatling_tool/stats.json"), Map.class);
+//
+//        for (Object key : map.keySet()) {
+//            System.out.printf("key=%s, value=%s\n", key, map.get(key));
+//        }
+//
+//        String contentsJson = gson.toJson(map.get("contents"));
+//        Contents contents = gson.fromJson(contentsJson, Contents.class);
+//
+//        Contents_ contents_ = contents.contents;
+//        String jsonContents_ = gson.toJson(contents_);
+//
+//
+//        Map contents_Map = gson.fromJson(jsonContents_, Map.class);
+//
+//        MyLinkedMap myLinkedMap = new MyLinkedMap(contents_Map);
+//
+//
+//        for (int i = 0; i < myLinkedMap.size(); i++) {
+//
+//            String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
+//            ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
+//            System.out.println(reqAuthorize);
+//        }
+//
+//    }
 
 
     static class MyLinkedMap<K, V> extends LinkedHashMap<K, V> {

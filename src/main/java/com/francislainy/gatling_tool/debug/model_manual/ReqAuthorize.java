@@ -1,18 +1,15 @@
-package com.francislainy.gatling_tool.debug.model;
+package com.francislainy.gatling_tool.debug.model_manual;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GroupLoginFlowCe67c {
+public class ReqAuthorize {
 
     @SerializedName("name")
     @Expose
     public String name;
     @SerializedName("stats")
     @Expose
-    public Stats__ stats;
-    @SerializedName("contents")
-    @Expose
-    public Contents_ contents;
+    public Stats stats;
 
 }
