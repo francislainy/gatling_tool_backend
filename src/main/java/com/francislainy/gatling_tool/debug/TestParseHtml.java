@@ -1,13 +1,11 @@
 package com.francislainy.gatling_tool.debug;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.francislainy.gatling_tool.debug.model.Contents;
 import com.francislainy.gatling_tool.debug.model.Contents_;
+import com.francislainy.gatling_tool.debug.model.Group;
 import com.francislainy.gatling_tool.debug.model.ReqAuthorize;
-import com.francislainy.gatling_tool.dto.stats.Stats;
 import com.google.gson.Gson;
-import net.sf.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -20,7 +18,45 @@ public class TestParseHtml {
 
     public static void main(String[] args) throws IOException {
 
-        parseJson1();
+        parseJson2();
+    }
+
+
+    private static void parseJson2() throws IOException {
+
+        Gson gson = new Gson();
+
+        ObjectMapper mapper = new ObjectMapper();
+        Map map = mapper.readValue(new File("/Users/camposf/IdeaProjects/gatling_tool/stats2.json"), Map.class);
+        
+        String contentsJson = gson.toJson(map.get("contents"));
+
+        Map contentsMap = gson.fromJson(contentsJson, Map.class);
+        MyLinkedMap myLinkedContentsMap = new MyLinkedMap(contentsMap);
+
+        System.out.println(myLinkedContentsMap.getEntry(0));
+        String jsonGroup = gson.toJson(myLinkedContentsMap.getValue(0));
+        Group group = gson.fromJson(jsonGroup, Group.class);
+
+        System.out.println(group.stats);
+
+
+        Contents_ contents_ = group.contents;
+        String jsonContents_ = gson.toJson(contents_);
+
+
+        Map contents_Map = gson.fromJson(jsonContents_, Map.class);
+
+        MyLinkedMap myLinkedMap = new MyLinkedMap(contents_Map);
+
+
+        for (int i = 0; i < myLinkedMap.size(); i++) {
+
+            String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
+            ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
+            System.out.println(reqAuthorize);
+        }
+
     }
 
 

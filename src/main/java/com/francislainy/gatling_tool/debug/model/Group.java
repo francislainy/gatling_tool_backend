@@ -3,7 +3,7 @@ package com.francislainy.gatling_tool.debug.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GroupLoginFlowCe67c {
+public class Group {
 
     @SerializedName("name")
     @Expose
