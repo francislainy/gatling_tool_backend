@@ -14,11 +14,7 @@ public class StatsJsonHelper {
 
     public static boolean hasJsonFormat(MultipartFile file) {
 
-        if (!TYPE.equals(file.getContentType())) {
-            return false;
-        }
-
-        return true;
+        return TYPE.equals(file.getContentType());
     }
 
     public static StatsEntity jsonToStats(MultipartFile file, UUID id) {

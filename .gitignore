@@ -34,3 +34,4 @@ build/
 .vscode/
 /HttpRequest.http
 /index.html
+/stats2.json
