@@ -2,19 +2,17 @@ package com.francislainy.gatling_tool.dto.stats;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import lombok.Data;
 
-@Data
-public class Group3 {
+public class Group {
 
     @SerializedName("name")
     @Expose
     public String name;
-    @SerializedName("count")
+    @SerializedName("stats")
     @Expose
-    public Integer count;
-    @SerializedName("percentage")
+    public Stats stats;
+    @SerializedName("contents")
     @Expose
-    public Integer percentage;
+    public Contents_ contents;
 
 }

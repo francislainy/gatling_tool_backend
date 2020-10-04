@@ -2,7 +2,9 @@ package com.francislainy.gatling_tool.dto.stats;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import lombok.Data;
 
+@Data
 public class Group1 {
 
     @SerializedName("name")
@@ -16,6 +18,3 @@ public class Group1 {
     public Integer percentage;
 
 }
-
-
-

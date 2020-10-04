@@ -1,8 +1,8 @@
 package com.francislainy.gatling_tool.helper;
 
-import com.francislainy.gatling_tool.debug.model_manual.Group;
-import com.francislainy.gatling_tool.debug.model_manual.ReqAuthorize;
-import com.francislainy.gatling_tool.debug.model_manual.Stats;
+import com.francislainy.gatling_tool.dto.stats.Group;
+import com.francislainy.gatling_tool.dto.stats.ReqAuthorize;
+import com.francislainy.gatling_tool.dto.stats.Stats;
 import com.francislainy.gatling_tool.model.entity.stats.StatsEntity;
 import com.google.gson.Gson;
 import org.springframework.web.multipart.MultipartFile;
@@ -62,7 +62,7 @@ public class StatsJsonHelper {
                         String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
                         ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
 
-                        com.francislainy.gatling_tool.debug.model_manual.Stats stats = reqAuthorize.stats;
+                        Stats stats = reqAuthorize.stats;
 
                         statsEntity = addStatsToDb(stats, id); //todo: populate table multiple times
 
@@ -70,7 +70,7 @@ public class StatsJsonHelper {
 
                 } else {
 
-                    com.francislainy.gatling_tool.debug.model_manual.Stats stats = group.stats;
+                    Stats stats = group.stats;
 
                     statsEntity = addStatsToDb(stats, id);
 
@@ -133,7 +133,7 @@ public class StatsJsonHelper {
                         String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
                         ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
 
-                        com.francislainy.gatling_tool.debug.model_manual.Stats stats = reqAuthorize.stats;
+                        Stats stats = reqAuthorize.stats;
 
                         statsEntity = addStatsToDb(stats, id); //todo: populate table multiple times
                         statsEntityList.add(statsEntity);
@@ -142,7 +142,7 @@ public class StatsJsonHelper {
 
                 } else {
 
-                    com.francislainy.gatling_tool.debug.model_manual.Stats stats = group.stats;
+                    Stats stats = group.stats;
 
                     statsEntity = addStatsToDb(stats, id);
                     statsEntityList.add(statsEntity);
@@ -225,61 +225,61 @@ public class StatsJsonHelper {
     }
 
 
-    private static void parseJson(File file) throws IOException {
-
-        Gson gson = new Gson();
-
-        BufferedReader br = new BufferedReader(new FileReader("/Users/camposf/IdeaProjects/gatling_tool/stats2.json"));
-
-        Map map = gson.fromJson(br, Map.class);
-
-
-        String contentsJson = gson.toJson(map.get("contents"));
-
-        Map contentsMap = gson.fromJson(contentsJson, Map.class);
-        MyLinkedMap myLinkedContentsMap = new MyLinkedMap(contentsMap);
-
-        System.out.println(myLinkedContentsMap.getEntry(0));
-
-        for (int a = 0; a < myLinkedContentsMap.size(); a++) {
-
-            String jsonGroup = gson.toJson(myLinkedContentsMap.getValue(a));
-            Map groupsMap = gson.fromJson(jsonGroup, Map.class);
-            MyLinkedMap myLinkedGroupMap = new MyLinkedMap(groupsMap);
-
-            Group group = gson.fromJson(jsonGroup, Group.class);
-
-            if (myLinkedGroupMap.get("contents") != null) {
-
-                String contents_Json = gson.toJson(myLinkedGroupMap.get("contents"));
-                Map contents_group_Map = gson.fromJson(contents_Json, Map.class);
-
-                MyLinkedMap myLinkedMap = new MyLinkedMap(contents_group_Map);
-
-
-                for (int i = 0; i < contents_group_Map.size(); i++) {
-
-                    String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
-                    ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
-
-                    com.francislainy.gatling_tool.debug.model_manual.Stats stats = reqAuthorize.stats;
-
-                    System.out.println(stats.name);
-
-                }
-
-            } else {
-
-                com.francislainy.gatling_tool.debug.model_manual.Stats stats = group.stats;
-
-                System.out.println(stats.name);
-
-            }
-
-
-        }
-
-    }
+//    private static void parseJson(File file) throws IOException {
+//
+//        Gson gson = new Gson();
+//
+//        BufferedReader br = new BufferedReader(new FileReader("/Users/camposf/IdeaProjects/gatling_tool/stats2.json"));
+//
+//        Map map = gson.fromJson(br, Map.class);
+//
+//
+//        String contentsJson = gson.toJson(map.get("contents"));
+//
+//        Map contentsMap = gson.fromJson(contentsJson, Map.class);
+//        MyLinkedMap myLinkedContentsMap = new MyLinkedMap(contentsMap);
+//
+//        System.out.println(myLinkedContentsMap.getEntry(0));
+//
+//        for (int a = 0; a < myLinkedContentsMap.size(); a++) {
+//
+//            String jsonGroup = gson.toJson(myLinkedContentsMap.getValue(a));
+//            Map groupsMap = gson.fromJson(jsonGroup, Map.class);
+//            MyLinkedMap myLinkedGroupMap = new MyLinkedMap(groupsMap);
+//
+//            Group group = gson.fromJson(jsonGroup, Group.class);
+//
+//            if (myLinkedGroupMap.get("contents") != null) {
+//
+//                String contents_Json = gson.toJson(myLinkedGroupMap.get("contents"));
+//                Map contents_group_Map = gson.fromJson(contents_Json, Map.class);
+//
+//                MyLinkedMap myLinkedMap = new MyLinkedMap(contents_group_Map);
+//
+//
+//                for (int i = 0; i < contents_group_Map.size(); i++) {
+//
+//                    String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
+//                    ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
+//
+//                    com.francislainy.gatling_tool.debug.model_manual.Stats stats = reqAuthorize.stats;
+//
+//                    System.out.println(stats.name);
+//
+//                }
+//
+//            } else {
+//
+//                com.francislainy.gatling_tool.debug.model_manual.Stats stats = group.stats;
+//
+//                System.out.println(stats.name);
+//
+//            }
+//
+//
+//        }
+//
+//    }
 
 
     private static File convertMultiPartToFile(MultipartFile file) throws IOException {
