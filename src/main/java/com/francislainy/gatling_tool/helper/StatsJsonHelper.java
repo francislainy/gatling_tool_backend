@@ -8,10 +8,7 @@ import com.google.gson.Gson;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class StatsJsonHelper {
 
@@ -84,6 +81,79 @@ public class StatsJsonHelper {
 
 
             return statsEntity;
+
+        } catch (IOException e) {
+            throw new RuntimeException("fail to parse json file: " + e.getMessage());
+        }
+    }
+
+
+    public static List<StatsEntity> jsonToStatsList(MultipartFile file, UUID id) {
+
+        try {
+
+            File myFile = convertMultiPartToFile(file);
+
+            Gson gson = new Gson();
+
+            BufferedReader br = new BufferedReader(new FileReader(myFile));
+
+            StatsEntity statsEntity = new StatsEntity();
+
+            List<StatsEntity> statsEntityList = new ArrayList<>();
+
+            Map map = gson.fromJson(br, Map.class);
+
+
+            String contentsJson = gson.toJson(map.get("contents"));
+
+            Map contentsMap = gson.fromJson(contentsJson, Map.class);
+            MyLinkedMap myLinkedContentsMap = new MyLinkedMap(contentsMap);
+
+            System.out.println(myLinkedContentsMap.getEntry(0));
+
+            for (int a = 0; a < myLinkedContentsMap.size(); a++) {
+
+                String jsonGroup = gson.toJson(myLinkedContentsMap.getValue(a));
+                Map groupsMap = gson.fromJson(jsonGroup, Map.class);
+                MyLinkedMap myLinkedGroupMap = new MyLinkedMap(groupsMap);
+
+                Group group = gson.fromJson(jsonGroup, Group.class);
+
+                if (myLinkedGroupMap.get("contents") != null) {
+
+                    String contents_Json = gson.toJson(myLinkedGroupMap.get("contents"));
+                    Map contents_group_Map = gson.fromJson(contents_Json, Map.class);
+
+                    MyLinkedMap myLinkedMap = new MyLinkedMap(contents_group_Map);
+
+
+                    for (int i = 0; i < contents_group_Map.size(); i++) {
+
+                        String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
+                        ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
+
+                        com.francislainy.gatling_tool.debug.model_manual.Stats stats = reqAuthorize.stats;
+
+                        statsEntity = addStatsToDb(stats, id); //todo: populate table multiple times
+                        statsEntityList.add(statsEntity);
+
+                    }
+
+                } else {
+
+                    com.francislainy.gatling_tool.debug.model_manual.Stats stats = group.stats;
+
+                    statsEntity = addStatsToDb(stats, id);
+                    statsEntityList.add(statsEntity);
+
+                }
+
+
+            }
+
+
+            return statsEntityList;
 
         } catch (IOException e) {
             throw new RuntimeException("fail to parse json file: " + e.getMessage());
