@@ -144,6 +144,6 @@ public class StatsEntity {
     @Column(name = "mean_number_of_requests_per_second_ko")
     private double meanNumberOfRequestsPerSecondKo;
 
-    @Column(name = "category_id")
-    private UUID categoryId;
+    @Column(name = "report_id")
+    private UUID reportId;
 }

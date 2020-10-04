@@ -25,9 +25,6 @@ public class CategoryQueryController {
     @Autowired
     private CategoryQueryService categoryQueryService;
 
-    @Autowired
-    private ReportQueryService reportQueryService;
-
     @Operation(summary = "Get the complete list of categories")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)

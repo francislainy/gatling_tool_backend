@@ -14,8 +14,4 @@ public class CategoryCreateDto {
     private UUID id;
     private String title;
 
-    public CategoryCreateDto(String title) {
-        this.title = title;
-    }
-
 }

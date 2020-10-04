@@ -220,7 +220,7 @@ public class StatsJsonHelper {
         statsEntity.setStandardDeviationOk(stats.standardDeviation.ok);
         statsEntity.setStandardDeviationTotal(stats.standardDeviation.total);
 
-        statsEntity.setCategoryId(id);
+        statsEntity.setReportId(id);
         return statsEntity;
     }
 

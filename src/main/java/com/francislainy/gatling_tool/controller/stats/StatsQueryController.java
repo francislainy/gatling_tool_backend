@@ -1,6 +1,7 @@
 package com.francislainy.gatling_tool.controller.stats;
 
 import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
+import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
 import com.francislainy.gatling_tool.dto.stats.Stats;
 import com.francislainy.gatling_tool.service.stats.StatsQueryService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,6 +40,16 @@ public class StatsQueryController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<CategoryQueryDto> getStats(@PathVariable(value = "id") UUID id) {
         return new ResponseEntity(statsQueryService.getStats(id), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Get the list of stats for a report")
+    @GetMapping(value = "/report/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public Map<String, List<ReportQueryDto>> getStatsByReport(@PathVariable(value = "id") UUID id) {
+
+        Map result = new HashMap();
+        result.put("stats", statsQueryService.listAllStatsByReport(id));
+        return result;
     }
 
 }

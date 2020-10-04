@@ -16,9 +16,9 @@ public class Stats {
     @SerializedName("id")
     @Expose
     private UUID id;
-    @SerializedName("category_id")
+    @SerializedName("report_id")
     @Expose
-    private UUID categoryId;
+    private UUID reportId;
     @SerializedName("name")
     @Expose
     public String name;

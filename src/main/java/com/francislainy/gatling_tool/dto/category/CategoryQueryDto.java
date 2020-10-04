@@ -18,10 +18,6 @@ public class CategoryQueryDto {
 
     private List<ReportQueryDto> reports;
 
-    public CategoryQueryDto(String title) {
-        this.title = title;
-    }
-
     public CategoryQueryDto(UUID id, String title) {
         this.id = id;
         this.title = title;

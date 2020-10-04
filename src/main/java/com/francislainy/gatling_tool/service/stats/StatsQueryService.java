@@ -13,4 +13,6 @@ public interface StatsQueryService {
 
     List<Stats> listAllStats();
 
+    List<Stats> listAllStatsByReport(UUID id);
+
 }
