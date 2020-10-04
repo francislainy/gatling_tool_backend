@@ -9,12 +9,12 @@ public class MeanResponseTime {
 
     @SerializedName("total")
     @Expose
-    public Integer total;
+    public Double total;
     @SerializedName("ok")
     @Expose
-    public Integer ok;
+    public Double ok;
     @SerializedName("ko")
     @Expose
-    public Integer ko;
+    public Double ko;
 
 }

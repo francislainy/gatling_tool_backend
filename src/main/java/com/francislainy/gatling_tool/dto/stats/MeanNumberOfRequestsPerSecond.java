@@ -15,6 +15,6 @@ public class MeanNumberOfRequestsPerSecond {
     public Double ok;
     @SerializedName("ko")
     @Expose
-    public Integer ko;
+    public Double ko;
 
 }

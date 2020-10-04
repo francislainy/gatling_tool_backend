@@ -1,26 +1,24 @@
 package com.francislainy.gatling_tool.dto.stats;
 
-import com.francislainy.gatling_tool.debug.model_manual.Group1;
-import com.francislainy.gatling_tool.debug.model_manual.Group2;
-import com.francislainy.gatling_tool.debug.model_manual.Group3;
-import com.francislainy.gatling_tool.debug.model_manual.Group4;
-import com.francislainy.gatling_tool.debug.model_manual.MaxResponseTime;
-import com.francislainy.gatling_tool.debug.model_manual.MeanNumberOfRequestsPerSecond;
-import com.francislainy.gatling_tool.debug.model_manual.MeanResponseTime;
-import com.francislainy.gatling_tool.debug.model_manual.MinResponseTime;
-import com.francislainy.gatling_tool.debug.model_manual.NumberOfRequests;
-import com.francislainy.gatling_tool.debug.model_manual.Percentiles1;
-import com.francislainy.gatling_tool.debug.model_manual.Percentiles2;
-import com.francislainy.gatling_tool.debug.model_manual.Percentiles3;
-import com.francislainy.gatling_tool.debug.model_manual.Percentiles4;
-import com.francislainy.gatling_tool.debug.model_manual.StandardDeviation;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class Stats {
 
+    @SerializedName("id")
+    @Expose
+    private UUID id;
+    @SerializedName("category_id")
+    @Expose
+    private UUID categoryId;
     @SerializedName("name")
     @Expose
     public String name;
@@ -67,8 +65,6 @@ public class Stats {
     @Expose
     public MeanNumberOfRequestsPerSecond meanNumberOfRequestsPerSecond;
 
-    public Stats(String name) {
-    }
 }
 
 

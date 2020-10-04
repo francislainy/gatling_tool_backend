@@ -46,13 +46,13 @@ public class StatsEntity {
     private int maxResponseTimeKo;
 
     @Column(name = "mean_response_time_total")
-    private int meanResponseTimeTotal;
+    private double meanResponseTimeTotal;
 
     @Column(name = "mean_response_time_ok")
-    private int meanResponseTimeOk;
+    private double meanResponseTimeOk;
 
     @Column(name = "mean_response_time_ko")
-    private int meanResponseTimeKo;
+    private double meanResponseTimeKo;
 
     @Column(name = "standard_deviation_total")
     private int standardDeviationTotal;
