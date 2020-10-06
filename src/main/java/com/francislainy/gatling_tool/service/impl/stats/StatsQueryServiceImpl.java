@@ -1,15 +1,12 @@
 package com.francislainy.gatling_tool.service.impl.stats;
 
-import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
 import com.francislainy.gatling_tool.dto.stats.*;
-import com.francislainy.gatling_tool.model.entity.category.Category;
-import com.francislainy.gatling_tool.model.entity.report.Report;
 import com.francislainy.gatling_tool.model.entity.stats.StatsEntity;
 import com.francislainy.gatling_tool.repository.stats.StatsRepository;
 import com.francislainy.gatling_tool.service.stats.StatsQueryService;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
-import com.google.gson.annotations.Expose;
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.GsonBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +18,11 @@ import java.util.UUID;
 public class StatsQueryServiceImpl implements StatsQueryService {
 
     @Autowired
-    private StatsRepository statsRepository;
+    private final StatsRepository statsRepository;
+
+    public StatsQueryServiceImpl(StatsRepository statsRepository) {
+        this.statsRepository = statsRepository;
+    }
 
     @Override
     public Stats getStats(UUID id) {
@@ -55,22 +56,6 @@ public class StatsQueryServiceImpl implements StatsQueryService {
         return statsList;
     }
 
-//    public List<ReportQueryDto> listAllReportsByCategory(UUID id) {
-//
-//        List<ReportQueryDto> reportList = new ArrayList<>();
-//
-//        reportRepository.findByCategory_Id(id).forEach(report -> {
-//
-//            Category category = new Category();
-//            category.setId(report.getCategory().getId());
-//            category.setTitle(report.getCategory().getTitle());
-//
-//            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category));
-//
-//        });
-//
-//        return reportList;
-//    }
 
     @Override
     public List<Stats> listAllStatsByReport(UUID id) {
@@ -79,9 +64,6 @@ public class StatsQueryServiceImpl implements StatsQueryService {
         List<Stats> statsList = new ArrayList<>();
 
         statsRepository.findByReportId(id).forEach(statsEntity -> {
-
-            Report report = new Report();
-            report.setId(report.getId());
 
             Stats stats = populateStats(statsEntity);
 
@@ -95,6 +77,7 @@ public class StatsQueryServiceImpl implements StatsQueryService {
 
 
     private Stats populateStats(StatsEntity statsEntity) {
+
         Stats stats = new Stats();
         stats.setId(statsEntity.getId());
 
@@ -200,10 +183,6 @@ public class StatsQueryServiceImpl implements StatsQueryService {
         standardDeviation.setTotal(statsEntity.getStandardDeviationTotal());
 
         stats.setStandardDeviation(standardDeviation);
-
-        Gson gson = new Gson();
-        String json = gson.toJson(stats);
-        stats = gson.fromJson(json, Stats.class);
 
 
         return stats;

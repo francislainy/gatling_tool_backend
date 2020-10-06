@@ -24,6 +24,10 @@ public class StatsQueryController {
     @Autowired
     private StatsQueryService statsQueryService;
 
+    public StatsQueryController(StatsQueryService statsQueryService) {
+        this.statsQueryService = statsQueryService;
+    }
+
     @Operation(summary = "Get the complete list of stats")
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
