@@ -16,7 +16,7 @@ public class TestParseHtml {
 
     public static void main(String[] args) throws IOException {
 
-        parseJson3();
+        parseHtml();
     }
 
 
@@ -205,7 +205,7 @@ public class TestParseHtml {
             Object[] list1 = set.toArray();
 
             for (int i = 0; i < list1.length; i++) {
-                System.out.println(list1[i]);
+                System.out.println(list1[i] + " ---");
             }
 
         } catch (IOException e) {
