@@ -5,6 +5,7 @@ import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
 import com.francislainy.gatling_tool.dto.report.ReportUpdateDto;
 import com.francislainy.gatling_tool.model.entity.category.Category;
 import com.francislainy.gatling_tool.model.entity.report.Report;
+import com.francislainy.gatling_tool.repository.category.CategoryRepository;
 import com.francislainy.gatling_tool.repository.report.ReportRepository;
 import com.francislainy.gatling_tool.service.report.ReportCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class ReportCommandImpl implements ReportCommandService {
 
     @Autowired
     private ReportRepository reportRepository;
+
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Override
     public UUID createReport(ReportCreateDto reportCreateDto) {
@@ -38,7 +42,7 @@ public class ReportCommandImpl implements ReportCommandService {
 
 
     @Override
-    public ReportQueryDto updateReport(UUID id, ReportUpdateDto reportUpdateDto) {
+    public ReportUpdateDto updateReport(UUID id, ReportUpdateDto reportUpdateDto) {
 
         if (reportRepository.findById(id).isPresent()) {
 
@@ -50,12 +54,13 @@ public class ReportCommandImpl implements ReportCommandService {
 
             Category category = new Category();
             category.setId(reportUpdateDto.getCategory().getId());
-            category.setTitle(reportUpdateDto.getCategory().getTitle());
+            Category existingCategory = categoryRepository.findById(reportUpdateDto.getCategory().getId()).get();
+            category.setTitle(existingCategory.getTitle());
             existingReport.setCategory(category);
 
             Report updatedReport = reportRepository.save(existingReport);
 
-            return new ReportQueryDto(updatedReport.getId(), updatedReport.getReportTitle(), updatedReport.getRun_date(), updatedReport.getCreated_date(), category);
+            return new ReportUpdateDto(updatedReport.getId(), updatedReport.getReportTitle(), updatedReport.getRun_date(), updatedReport.getCreated_date(), category);
 
         } else {
             return null;

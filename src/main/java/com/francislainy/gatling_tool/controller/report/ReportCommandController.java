@@ -31,7 +31,7 @@ public class ReportCommandController {
     @Operation(summary = "Update a report")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<ReportQueryDto> updateReport(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<ReportUpdateDto> updateReport(@PathVariable(value = "id") UUID id,
                                                        @RequestBody ReportUpdateDto reportUpdateDto) {
         return new ResponseEntity<>(reportCommandService.updateReport(id, reportUpdateDto), HttpStatus.OK);
     }

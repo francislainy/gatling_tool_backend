@@ -1,6 +1,5 @@
 package com.francislainy.gatling_tool.dto.report;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.francislainy.gatling_tool.model.entity.category.Category;
 import lombok.AllArgsConstructor;
 import lombok.Data;

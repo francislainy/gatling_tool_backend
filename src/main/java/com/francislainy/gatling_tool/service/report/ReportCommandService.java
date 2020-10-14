@@ -10,7 +10,7 @@ public interface ReportCommandService {
 
     UUID createReport(ReportCreateDto reportCreateDto);
 
-    ReportQueryDto updateReport(UUID id, ReportUpdateDto reportUpdateDto);
+    ReportUpdateDto updateReport(UUID id, ReportUpdateDto reportUpdateDto);
 
     void deleteReport(UUID id);
 }
