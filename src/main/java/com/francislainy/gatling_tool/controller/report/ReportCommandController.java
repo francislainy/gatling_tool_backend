@@ -1,7 +1,6 @@
 package com.francislainy.gatling_tool.controller.report;
 
 import com.francislainy.gatling_tool.dto.report.ReportCreateDto;
-import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
 import com.francislainy.gatling_tool.dto.report.ReportUpdateDto;
 import com.francislainy.gatling_tool.service.report.ReportCommandService;
 import io.swagger.v3.oas.annotations.Operation;

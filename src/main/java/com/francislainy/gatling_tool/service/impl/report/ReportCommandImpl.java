@@ -32,10 +32,8 @@ public class ReportCommandImpl implements ReportCommandService {
         newReport.setCreated_date(reportCreateDto.getCreatedDate());
         newReport.setReportTitle(reportCreateDto.getTitle());
 
-        Category category = new Category();
-        category.setId(reportCreateDto.getCategory().getId());
-        category.setTitle(reportCreateDto.getCategory().getTitle());
-        newReport.setCategory(category);
+        Category existingCategory = categoryRepository.findById(reportCreateDto.getCategory().getId()).get();
+        newReport.setCategory(existingCategory);
 
         return reportRepository.save(newReport).getId();
     }
@@ -52,15 +50,13 @@ public class ReportCommandImpl implements ReportCommandService {
             existingReport.setRun_date(reportUpdateDto.getRunDate());
             existingReport.setCreated_date(reportUpdateDto.getCreatedDate());
 
-            Category category = new Category();
-            category.setId(reportUpdateDto.getCategory().getId());
             Category existingCategory = categoryRepository.findById(reportUpdateDto.getCategory().getId()).get();
-            category.setTitle(existingCategory.getTitle());
-            existingReport.setCategory(category);
+            existingCategory.setId(reportUpdateDto.getCategory().getId());
+            existingReport.setCategory(existingCategory);
 
             Report updatedReport = reportRepository.save(existingReport);
 
-            return new ReportUpdateDto(updatedReport.getId(), updatedReport.getReportTitle(), updatedReport.getRun_date(), updatedReport.getCreated_date(), category);
+            return new ReportUpdateDto(updatedReport.getId(), updatedReport.getReportTitle(), updatedReport.getRun_date(), updatedReport.getCreated_date(), existingCategory);
 
         } else {
             return null;

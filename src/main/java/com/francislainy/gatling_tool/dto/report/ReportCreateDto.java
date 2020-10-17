@@ -19,8 +19,4 @@ public class ReportCreateDto {
 
     private Category category;
 
-    public ReportCreateDto(String title) {
-        this.title = title;
-    }
-
 }

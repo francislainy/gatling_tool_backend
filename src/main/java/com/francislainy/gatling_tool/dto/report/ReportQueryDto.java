@@ -19,10 +19,6 @@ public class ReportQueryDto {
 
     private Category category;
 
-    public ReportQueryDto(String title) {
-        this.title = title;
-    }
-
     public ReportQueryDto(UUID id, String title, String runDate, String createdDate) {
         this.id = id;
         this.title = title;
