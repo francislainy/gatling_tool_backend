@@ -21,9 +21,9 @@ public class Report {
     @Column(name = "report_title", nullable = false)
     private String reportTitle;
     @Column(name = "run_date", nullable = false)
-    private String run_date;
+    private Long run_date;
     @Column(name = "created_date", nullable = false)
-    private String created_date;
+    private Long created_date;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id",  nullable = false)

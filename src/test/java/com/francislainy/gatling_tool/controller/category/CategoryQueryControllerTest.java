@@ -112,7 +112,7 @@ class CategoryQueryControllerTest {
         when(categoryRepository.findById(UUID.fromString(categoryId))).thenReturn(java.util.Optional.of(category));
 
 
-        Report report = new Report(UUID.fromString(reportId), "My saturday report", "today", "today", null);
+        Report report = new Report(UUID.fromString(reportId), "My saturday report", 1591609820902L, 1591609820902L, null);
         ArrayList reports = new ArrayList();
         reports.add(report);
         when(reportRepository.findByCategory_Id(category.getId())).thenReturn(reports);

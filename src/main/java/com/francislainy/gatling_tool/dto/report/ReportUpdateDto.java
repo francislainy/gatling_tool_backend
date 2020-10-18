@@ -14,8 +14,8 @@ public class ReportUpdateDto {
 
     private UUID id;
     private String title;
-    private String runDate;
-    private String createdDate;
+    private Long runDate;
+    private Long createdDate;
 
     private Category category;
 

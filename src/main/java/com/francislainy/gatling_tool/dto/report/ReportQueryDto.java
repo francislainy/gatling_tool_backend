@@ -14,12 +14,12 @@ public class ReportQueryDto {
 
     private UUID id;
     private String title;
-    private String runDate;
-    private String createdDate;
+    private Long runDate;
+    private Long createdDate;
 
     private Category category;
 
-    public ReportQueryDto(UUID id, String title, String runDate, String createdDate) {
+    public ReportQueryDto(UUID id, String title, Long runDate, Long createdDate) {
         this.id = id;
         this.title = title;
         this.runDate = runDate;
