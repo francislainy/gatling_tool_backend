@@ -19,98 +19,33 @@ public class StatsJsonHelper {
         return TYPE.equals(file.getContentType());
     }
 
-    public static StatsEntity jsonToStats(MultipartFile file, UUID id) {
-
-        try {
-
-            File myFile = convertMultiPartToFile(file);
-
-            Gson gson = new Gson();
-
-            BufferedReader br = new BufferedReader(new FileReader(myFile));
-
-            StatsEntity statsEntity = new StatsEntity();
-
-            Map map = gson.fromJson(br, Map.class);
-
-
-            String contentsJson = gson.toJson(map.get("contents"));
-
-            Map contentsMap = gson.fromJson(contentsJson, Map.class);
-            MyLinkedMap myLinkedContentsMap = new MyLinkedMap(contentsMap);
-
-            System.out.println(myLinkedContentsMap.getEntry(0));
-
-            for (int a = 0; a < myLinkedContentsMap.size(); a++) {
-
-                String jsonGroup = gson.toJson(myLinkedContentsMap.getValue(a));
-                Map groupsMap = gson.fromJson(jsonGroup, Map.class);
-                MyLinkedMap myLinkedGroupMap = new MyLinkedMap(groupsMap);
-
-                Group group = gson.fromJson(jsonGroup, Group.class);
-
-                if (myLinkedGroupMap.get("contents") != null) {
-
-                    String contents_Json = gson.toJson(myLinkedGroupMap.get("contents"));
-                    Map contents_group_Map = gson.fromJson(contents_Json, Map.class);
-
-                    MyLinkedMap myLinkedMap = new MyLinkedMap(contents_group_Map);
-
-
-                    for (int i = 0; i < contents_group_Map.size(); i++) {
-
-                        String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
-                        ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
-
-                        Stats stats = reqAuthorize.stats;
-
-                        statsEntity = addStatsToDb(stats, id); //todo: populate table multiple times
-
-                    }
-
-                } else {
-
-                    Stats stats = group.stats;
-
-                    statsEntity = addStatsToDb(stats, id);
-
-                }
-
-
-            }
-
-
-            return statsEntity;
-
-        } catch (IOException e) {
-            throw new RuntimeException("fail to parse json file: " + e.getMessage());
-        }
-    }
-
 
     public static List<StatsEntity> jsonToStatsList(MultipartFile file, UUID id) {
 
         try {
 
             File myFile = convertMultiPartToFile(file);
-
             Gson gson = new Gson();
-
             BufferedReader br = new BufferedReader(new FileReader(myFile));
 
-            StatsEntity statsEntity = new StatsEntity();
-
+            StatsEntity statsEntity;
             List<StatsEntity> statsEntityList = new ArrayList<>();
 
             Map map = gson.fromJson(br, Map.class);
 
+            // Save global info to get global combined stats
+            String globalStatsJson = gson.toJson(map.get("stats"));
+            Stats stats = gson.fromJson(globalStatsJson, Stats.class);
+            statsEntity = addStatsToDbEntity(stats, id);
+            statsEntityList.add(statsEntity);
 
+
+            // Save individual stats
             String contentsJson = gson.toJson(map.get("contents"));
 
             Map contentsMap = gson.fromJson(contentsJson, Map.class);
             MyLinkedMap myLinkedContentsMap = new MyLinkedMap(contentsMap);
 
-            System.out.println(myLinkedContentsMap.getEntry(0));
 
             for (int a = 0; a < myLinkedContentsMap.size(); a++) {
 
@@ -133,25 +68,23 @@ public class StatsJsonHelper {
                         String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
                         ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
 
-                        Stats stats = reqAuthorize.stats;
+                        Stats st = reqAuthorize.stats;
 
-                        statsEntity = addStatsToDb(stats, id); //todo: populate table multiple times
+                        statsEntity = addStatsToDbEntity(st, id);
                         statsEntityList.add(statsEntity);
 
                     }
 
                 } else {
 
-                    Stats stats = group.stats;
+                    Stats st = group.stats;
 
-                    statsEntity = addStatsToDb(stats, id);
+                    statsEntity = addStatsToDbEntity(st, id);
                     statsEntityList.add(statsEntity);
 
                 }
 
-
             }
-
 
             return statsEntityList;
 
@@ -161,7 +94,7 @@ public class StatsJsonHelper {
     }
 
 
-    private static StatsEntity addStatsToDb(Stats stats, UUID id) {
+    private static StatsEntity addStatsToDbEntity(Stats stats, UUID id) {
         StatsEntity statsEntity = new StatsEntity();
         statsEntity.setGroup1Count(stats.group1.count);
         statsEntity.setGroup1Name(stats.group1.name);
@@ -223,63 +156,6 @@ public class StatsJsonHelper {
         statsEntity.setReportId(id);
         return statsEntity;
     }
-
-
-//    private static void parseJson(File file) throws IOException {
-//
-//        Gson gson = new Gson();
-//
-//        BufferedReader br = new BufferedReader(new FileReader("/Users/camposf/IdeaProjects/gatling_tool/stats2.json"));
-//
-//        Map map = gson.fromJson(br, Map.class);
-//
-//
-//        String contentsJson = gson.toJson(map.get("contents"));
-//
-//        Map contentsMap = gson.fromJson(contentsJson, Map.class);
-//        MyLinkedMap myLinkedContentsMap = new MyLinkedMap(contentsMap);
-//
-//        System.out.println(myLinkedContentsMap.getEntry(0));
-//
-//        for (int a = 0; a < myLinkedContentsMap.size(); a++) {
-//
-//            String jsonGroup = gson.toJson(myLinkedContentsMap.getValue(a));
-//            Map groupsMap = gson.fromJson(jsonGroup, Map.class);
-//            MyLinkedMap myLinkedGroupMap = new MyLinkedMap(groupsMap);
-//
-//            Group group = gson.fromJson(jsonGroup, Group.class);
-//
-//            if (myLinkedGroupMap.get("contents") != null) {
-//
-//                String contents_Json = gson.toJson(myLinkedGroupMap.get("contents"));
-//                Map contents_group_Map = gson.fromJson(contents_Json, Map.class);
-//
-//                MyLinkedMap myLinkedMap = new MyLinkedMap(contents_group_Map);
-//
-//
-//                for (int i = 0; i < contents_group_Map.size(); i++) {
-//
-//                    String jsonReqAuthorize = gson.toJson(myLinkedMap.getValue(i));
-//                    ReqAuthorize reqAuthorize = gson.fromJson(jsonReqAuthorize, ReqAuthorize.class);
-//
-//                    com.francislainy.gatling_tool.debug.model_manual.Stats stats = reqAuthorize.stats;
-//
-//                    System.out.println(stats.name);
-//
-//                }
-//
-//            } else {
-//
-//                com.francislainy.gatling_tool.debug.model_manual.Stats stats = group.stats;
-//
-//                System.out.println(stats.name);
-//
-//            }
-//
-//
-//        }
-//
-//    }
 
 
     private static File convertMultiPartToFile(MultipartFile file) throws IOException {
