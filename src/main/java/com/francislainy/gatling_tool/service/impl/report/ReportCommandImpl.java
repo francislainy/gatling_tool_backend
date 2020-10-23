@@ -1,7 +1,6 @@
 package com.francislainy.gatling_tool.service.impl.report;
 
 import com.francislainy.gatling_tool.dto.report.ReportCreateDto;
-import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
 import com.francislainy.gatling_tool.dto.report.ReportUpdateDto;
 import com.francislainy.gatling_tool.model.entity.category.Category;
 import com.francislainy.gatling_tool.model.entity.report.Report;
@@ -45,22 +44,25 @@ public class ReportCommandImpl implements ReportCommandService {
         if (reportRepository.findById(id).isPresent()) {
 
             Report existingReport = reportRepository.findById(id).get();
-
             existingReport.setReportTitle(reportUpdateDto.getTitle());
             existingReport.setRun_date(reportUpdateDto.getRunDate());
             existingReport.setCreated_date(reportUpdateDto.getCreatedDate());
 
-            Category category = new Category();
-
-            category.setId(reportUpdateDto.getCategory().getId());
             Category existingCategory = categoryRepository.findById(reportUpdateDto.getCategory().getId()).get();
-            category.setTitle(existingCategory.getTitle());
+            Category category = new Category(existingCategory.getId(), existingCategory.getTitle());
+            existingReport.setCategory(category); // This is needed to remove hibernate interceptor to be set together with the other category properties
 
-            existingReport.setCategory(category);
 
             Report updatedReport = reportRepository.save(existingReport);
+            updatedReport.setCategory(category); // This is needed to remove hibernate interceptor to be set together with the other category properties
 
-            return new ReportUpdateDto(updatedReport.getId(), updatedReport.getReportTitle(), updatedReport.getRun_date(), updatedReport.getCreated_date(), updatedReport.getCategory());
+
+            ReportUpdateDto newReportUpdateDto = new ReportUpdateDto(updatedReport.getId(),
+                    updatedReport.getReportTitle(), updatedReport.getRun_date(),
+                    updatedReport.getCreated_date(), updatedReport.getCategory());
+
+
+            return newReportUpdateDto;
 
         } else {
             return null;
