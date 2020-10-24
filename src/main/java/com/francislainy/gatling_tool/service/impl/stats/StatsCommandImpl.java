@@ -31,12 +31,31 @@ public class StatsCommandImpl implements StatsCommandService {
             Report existingReport = reportRepository.findById(statsUpdateDto.getReportId()).get();
             Report report = existingReport;
             report.setId(statsUpdateDto.getReportId());
-            existingStats.setReportId(report.getId()); // This is needed to remove hibernate interceptor to be set together with the other category properties
+            existingStats.setReportId(report.getId()); // This is needed to remove hibernate interceptor to be set together with the other report properties
 
             StatsEntity updatedStats = statsRepository.save(existingStats);
             updatedStats.setReportId(existingReport.getId());
 
             Stats stats = new Stats(updatedStats.getId(), updatedStats.getReportId(), updatedStats.getName());
+
+            return stats;
+
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public Stats updateStatsEndpoint(UUID id, Stats statsUpdateDto) {
+
+        if (statsRepository.findById(id).isPresent()) {
+
+            StatsEntity existingStats = statsRepository.findById(id).get();
+            existingStats.setEndpoint(statsUpdateDto.getEndpoint());
+
+            StatsEntity updatedStats = statsRepository.save(existingStats);
+
+            Stats stats = new Stats(updatedStats.getId(), updatedStats.getEndpoint());
 
             return stats;
 

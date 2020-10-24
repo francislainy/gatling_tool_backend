@@ -184,6 +184,7 @@ public class StatsQueryServiceImpl implements StatsQueryService {
 
         stats.setStandardDeviation(standardDeviation);
 
+        stats.setEndpoint(statsEntity.getEndpoint());
 
         return stats;
     }

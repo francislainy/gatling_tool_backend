@@ -8,5 +8,7 @@ public interface StatsCommandService {
 
     Stats updateStats(UUID id, Stats statsUpdateDto);
 
+    Stats updateStatsEndpoint(UUID id, Stats statsUpdateDto);
+
     void deleteStats(UUID id);
 }

@@ -64,11 +64,19 @@ public class Stats {
     @SerializedName("meanNumberOfRequestsPerSecond")
     @Expose
     public MeanNumberOfRequestsPerSecond meanNumberOfRequestsPerSecond;
+    @SerializedName("endpoint")
+    @Expose
+    public String endpoint;
 
     public Stats(UUID id, UUID reportId, String name) {
         this.id = id;
         this.name = name;
         this.reportId = reportId;
+    }
+
+    public Stats(UUID id, String endpoint) {
+        this.id = id;
+        this.endpoint = endpoint;
     }
 }
 

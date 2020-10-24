@@ -22,15 +22,23 @@ public class StatsCommandController {
     @Operation(summary = "Update a stats")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Stats> updateReport(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<Stats> updateStats(@PathVariable(value = "id") UUID id,
                                               @RequestBody Stats stats) {
         return new ResponseEntity<>(statsCommandService.updateStats(id, stats), HttpStatus.OK);
+    }
+
+    @Operation(summary = "Update a stats' endpoint")
+    @PutMapping(value = "/{id}/endpoint", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Stats> updateStatsEndpoint(@PathVariable(value = "id") UUID id,
+                                              @RequestBody Stats stats) {
+        return new ResponseEntity<>(statsCommandService.updateStatsEndpoint(id, stats), HttpStatus.OK);
     }
 
     @Operation(summary = "Delete a stats")
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public void deleteReport(@PathVariable(value = "id") UUID id) {
+    public void deleteStats(@PathVariable(value = "id") UUID id) {
 
         statsCommandService.deleteStats(id);
     }

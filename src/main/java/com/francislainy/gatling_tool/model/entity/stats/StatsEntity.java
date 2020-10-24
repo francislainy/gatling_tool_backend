@@ -18,6 +18,9 @@ public class StatsEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "endpoint")
+    private String endpoint;
+
     @Column(name = "number_of_requests_total")
     private int numberOfRequestsTotal;
 
