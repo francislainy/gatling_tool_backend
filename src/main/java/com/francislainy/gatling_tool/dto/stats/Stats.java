@@ -65,6 +65,11 @@ public class Stats {
     @Expose
     public MeanNumberOfRequestsPerSecond meanNumberOfRequestsPerSecond;
 
+    public Stats(UUID id, UUID reportId, String name) {
+        this.id = id;
+        this.name = name;
+        this.reportId = reportId;
+    }
 }
 
 
