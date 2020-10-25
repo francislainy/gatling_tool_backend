@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface StatsRepository extends JpaRepository<StatsEntity, UUID> {
 
-    String queryStatsOrderedById = "SELECT * FROM stats WHERE report.id = :reportId ORDER BY id";
+    String queryStatsOrderedById = "SELECT * FROM stats WHERE report_id = :reportId ORDER BY id";
 
     @Query(value = queryStatsOrderedById, nativeQuery = true)
     List<StatsEntity> findByReportId(UUID reportId);
