@@ -3,9 +3,13 @@ package com.francislainy.gatling_tool.controller.stats;
 import com.francislainy.gatling_tool.dto.category.CategoryQueryDto;
 import com.francislainy.gatling_tool.dto.report.ReportQueryDto;
 import com.francislainy.gatling_tool.dto.stats.Stats;
+import com.francislainy.gatling_tool.service.CsvService;
 import com.francislainy.gatling_tool.service.stats.StatsQueryService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +27,9 @@ public class StatsQueryController {
 
     @Autowired
     private StatsQueryService statsQueryService;
+
+    @Autowired
+    CsvService fileService;
 
     public StatsQueryController(StatsQueryService statsQueryService) {
         this.statsQueryService = statsQueryService;
@@ -56,4 +63,14 @@ public class StatsQueryController {
         return result;
     }
 
+    @GetMapping("/csv/download")
+    public ResponseEntity<Resource> getFile() {
+        String filename = "tutorials.csv";
+        InputStreamResource file = new InputStreamResource(fileService.load());
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
+                .contentType(MediaType.parseMediaType("application/csv"))
+                .body(file);
+    }
 }

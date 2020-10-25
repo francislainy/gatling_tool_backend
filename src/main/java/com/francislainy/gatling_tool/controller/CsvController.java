@@ -64,14 +64,4 @@ public class CsvController {
         }
     }
 
-    @GetMapping("/download")
-    public ResponseEntity<Resource> getFile() {
-        String filename = "tutorials.csv";
-        InputStreamResource file = new InputStreamResource(fileService.load());
-
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
-                .contentType(MediaType.parseMediaType("application/csv"))
-                .body(file);
-    }
 }

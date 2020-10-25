@@ -1,6 +1,7 @@
 package com.francislainy.gatling_tool.helper;
 
 import com.francislainy.gatling_tool.model.entity.Tutorial;
+import com.francislainy.gatling_tool.model.entity.stats.StatsEntity;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVPrinter;
@@ -59,17 +60,16 @@ public class CsvHelper {
         }
     }
 
-    public static ByteArrayInputStream tutorialsToCSV(List<Tutorial> tutorials) {
+    public static ByteArrayInputStream statsToCsv(List<StatsEntity> statsEntityList) {
         final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
 
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();
              CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
-            for (Tutorial tutorial : tutorials) {
+            for (StatsEntity statsEntity : statsEntityList) {
                 List<String> data = Arrays.asList(
-                        String.valueOf(tutorial.getId()),
-                        tutorial.getTitle(),
-                        tutorial.getDescription(),
-                        String.valueOf(tutorial.isPublished())
+                        String.valueOf(statsEntity.getId()),
+                        statsEntity.getEndpoint(),
+                        statsEntity.getGroup1Name()
                 );
 
                 csvPrinter.printRecord(data);
