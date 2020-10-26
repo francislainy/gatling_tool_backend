@@ -11,4 +11,5 @@ public interface StatsCommandService {
     Stats updateStatsEndpoint(UUID id, Stats statsUpdateDto);
 
     void deleteStats(UUID id);
+
 }

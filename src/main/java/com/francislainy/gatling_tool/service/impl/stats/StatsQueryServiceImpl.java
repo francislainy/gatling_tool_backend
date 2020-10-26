@@ -30,10 +30,7 @@ public class StatsQueryServiceImpl implements StatsQueryService {
         if (statsRepository.findById(id).isPresent()) {
             StatsEntity statsEntity = statsRepository.findById(id).get();
 
-            Stats stats = populateStats(statsEntity);
-
-
-            return stats;
+            return populateStats(statsEntity);
         } else {
             return null;
         }
@@ -48,7 +45,6 @@ public class StatsQueryServiceImpl implements StatsQueryService {
         statsRepository.findAll().forEach(statsEntity -> {
 
             Stats stats = populateStats(statsEntity);
-
 
             statsList.add(stats);
         });
@@ -66,7 +62,6 @@ public class StatsQueryServiceImpl implements StatsQueryService {
         statsRepository.findByReportId(id).forEach(statsEntity -> {
 
             Stats stats = populateStats(statsEntity);
-
 
             statsList.add(stats);
 
