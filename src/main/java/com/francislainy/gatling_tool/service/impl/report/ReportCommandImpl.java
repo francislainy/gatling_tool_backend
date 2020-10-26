@@ -21,6 +21,9 @@ public class ReportCommandImpl implements ReportCommandService {
     private ReportRepository reportRepository;
 
     @Autowired
+    private StatsRepository statsRepository;
+
+    @Autowired
     private CategoryRepository categoryRepository;
 
     @Override
