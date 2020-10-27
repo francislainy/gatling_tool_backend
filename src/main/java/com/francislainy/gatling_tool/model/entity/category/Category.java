@@ -24,7 +24,7 @@ public class Category {
     private String title;
 
     @OneToMany(mappedBy = "category", cascade = CascadeType.MERGE, orphanRemoval = true)
-    private Collection<Report> report;
+    private Collection<Report> reports;
 
     public Category(UUID id, String title) {
 
@@ -32,10 +32,18 @@ public class Category {
         this.title = title;
     }
 
-    public void addReport(Report r){
-        if (this.report == null){
-            this.report = new ArrayList<>();
+    public void addReport(Report r) {
+        if (this.reports == null) {
+            this.reports = new ArrayList<>();
         }
-        this.report.add(r);
+        r.setCategory(this);
+        this.reports.add(r);
+    }
+
+    public void removeReport(Report r) {
+        if (this.reports != null) {
+            r.setCategory(null);
+            this.reports.remove(r);
+        }
     }
 }

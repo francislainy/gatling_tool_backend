@@ -54,20 +54,12 @@ public class ReportCommandImpl implements ReportCommandService {
             existingReport.setCreated_date(reportUpdateDto.getCreatedDate());
 
             Category existingCategory = categoryRepository.findById(reportUpdateDto.getCategory().getId()).get();
-            Category category = new Category(existingCategory.getId(), existingCategory.getTitle());
-            existingReport.setCategory(category); // This is needed to remove hibernate interceptor to be set together with the other category properties
-            category.addReport(existingReport);
+            existingCategory.addReport(existingReport);
+            reportRepository.save(existingReport);
 
-            Report updatedReport = reportRepository.save(existingReport);
-            updatedReport.setCategory(category); // This is needed to remove hibernate interceptor to be set together with the other category properties
-
-
-            ReportUpdateDto newReportUpdateDto = new ReportUpdateDto(updatedReport.getId(),
-                    updatedReport.getReportTitle(), updatedReport.getRun_date(),
-                    updatedReport.getCreated_date(), updatedReport.getCategory());
-
-
-            return newReportUpdateDto;
+            return new ReportUpdateDto(existingReport.getId(),
+                    existingReport.getReportTitle(), existingReport.getRun_date(),
+                    existingReport.getCreated_date(), existingReport.getCategory());
 
         } else {
             return null;
