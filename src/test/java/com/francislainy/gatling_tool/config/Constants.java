@@ -7,6 +7,6 @@ public class Constants {
 
     public static String BASE_PACT_URL = "localhost";
 
-    public static final String PACT_PROVIDER = "gatling-provider";
-    public static final String PACT_CONSUMER = "gatling-consumer";
+    public static final String PACT_PROVIDER = "BACKEND";
+    public static final String PACT_CONSUMER = "FRONTEND";
 }

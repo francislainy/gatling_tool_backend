@@ -43,8 +43,12 @@ public class PactProviderTest {
     }
 
 
-    @State("a category with ID cdb02322-a8a6-4acf-9644-ddf8b24af9e6 exists")
+    @State("a request for all categories")
     void sampleState() {
+    }
+
+    @State("a request for a single category")
+    void sampleState1() {
     }
 
 }
