@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.UUID;
 
@@ -22,12 +23,19 @@ public class Category {
     @Column(name = "category_title", nullable = false)
     private String title;
 
-    @OneToMany(mappedBy = "category", orphanRemoval = true)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.MERGE, orphanRemoval = true)
     private Collection<Report> report;
 
     public Category(UUID id, String title) {
 
         this.id = id;
         this.title = title;
+    }
+
+    public void addReport(Report r){
+        if (this.report == null){
+            this.report = new ArrayList<>();
+        }
+        this.report.add(r);
     }
 }

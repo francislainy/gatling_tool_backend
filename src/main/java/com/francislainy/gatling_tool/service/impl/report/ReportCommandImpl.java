@@ -56,7 +56,7 @@ public class ReportCommandImpl implements ReportCommandService {
             Category existingCategory = categoryRepository.findById(reportUpdateDto.getCategory().getId()).get();
             Category category = new Category(existingCategory.getId(), existingCategory.getTitle());
             existingReport.setCategory(category); // This is needed to remove hibernate interceptor to be set together with the other category properties
-
+            category.addReport(existingReport);
 
             Report updatedReport = reportRepository.save(existingReport);
             updatedReport.setCategory(category); // This is needed to remove hibernate interceptor to be set together with the other category properties
