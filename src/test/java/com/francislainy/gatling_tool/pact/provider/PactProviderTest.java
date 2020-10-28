@@ -51,4 +51,8 @@ public class PactProviderTest {
     void sampleState1() {
     }
 
+    @State("a request for a single category including its children reports")
+    void sampleState2() {
+    }
+
 }
