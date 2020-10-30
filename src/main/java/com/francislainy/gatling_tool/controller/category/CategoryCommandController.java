@@ -24,14 +24,14 @@ public class CategoryCommandController {
     @Operation(summary = "Create a category")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<UUID> createCategory(@RequestBody CategoryCreateDto categoryCreateDto) {
+    public ResponseEntity<CategoryCreateDto> createCategory(@RequestBody CategoryCreateDto categoryCreateDto) {
         return new ResponseEntity<>(categoryCommandService.createCategory(categoryCreateDto), HttpStatus.CREATED);
     }
 
     @Operation(summary = "Update a category")
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<CategoryQueryDto> updateCategory(@PathVariable(value = "id") UUID id,
+    public ResponseEntity<CategoryUpdateDto> updateCategory(@PathVariable(value = "id") UUID id,
                                                            @RequestBody CategoryUpdateDto categoryUpdateDto) {
         return new ResponseEntity<>(categoryCommandService.updateCategory(id, categoryUpdateDto), HttpStatus.OK);
     }

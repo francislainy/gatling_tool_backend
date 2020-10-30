@@ -10,6 +10,8 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 
 import java.util.HashMap;
+
+import org.apache.http.client.methods.HttpPut;
 import org.apache.log4j.Logger;
 
 public class Util {
@@ -49,10 +51,16 @@ public class Util {
         String method = ((RequestResponseInteraction) context.getInteraction()).getRequest().getMethod();
 
         String baseUrl = "";
-        if (method.equals("POST")) {
-            baseUrl = ((HttpPost) request).getURI().toString();
-        } else if (method.equals("GET")) {
-            baseUrl = ((HttpGet) request).getURI().toString();
+        switch (method) {
+            case "POST":
+                baseUrl = ((HttpPost) request).getURI().toString();
+                break;
+            case "GET":
+                baseUrl = ((HttpGet) request).getURI().toString();
+                break;
+            case "PUT":
+                baseUrl = ((HttpPut) request).getURI().toString();
+                break;
         }
 
         Header[] headers = request.getAllHeaders();

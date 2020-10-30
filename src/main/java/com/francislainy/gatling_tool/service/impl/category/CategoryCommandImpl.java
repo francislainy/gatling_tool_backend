@@ -19,18 +19,21 @@ public class CategoryCommandImpl implements CategoryCommandService {
 
 
     @Override
-    public UUID createCategory(CategoryCreateDto categoryCreateDto) {
+    public CategoryCreateDto createCategory(CategoryCreateDto categoryCreateDto) {
 
         Category newCategory = new Category();
         newCategory.setId(UUID.randomUUID());
         newCategory.setTitle(categoryCreateDto.getTitle());
 
-        return categoryRepository.save(newCategory).getId();
+        categoryRepository.save(newCategory);
+
+        return new CategoryCreateDto(newCategory.getId(), newCategory.getTitle());
+
     }
 
 
     @Override
-    public CategoryQueryDto updateCategory(UUID id, CategoryUpdateDto categoryUpdateDto) {
+    public CategoryUpdateDto updateCategory(UUID id, CategoryUpdateDto categoryUpdateDto) {
 
         if (categoryRepository.findById(id).isPresent()) {
 
@@ -40,7 +43,7 @@ public class CategoryCommandImpl implements CategoryCommandService {
 
             Category updatedCategory = categoryRepository.save(existingCategory);
 
-            return new CategoryQueryDto(updatedCategory.getId(), updatedCategory.getTitle());
+            return new CategoryUpdateDto(updatedCategory.getId(), updatedCategory.getTitle());
 
         } else {
             return null;
