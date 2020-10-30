@@ -1,41 +1,317 @@
 {
-  "name": "Global Information",
-  "stats": {
-    "name": "Global Information"
-  },
-  "contents": {
-    "group_login-flow-ce67c": {
-      "name": "Login Flow",
-      "stats": {
-        "name": "Login Flow"
-      }
+  "type": "GROUP",
+"name": "Global Information",
+"path": "",
+"pathFormatted": "group_missing-name-b06d1",
+"stats": {
+    "name": "Global Information",
+    "numberOfRequests": {
+        "total": 8043,
+        "ok": 8043,
+        "ko": 0
     },
-    "contents": {
-      "req_authorize----au-271f3": {
-        "name": "Authorize - /authorize",
-        "stats": {
-          "name": "Authorize - /authorize"
-        }
-      },
-      "req_fetch-token---h-2053e": {
-        "name": "Fetch Token - https://api.cert.eng.hmhco.com/ids-grid-api/ids/v1/tokeninfo",
-        "stats": {
-          "name": "Fetch Token - https://api.cert.eng.hmhco.com/ids-grid-api/ids/v1/tokeninfo"
-        }
-      },
-      "req_fetch-token-dis-d9b91": {
+    "minResponseTime": {
+        "total": 115,
+        "ok": 115,
+        "ko": 0
+    },
+    "maxResponseTime": {
+        "total": 1079,
+        "ok": 1079,
+        "ko": 0
+    },
+    "meanResponseTime": {
+        "total": 186,
+        "ok": 186,
+        "ko": 0
+    },
+    "standardDeviation": {
+        "total": 74,
+        "ok": 74,
+        "ko": 0
+    },
+    "percentiles1": {
+        "total": 142,
+        "ok": 142,
+        "ko": 0
+    },
+    "percentiles2": {
+        "total": 270,
+        "ok": 270,
+        "ko": 0
+    },
+    "percentiles3": {
+        "total": 285,
+        "ok": 285,
+        "ko": 0
+    },
+    "percentiles4": {
+        "total": 323,
+        "ok": 323,
+        "ko": 0
+    },
+    "group1": {
+        "name": "t < 800 ms",
+        "count": 8039,
+        "percentage": 100
+    },
+    "group2": {
+        "name": "800 ms < t < 1200 ms",
+        "count": 4,
+        "percentage": 0
+    },
+    "group3": {
+        "name": "t > 1200 ms",
+        "count": 0,
+        "percentage": 0
+    },
+    "group4": {
+        "name": "failed",
+        "count": 0,
+        "percentage": 0
+    },
+    "meanNumberOfRequestsPerSecond": {
+        "total": 20.259445843828715,
+        "ok": 20.259445843828715,
+        "ko": 0
+    }
+},
+"contents": {
+"req_get-token-from--219a6": {
         "type": "REQUEST",
-        "name": "Fetch Token dist_id - https://api.cert.eng.hmhco.com/ids-grid-api/ids/v1/tokeninfo",
-        "stats": {
-          "name": "Fetch Token dist_id - https://api.cert.eng.hmhco.com/ids-grid-api/ids/v1/tokeninfo"
-        }
-      }
+        "name": "Get Token from IDM",
+"path": "Get Token from IDM",
+"pathFormatted": "req_get-token-from--219a6",
+"stats": {
+    "name": "Get Token from IDM",
+    "numberOfRequests": {
+        "total": 2683,
+        "ok": 2683,
+        "ko": 0
+    },
+    "minResponseTime": {
+        "total": 258,
+        "ok": 258,
+        "ko": 0
+    },
+    "maxResponseTime": {
+        "total": 1079,
+        "ok": 1079,
+        "ko": 0
+    },
+    "meanResponseTime": {
+        "total": 281,
+        "ok": 281,
+        "ko": 0
+    },
+    "standardDeviation": {
+        "total": 42,
+        "ok": 42,
+        "ko": 0
+    },
+    "percentiles1": {
+        "total": 275,
+        "ok": 275,
+        "ko": 0
+    },
+    "percentiles2": {
+        "total": 281,
+        "ok": 281,
+        "ko": 0
+    },
+    "percentiles3": {
+        "total": 299,
+        "ok": 299,
+        "ko": 0
+    },
+    "percentiles4": {
+        "total": 438,
+        "ok": 438,
+        "ko": 0
+    },
+    "group1": {
+        "name": "t < 800 ms",
+        "count": 2679,
+        "percentage": 100
+    },
+    "group2": {
+        "name": "800 ms < t < 1200 ms",
+        "count": 4,
+        "percentage": 0
+    },
+    "group3": {
+        "name": "t > 1200 ms",
+        "count": 0,
+        "percentage": 0
+    },
+    "group4": {
+        "name": "failed",
+        "count": 0,
+        "percentage": 0
+    },
+    "meanNumberOfRequestsPerSecond": {
+        "total": 6.758186397984887,
+        "ok": 6.758186397984887,
+        "ko": 0
     }
-  },
-  "req_get-last-public-74412": {
+}
+    },"req_get-last-public-74412": {
+        "type": "REQUEST",
+        "name": "Get Last Publication date",
+"path": "Get Last Publication date",
+"pathFormatted": "req_get-last-public-74412",
+"stats": {
     "name": "Get Last Publication date",
-    "stats": {
-      "name": "Get Notifications from Database"
+    "numberOfRequests": {
+        "total": 2681,
+        "ok": 2681,
+        "ko": 0
+    },
+    "minResponseTime": {
+        "total": 115,
+        "ok": 115,
+        "ko": 0
+    },
+    "maxResponseTime": {
+        "total": 658,
+        "ok": 658,
+        "ko": 0
+    },
+    "meanResponseTime": {
+        "total": 136,
+        "ok": 136,
+        "ko": 0
+    },
+    "standardDeviation": {
+        "total": 26,
+        "ok": 26,
+        "ko": 0
+    },
+    "percentiles1": {
+        "total": 132,
+        "ok": 132,
+        "ko": 0
+    },
+    "percentiles2": {
+        "total": 137,
+        "ok": 137,
+        "ko": 0
+    },
+    "percentiles3": {
+        "total": 151,
+        "ok": 151,
+        "ko": 0
+    },
+    "percentiles4": {
+        "total": 228,
+        "ok": 228,
+        "ko": 0
+    },
+    "group1": {
+        "name": "t < 800 ms",
+        "count": 2681,
+        "percentage": 100
+    },
+    "group2": {
+        "name": "800 ms < t < 1200 ms",
+        "count": 0,
+        "percentage": 0
+    },
+    "group3": {
+        "name": "t > 1200 ms",
+        "count": 0,
+        "percentage": 0
+    },
+    "group4": {
+        "name": "failed",
+        "count": 0,
+        "percentage": 0
+    },
+    "meanNumberOfRequestsPerSecond": {
+        "total": 6.753148614609572,
+        "ok": 6.753148614609572,
+        "ko": 0
     }
-  }
+}
+    },"req_get-notificatio-eaa9b": {
+        "type": "REQUEST",
+        "name": "Get Notifications from Database",
+"path": "Get Notifications from Database",
+"pathFormatted": "req_get-notificatio-eaa9b",
+"stats": {
+    "name": "Get Notifications from Database",
+    "numberOfRequests": {
+        "total": 2679,
+        "ok": 2679,
+        "ko": 0
+    },
+    "minResponseTime": {
+        "total": 119,
+        "ok": 119,
+        "ko": 0
+    },
+    "maxResponseTime": {
+        "total": 323,
+        "ok": 323,
+        "ko": 0
+    },
+    "meanResponseTime": {
+        "total": 142,
+        "ok": 142,
+        "ko": 0
+    },
+    "standardDeviation": {
+        "total": 17,
+        "ok": 17,
+        "ko": 0
+    },
+    "percentiles1": {
+        "total": 139,
+        "ok": 139,
+        "ko": 0
+    },
+    "percentiles2": {
+        "total": 145,
+        "ok": 145,
+        "ko": 0
+    },
+    "percentiles3": {
+        "total": 159,
+        "ok": 159,
+        "ko": 0
+    },
+    "percentiles4": {
+        "total": 219,
+        "ok": 219,
+        "ko": 0
+    },
+    "group1": {
+        "name": "t < 800 ms",
+        "count": 2679,
+        "percentage": 100
+    },
+    "group2": {
+        "name": "800 ms < t < 1200 ms",
+        "count": 0,
+        "percentage": 0
+    },
+    "group3": {
+        "name": "t > 1200 ms",
+        "count": 0,
+        "percentage": 0
+    },
+    "group4": {
+        "name": "failed",
+        "count": 0,
+        "percentage": 0
+    },
+    "meanNumberOfRequestsPerSecond": {
+        "total": 6.748110831234257,
+        "ok": 6.748110831234257,
+        "ko": 0
+    }
+}
+    }
+}
+
 }

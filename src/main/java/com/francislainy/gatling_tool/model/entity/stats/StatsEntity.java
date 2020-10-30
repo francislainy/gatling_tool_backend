@@ -1,5 +1,6 @@
 package com.francislainy.gatling_tool.model.entity.stats;
 
+import com.francislainy.gatling_tool.model.entity.report.Report;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -147,6 +148,7 @@ public class StatsEntity {
     @Column(name = "mean_number_of_requests_per_second_ko")
     private double meanNumberOfRequestsPerSecondKo;
 
-    @Column(name = "report_id")
-    private UUID reportId;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+    @JoinColumn(name = "report_id",  nullable = false)
+    private Report report;
 }

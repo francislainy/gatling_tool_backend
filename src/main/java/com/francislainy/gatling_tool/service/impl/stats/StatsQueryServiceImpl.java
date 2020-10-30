@@ -76,7 +76,7 @@ public class StatsQueryServiceImpl implements StatsQueryService {
         Stats stats = new Stats();
         stats.setId(statsEntity.getId());
 
-        stats.setReportId(statsEntity.getReportId());
+        stats.setReportId(statsEntity.getReport().getId());
 
         Group1 group1 = new Group1();
         group1.setCount(statsEntity.getGroup1Count());

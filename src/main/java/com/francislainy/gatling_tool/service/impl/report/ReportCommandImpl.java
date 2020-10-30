@@ -4,10 +4,8 @@ import com.francislainy.gatling_tool.dto.report.ReportCreateDto;
 import com.francislainy.gatling_tool.dto.report.ReportUpdateDto;
 import com.francislainy.gatling_tool.model.entity.category.Category;
 import com.francislainy.gatling_tool.model.entity.report.Report;
-import com.francislainy.gatling_tool.model.entity.stats.StatsEntity;
 import com.francislainy.gatling_tool.repository.category.CategoryRepository;
 import com.francislainy.gatling_tool.repository.report.ReportRepository;
-import com.francislainy.gatling_tool.repository.stats.StatsRepository;
 import com.francislainy.gatling_tool.service.report.ReportCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +17,6 @@ public class ReportCommandImpl implements ReportCommandService {
 
     @Autowired
     private ReportRepository reportRepository;
-
-    @Autowired
-    private StatsRepository statsRepository;
 
     @Autowired
     private CategoryRepository categoryRepository;
@@ -76,15 +71,6 @@ public class ReportCommandImpl implements ReportCommandService {
             Report existingReport = reportRepository.findById(id).get();
 
             reportRepository.delete(existingReport);
-
-            if (!statsRepository.findByReportId(id).isEmpty()) {
-
-                for (StatsEntity statsEntity : statsRepository.findByReportId(id)) {
-
-                    statsRepository.delete(statsEntity);
-                }
-
-            }
 
         }
     }

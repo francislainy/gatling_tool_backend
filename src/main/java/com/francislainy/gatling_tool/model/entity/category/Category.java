@@ -1,5 +1,6 @@
 package com.francislainy.gatling_tool.model.entity.category;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.francislainy.gatling_tool.model.entity.report.Report;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,7 +24,8 @@ public class Category {
     @Column(name = "category_title", nullable = false)
     private String title;
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<Report> reports;
 
     public Category(UUID id, String title) {
@@ -46,4 +48,5 @@ public class Category {
             this.reports.remove(r);
         }
     }
+
 }

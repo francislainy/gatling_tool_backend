@@ -1,11 +1,17 @@
 package com.francislainy.gatling_tool.model.entity.report;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.francislainy.gatling_tool.dto.stats.Stats;
 import com.francislainy.gatling_tool.model.entity.category.Category;
+import com.francislainy.gatling_tool.model.entity.stats.StatsEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.UUID;
 
 @NoArgsConstructor
@@ -25,8 +31,40 @@ public class Report {
     @Column(name = "created_date", nullable = false)
     private Long created_date;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
-    @JoinColumn(name = "category_id",  nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
+
+    public Report(UUID id) {
+        this.id = id;
+    }
+
+
+    @JsonManagedReference
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "report", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Collection<StatsEntity> statsEntity;
+
+    public Report(UUID id, String title) {
+
+        this.id = id;
+        this.reportTitle = title;
+    }
+
+    public void addStats(StatsEntity s) {
+        if (this.statsEntity == null) {
+            this.statsEntity = new ArrayList<>();
+        }
+        s.setReport(this);
+        this.statsEntity.add(s);
+    }
+
+    public void removeStats(StatsEntity s) {
+        if (this.statsEntity != null) {
+            s.setReport(null);
+            this.statsEntity.remove(s);
+        }
+    }
+
 
 }

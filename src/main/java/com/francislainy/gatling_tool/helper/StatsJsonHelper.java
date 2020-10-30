@@ -3,6 +3,7 @@ package com.francislainy.gatling_tool.helper;
 import com.francislainy.gatling_tool.dto.stats.Group;
 import com.francislainy.gatling_tool.dto.stats.ReqAuthorize;
 import com.francislainy.gatling_tool.dto.stats.Stats;
+import com.francislainy.gatling_tool.model.entity.report.Report;
 import com.francislainy.gatling_tool.model.entity.stats.StatsEntity;
 import com.google.gson.Gson;
 import org.springframework.web.multipart.MultipartFile;
@@ -153,13 +154,15 @@ public class StatsJsonHelper {
         statsEntity.setStandardDeviationOk(stats.standardDeviation.ok);
         statsEntity.setStandardDeviationTotal(stats.standardDeviation.total);
 
-        statsEntity.setReportId(id);
+
+
+        statsEntity.setReport(new Report(id));
         return statsEntity;
     }
 
 
     private static File convertMultiPartToFile(MultipartFile file) throws IOException {
-        File convFile = new File(file.getOriginalFilename());
+        File convFile = new File(Objects.requireNonNull(file.getOriginalFilename()));
         FileOutputStream fos = new FileOutputStream(convFile);
         fos.write(file.getBytes());
         fos.close();
