@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.francislainy.gatling_tool.dto.stats.Stats;
 import com.francislainy.gatling_tool.model.entity.category.Category;
 import com.francislainy.gatling_tool.model.entity.stats.StatsEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -18,7 +16,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @Table(name = "report")
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(exclude="category")
 public class Report {
 
     @Id
@@ -66,5 +66,15 @@ public class Report {
         }
     }
 
-
+    @Override
+    public String toString() {
+        return "Report{" +
+                "id=" + id +
+                ", reportTitle='" + reportTitle + '\'' +
+                ", run_date=" + run_date +
+                ", created_date=" + created_date +
+                ", category=" + null +
+                ", statsEntity=" + statsEntity +
+                '}';
+    }
 }

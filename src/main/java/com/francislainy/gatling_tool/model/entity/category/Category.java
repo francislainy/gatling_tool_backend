@@ -2,20 +2,21 @@ package com.francislainy.gatling_tool.model.entity.category;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.francislainy.gatling_tool.model.entity.report.Report;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.UUID;
 
 @Entity
 @Table(name = "category")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@EqualsAndHashCode(exclude="reports")
 public class Category {
 
     @Id
@@ -47,6 +48,15 @@ public class Category {
             r.setCategory(null);
             this.reports.remove(r);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", reports=" + null +
+                '}';
     }
 
 }

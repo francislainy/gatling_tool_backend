@@ -41,6 +41,7 @@ public class ReportCommandImpl implements ReportCommandService {
     @Override
     public ReportUpdateDto updateReport(UUID id, ReportUpdateDto reportUpdateDto) {
 
+
         if (reportRepository.findById(id).isPresent()) {
 
             Report existingReport = reportRepository.findById(id).get();
@@ -49,12 +50,18 @@ public class ReportCommandImpl implements ReportCommandService {
             existingReport.setCreated_date(reportUpdateDto.getCreatedDate());
 
             Category existingCategory = categoryRepository.findById(reportUpdateDto.getCategory().getId()).get();
+
+            Category category = new Category(existingCategory.getId(), existingCategory.getTitle());
+
+            ReportUpdateDto reportUpdateDto1 = new ReportUpdateDto(existingReport.getId(),
+                    existingReport.getReportTitle(), existingReport.getRun_date(),
+                    existingReport.getCreated_date(), category);
+
+
             existingCategory.addReport(existingReport);
             reportRepository.save(existingReport);
 
-            return new ReportUpdateDto(existingReport.getId(),
-                    existingReport.getReportTitle(), existingReport.getRun_date(),
-                    existingReport.getCreated_date(), existingReport.getCategory());
+            return reportUpdateDto1;
 
         } else {
             return null;
