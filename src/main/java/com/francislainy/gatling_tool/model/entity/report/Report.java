@@ -1,8 +1,6 @@
 package com.francislainy.gatling_tool.model.entity.report;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.francislainy.gatling_tool.dto.stats.Stats;
 import com.francislainy.gatling_tool.model.entity.category.Category;
 import com.francislainy.gatling_tool.model.entity.stats.StatsEntity;
 import lombok.*;
@@ -16,9 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @Table(name = "report")
-@Getter
-@Setter
-@EqualsAndHashCode(exclude="category")
+@Data
 public class Report {
 
     @Id
@@ -31,7 +27,6 @@ public class Report {
     @Column(name = "created_date", nullable = false)
     private Long created_date;
 
-    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
@@ -45,11 +40,13 @@ public class Report {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "report", cascade = CascadeType.ALL, orphanRemoval = true)
     private Collection<StatsEntity> statsEntity;
 
+
     public Report(UUID id, String title) {
 
         this.id = id;
         this.reportTitle = title;
     }
+
 
     public void addStats(StatsEntity s) {
         if (this.statsEntity == null) {
@@ -59,6 +56,7 @@ public class Report {
         this.statsEntity.add(s);
     }
 
+
     public void removeStats(StatsEntity s) {
         if (this.statsEntity != null) {
             s.setReport(null);
@@ -66,15 +64,4 @@ public class Report {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Report{" +
-                "id=" + id +
-                ", reportTitle='" + reportTitle + '\'' +
-                ", run_date=" + run_date +
-                ", created_date=" + created_date +
-                ", category=" + null +
-                ", statsEntity=" + statsEntity +
-                '}';
-    }
 }
