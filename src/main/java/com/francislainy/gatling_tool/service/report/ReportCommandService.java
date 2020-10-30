@@ -8,7 +8,7 @@ import java.util.UUID;
 
 public interface ReportCommandService {
 
-    UUID createReport(ReportCreateDto reportCreateDto);
+    ReportCreateDto createReport(ReportCreateDto reportCreateDto);
 
     ReportUpdateDto updateReport(UUID id, ReportUpdateDto reportUpdateDto);
 

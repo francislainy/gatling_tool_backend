@@ -15,7 +15,6 @@ import java.util.UUID;
 
 import io.swagger.v3.oas.annotations.Operation;
 
-
 @CrossOrigin
 @RequestMapping("/api/gatling-tool/report")
 @RestController

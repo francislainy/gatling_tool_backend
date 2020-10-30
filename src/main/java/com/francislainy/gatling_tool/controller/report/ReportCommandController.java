@@ -23,7 +23,7 @@ public class ReportCommandController {
     @Operation(summary = "Create a report")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<UUID> createReport(@RequestBody ReportCreateDto reportCreateDto) {
+    public ResponseEntity<ReportCreateDto> createReport(@RequestBody ReportCreateDto reportCreateDto) {
         return new ResponseEntity<>(reportCommandService.createReport(reportCreateDto), HttpStatus.CREATED);
     }
 

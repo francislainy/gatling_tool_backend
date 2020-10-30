@@ -22,19 +22,25 @@ public class ReportCommandImpl implements ReportCommandService {
     private CategoryRepository categoryRepository;
 
     @Override
-    public UUID createReport(ReportCreateDto reportCreateDto) {
+    public ReportCreateDto createReport(ReportCreateDto reportCreateDto) {
 
-        Report newReport = new Report();
-        newReport.setId(UUID.randomUUID());
+        Report report = new Report();
+        report.setId(UUID.randomUUID());
 
-        newReport.setRun_date(reportCreateDto.getRunDate());
-        newReport.setCreated_date(reportCreateDto.getCreatedDate());
-        newReport.setReportTitle(reportCreateDto.getTitle());
+        report.setRun_date(reportCreateDto.getRunDate());
+        report.setCreated_date(reportCreateDto.getCreatedDate());
+        report.setReportTitle(reportCreateDto.getTitle());
 
         Category existingCategory = categoryRepository.findById(reportCreateDto.getCategory().getId()).get();
-        newReport.setCategory(existingCategory);
+        report.setCategory(existingCategory);
 
-        return reportRepository.save(newReport).getId();
+        reportRepository.save(report);
+
+        Category category = new Category(existingCategory.getId(), existingCategory.getTitle());
+
+        ReportCreateDto reportCreateDto1 = new ReportCreateDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category);
+
+        return reportCreateDto1;
     }
 
 

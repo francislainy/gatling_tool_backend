@@ -35,7 +35,6 @@ public class PactProviderTest {
         context.verifyInteraction();
     }
 
-
     @BeforeEach
     void before(PactVerificationContext context) {
         context.setTarget(new HttpTestTarget(BASE_PACT_URL, 8081, "/"));
@@ -59,6 +58,22 @@ public class PactProviderTest {
 
     @State("a request to update a category")
     void sampleState4() {
+    }
+
+    @State("a request to create a report")
+    void sampleState5() {
+    }
+
+    @State("a request for a single report")
+    void sampleState6() {
+    }
+
+    @State("a request for all reports")
+    void sampleState7() {
+    }
+
+    @State("a request to update a report")
+    void sampleState8() {
     }
 
 }
