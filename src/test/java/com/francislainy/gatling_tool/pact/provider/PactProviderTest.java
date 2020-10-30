@@ -38,10 +38,8 @@ public class PactProviderTest {
 
     @BeforeEach
     void before(PactVerificationContext context) {
-        context.setTarget(new HttpTestTarget(BASE_PACT_URL, 8081, "/api/gatling-tool"));
-
+        context.setTarget(new HttpTestTarget(BASE_PACT_URL, 8081, "/"));
     }
-
 
     @State("a request for all categories")
     void sampleState() {
@@ -53,6 +51,14 @@ public class PactProviderTest {
 
     @State("a request for a single category including its children reports")
     void sampleState2() {
+    }
+
+    @State("a request to create a category")
+    void sampleState3() {
+    }
+
+    @State("a request to update a category")
+    void sampleState4() {
     }
 
 }
