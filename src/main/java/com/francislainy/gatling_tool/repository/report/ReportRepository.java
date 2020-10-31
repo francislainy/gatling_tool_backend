@@ -14,9 +14,7 @@ public interface ReportRepository extends CrudRepository<Report, UUID> {
 
     List<Report> findByReportTitle(@Param("reportTitle") String reportTitle);
 
-    String queryReportListAndCategoryName = "SELECT report.id, report.report_title, report.created_date, report.run_date, report.category_id, category.category_title\n" +
-            "FROM report\n" +
-            "         INNER JOIN category on report.category_id = category.id";
+    String queryReportListAndCategoryName = "SELECT * FROM report INNER JOIN category on report.category_id = category.id ORDER BY report.created_date DESC";
 
     @Query(value = queryReportListAndCategoryName, nativeQuery = true)
     List<Report> findReportListWithCategoryName();

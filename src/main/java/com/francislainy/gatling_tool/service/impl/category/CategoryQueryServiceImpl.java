@@ -33,13 +33,7 @@ public class CategoryQueryServiceImpl implements CategoryQueryService {
         if (categoryRepository.findById(id).isPresent()) {
             Category category = categoryRepository.findById(id).get();
 
-            CategoryQueryDto categoryQueryDto = new CategoryQueryDto(category.getId(), category.getTitle());
-
-            String json = createJsonFromClassObject(categoryQueryDto);
-
-            categoryQueryDto = Utils.createClassFromJsonString(json, CategoryQueryDto.class);
-
-            return categoryQueryDto;
+            return new CategoryQueryDto(category.getId(), category.getTitle());
 
         } else {
             return null;
