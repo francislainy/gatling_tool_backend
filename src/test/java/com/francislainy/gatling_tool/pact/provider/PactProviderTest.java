@@ -19,7 +19,6 @@ import static Util.Util.logCurlFromPact;
 import static com.francislainy.gatling_tool.config.Constants.*;
 
 //@PactFolder("target/pacts")
-
 @Provider(PACT_PROVIDER)
 @PactBroker(host = BROKER_PACT_URL, authentication = @PactBrokerAuth(token = BROKER_TOKEN), consumers = {PACT_CONSUMER})
 @VerificationReports(value = {"markdown"}, reportDir = "target/pacts/myreports")
@@ -29,6 +28,8 @@ public class PactProviderTest {
     @TestTemplate
     @ExtendWith(PactVerificationInvocationContextProvider.class)
     void pactTestTemplate(PactVerificationContext context, HttpRequest request) {
+
+        System.setProperty("pact.verifier.publishResults", "true");
 
         logCurlFromPact(context, request);
 
