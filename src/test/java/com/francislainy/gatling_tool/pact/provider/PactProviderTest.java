@@ -77,4 +77,12 @@ public class PactProviderTest {
     void sampleState8() {
     }
 
+    @State("a request for stats that belong to a report")
+    void sampleState9() {
+    }
+
+    @State("a request to update a stats endpoint")
+    void sampleState10() {
+    }
+
 }
