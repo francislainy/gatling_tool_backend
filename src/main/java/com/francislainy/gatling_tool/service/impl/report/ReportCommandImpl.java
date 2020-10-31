@@ -33,10 +33,12 @@ public class ReportCommandImpl implements ReportCommandService {
         Category existingCategory = categoryRepository.findById(reportCreateDto.getCategory().getId()).get();
         report.setCategory(existingCategory);
 
+        reportRepository.save(report);
+
         Category category = new Category(existingCategory.getId(), existingCategory.getTitle());
 
         return new ReportCreateDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category);
-        
+
     }
 
 
