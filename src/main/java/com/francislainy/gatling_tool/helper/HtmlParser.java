@@ -20,32 +20,29 @@ public class HtmlParser {
 //        retrieveNumUsers();
 
 
+        retrieveDurationSeconds();
+    }
+
+
+    private static void retrieveDurationSeconds() {
         try {
             Document document =
-                    Jsoup.parse(new File("/Users/camposf/IdeaProjects/gatling_tool/index2.html"), "utf-8");
-            Elements scriptElements = document.getElementsByTag("script");
+                    Jsoup.parse(new File("/Users/camposf/IdeaProjects/gatling_tool/index_o.html"), "utf-8");
 
-            for (Element element : scriptElements) {
-                for (DataNode node : element.dataNodes()) {
-                    String wholeData = node.getWholeData();
+            String wholeData = String.valueOf(document.body());
 
-                    Pattern pattern = Pattern.compile("var timestamp = (.*?);", Pattern.DOTALL);
+            Pattern pattern = Pattern.compile("duration : (.*?)seconds", Pattern.DOTALL);
 
-                    Matcher matcher = pattern.matcher(wholeData);
-                    if (matcher.find()) {
-                        System.out.println(matcher.group(1));
-                    }
-
-                }
+            Matcher matcher = pattern.matcher(wholeData);
+            if (matcher.find()) {
+                System.out.println(matcher.group(1));
             }
-
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
+
 
     private static void retrieveNumUsers() {
         try {
