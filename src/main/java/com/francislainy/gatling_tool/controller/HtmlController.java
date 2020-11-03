@@ -28,9 +28,9 @@ public class HtmlController {
         if (HtmlHelper.hasHtmlFormat(file)) {
             try {
 
-                fileService.save(file);
+                int numUsers = fileService.save(file);
 
-                message += "Uploaded the file successfully: " + file.getOriginalFilename();
+                message += "Uploaded the file successfully: " + file.getOriginalFilename() + " - " + numUsers + " users";
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
                 message = "Could not upload the file: " + file.getOriginalFilename() + "! \n" + e.getMessage();

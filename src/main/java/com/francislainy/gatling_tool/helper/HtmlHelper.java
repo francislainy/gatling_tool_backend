@@ -1,14 +1,13 @@
 package com.francislainy.gatling_tool.helper;
 
-import com.francislainy.gatling_tool.model.entity.HtmlTutorial;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HtmlHelper {
 
@@ -19,55 +18,96 @@ public class HtmlHelper {
         return TYPE.equals(file.getContentType());
     }
 
-    public static List<HtmlTutorial> htmlToTutorials(MultipartFile file) {
+    public static int htmlToTutorials(MultipartFile file) {
 
         try {
-            List<HtmlTutorial> tutorialsList = new ArrayList<>();
 
             File myFile = convertMultiPartToFile(file);
 
-            try {
-                Document document = Jsoup.parse(myFile, "utf-8");
-                System.out.println(document.title());
+            retrieveDurationSeconds(myFile);
+            int numUsers = retrieveNumUsers(myFile);
 
-                ArrayList<String> list = new ArrayList<>();
-                Element table = document.select("table").get(0); //select the first table.
-                Elements rows = table.select("tr");
-
-                for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
-                    Element row = rows.get(i);
-                    Elements tds = row.select("td");
-
-                    if (i > 3) { //First three elements are headers
-
-                        String item = tds.get(0).text().split(":")[0];
-                        list.add(item);
-                    }
-                }
-
-
-                Set<String> set = new LinkedHashSet<String>(list);
-                Object[] list1 = set.toArray();
-
-                for (int i = 0; i < list1.length; i++) {
-                    System.out.println(list1[i] + " ---");
-                    HtmlTutorial htmlTutorial = new HtmlTutorial();
-                    htmlTutorial.setTitle((String) list1[i]);
-                    tutorialsList.add(htmlTutorial);
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            return tutorialsList;
+            return numUsers;
 
         } catch (IOException e) {
             throw new RuntimeException("fail to parse html file: " + e.getMessage());
         }
     }
 
+
+    private static void retrieveDurationSeconds(File file) {
+        try {
+            Document document =
+                    Jsoup.parse(file, "utf-8");
+
+            String wholeData = String.valueOf(document.body());
+
+            Pattern pattern = Pattern.compile("duration : (.*?)seconds", Pattern.DOTALL);
+
+            Matcher matcher = pattern.matcher(wholeData);
+            if (matcher.find()) {
+                System.out.println(matcher.group(1));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private static int retrieveNumUsers(File file) {
+
+        int numUsers = 0;
+
+        try {
+            Document document =
+                    Jsoup.parse(file, "utf-8");
+
+            String wholeData = String.valueOf(document.body());
+
+            Pattern pattern0 = Pattern.compile("allUsersChart = (.*?);", Pattern.DOTALL);
+
+            Matcher matcher0 = pattern0.matcher(wholeData);
+            String string0 = "";
+            if (matcher0.find()) {
+                string0 = matcher0.group(1);
+            }
+
+            Pattern pattern = Pattern.compile("data: \\[(.*?)tooltip", Pattern.DOTALL);
+
+            Matcher matcher = pattern.matcher(string0);
+            ArrayList<String> userTimesList = new ArrayList();
+            ArrayList<String> usersList = new ArrayList();
+            String string1 = "";
+            if (matcher.find()) {
+                string1 = matcher.group(1);
+            }
+
+            for (String s : string1.split("\\[(.*?)")) {
+                userTimesList.add(s.substring(0, s.length() - 2)); //remove ] and comma
+            }
+
+            int i = 0;
+            for (String s : userTimesList) {
+                if (i != 0) { //First item is messed up because of line break so removing it from the list as it's not a number
+                    usersList.add(s.split(",")[1]);
+                }
+                i++;
+            }
+
+            Collections.sort(usersList);
+
+            numUsers = Integer.parseInt(usersList.get(usersList.size() - 1));
+
+            System.out.println(numUsers);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return numUsers;
+
+    }
 
     private static File convertMultiPartToFile(MultipartFile file) throws IOException {
         File convFile = new File(file.getOriginalFilename());
@@ -76,5 +116,4 @@ public class HtmlHelper {
         fos.close();
         return convFile;
     }
-
 }
