@@ -20,7 +20,7 @@ public interface ReportRepository extends CrudRepository<Report, UUID> {
     List<Report> findReportListWithCategoryName();
 
 
-    String queryReportItemAndCategoryName = "SELECT report.id, report.report_title, report.created_date, report.run_date, report.category_id, category.category_title\n" +
+    String queryReportItemAndCategoryName = "SELECT report.id, report.report_title, report.created_date, report.run_date, report.number_of_users, report.duration, report.category_id, category.category_title\n" +
             "FROM report\n" +
             "         INNER JOIN category on report.category_id = category.id WHERE report.id = :id";
 

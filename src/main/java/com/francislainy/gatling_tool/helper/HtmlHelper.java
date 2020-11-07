@@ -1,5 +1,6 @@
 package com.francislainy.gatling_tool.helper;
 
+import com.francislainy.gatling_tool.dto.report.ReportQueryDtoFileUploaded;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,16 +19,16 @@ public class HtmlHelper {
         return TYPE.equals(file.getContentType());
     }
 
-    public static int htmlToTutorials(MultipartFile file) {
+    public static ReportQueryDtoFileUploaded getInfoFromHtml(MultipartFile file) {
 
         try {
 
             File myFile = convertMultiPartToFile(file);
 
-            retrieveDurationSeconds(myFile);
+            long duration = retrieveDurationSeconds(myFile);
             int numUsers = retrieveNumUsers(myFile);
 
-            return numUsers;
+            return new ReportQueryDtoFileUploaded(null, numUsers, duration);
 
         } catch (IOException e) {
             throw new RuntimeException("fail to parse html file: " + e.getMessage());
@@ -35,7 +36,7 @@ public class HtmlHelper {
     }
 
 
-    private static void retrieveDurationSeconds(File file) {
+    private static Long retrieveDurationSeconds(File file) {
         try {
             Document document =
                     Jsoup.parse(file, "utf-8");
@@ -46,12 +47,14 @@ public class HtmlHelper {
 
             Matcher matcher = pattern.matcher(wholeData);
             if (matcher.find()) {
-                System.out.println(matcher.group(1));
+                return (long) Integer.parseInt(matcher.group(1).trim());
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return 0L;
     }
 
 
@@ -108,6 +111,7 @@ public class HtmlHelper {
         return numUsers;
 
     }
+
 
     private static File convertMultiPartToFile(MultipartFile file) throws IOException {
         File convFile = new File(file.getOriginalFilename());

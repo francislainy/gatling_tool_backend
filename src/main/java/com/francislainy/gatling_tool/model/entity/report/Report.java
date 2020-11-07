@@ -14,7 +14,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @Table(name = "report")
-@Data
+@Getter
+@Setter
 public class Report {
 
     @Id
@@ -26,6 +27,11 @@ public class Report {
     private Long run_date;
     @Column(name = "created_date", nullable = false)
     private Long created_date;
+    @Column(name = "number_of_users")
+    private Integer numberOfUsers;
+    @Column(name = "duration")
+    private Long duration;
+
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "category_id", nullable = false)

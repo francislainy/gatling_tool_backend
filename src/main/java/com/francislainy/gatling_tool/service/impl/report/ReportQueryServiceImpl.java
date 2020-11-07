@@ -28,7 +28,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
             category.setId(report.getCategory().getId());
             category.setTitle(report.getCategory().getTitle());
 
-            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category);
+            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category ,0, null);
 
         } else {
             return null;
@@ -47,7 +47,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
             category.setId(report.getCategory().getId());
             category.setTitle(report.getCategory().getTitle());
 
-            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category);
+            return new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category, 0, null);
         } else {
             return null;
         }
@@ -65,7 +65,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
             category.setId(report.getCategory().getId());
             category.setTitle(report.getCategory().getTitle());
 
-            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category));
+            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category, 0, null));
 
         });
 
@@ -84,7 +84,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
             category.setId(report.getCategory().getId());
             category.setTitle(report.getCategory().getTitle());
 
-            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category));
+            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category, 0, null));
 
         });
 
@@ -102,7 +102,7 @@ public class ReportQueryServiceImpl implements ReportQueryService {
             category.setId(report.getCategory().getId());
             category.setTitle(report.getCategory().getTitle());
 
-            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category));
+            reportList.add(new ReportQueryDto(report.getId(), report.getReportTitle(), report.getRun_date(), report.getCreated_date(), category, 0, null));
 
         });
 

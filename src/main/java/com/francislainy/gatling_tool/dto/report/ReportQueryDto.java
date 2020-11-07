@@ -19,6 +19,9 @@ public class ReportQueryDto {
 
     private Category category;
 
+    private Integer numberOfUsers;
+    private Long duration;
+
     public ReportQueryDto(UUID id, String title, Long runDate, Long createdDate) {
         this.id = id;
         this.title = title;

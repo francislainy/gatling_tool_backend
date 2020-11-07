@@ -1,6 +1,8 @@
 package com.francislainy.gatling_tool.dto.report;
 
 import com.francislainy.gatling_tool.model.entity.category.Category;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

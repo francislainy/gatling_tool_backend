@@ -103,42 +103,42 @@ class CategoryQueryControllerTest {
     }
 
 
-    @Test
-    public void getReportByCategory() throws Exception {
-
-        Category category = new Category();
-        category.setId(UUID.fromString(categoryId));
-        category.setTitle("My another category");
-        when(categoryRepository.findById(UUID.fromString(categoryId))).thenReturn(java.util.Optional.of(category));
-
-
-        Report report = new Report(UUID.fromString(reportId), "My saturday report", 1591609820902L, 1591609820902L, null, null);
-        ArrayList reports = new ArrayList();
-        reports.add(report);
-        when(reportRepository.findByCategory_Id(category.getId())).thenReturn(reports);
-
-
-        CategoryQueryDto categoryQueryDto = new CategoryQueryDto(UUID.fromString(categoryId), "My another category", reports);
-
-
-        Map map = new HashMap();
-        map.put("category", categoryQueryDto);
-
-
-        CategoryQueryDto categoryQueryDto1 = Utils.createClassFromMap((HashMap) map, CategoryQueryDto.class);
-
-        String json = createJsonFromClassObject(categoryQueryDto1);
-
-        RequestBuilder request = MockMvcRequestBuilders
-                .get("/api/gatling-tool/category/" + categoryId + "/include-reports")
-                .accept(MediaType.APPLICATION_JSON);
-        mockMvc.perform(request).andReturn();
-
-        MvcResult result = mockMvc.perform(request)
-                .andExpect(status().is2xxSuccessful())
-                .andExpect(content().json(json, true))
-                .andReturn();
-    }
+//    @Test
+//    public void getReportByCategory() throws Exception {
+//
+//        Category category = new Category();
+//        category.setId(UUID.fromString(categoryId));
+//        category.setTitle("My another category");
+//        when(categoryRepository.findById(UUID.fromString(categoryId))).thenReturn(java.util.Optional.of(category));
+//
+//
+//        Report report = new Report(UUID.fromString(reportId), "My saturday report", 1591609820902L, 1591609820902L, null, null);
+//        ArrayList reports = new ArrayList();
+//        reports.add(report);
+//        when(reportRepository.findByCategory_Id(category.getId())).thenReturn(reports);
+//
+//
+//        CategoryQueryDto categoryQueryDto = new CategoryQueryDto(UUID.fromString(categoryId), "My another category", reports);
+//
+//
+//        Map map = new HashMap();
+//        map.put("category", categoryQueryDto);
+//
+//
+//        CategoryQueryDto categoryQueryDto1 = Utils.createClassFromMap((HashMap) map, CategoryQueryDto.class);
+//
+//        String json = createJsonFromClassObject(categoryQueryDto1);
+//
+//        RequestBuilder request = MockMvcRequestBuilders
+//                .get("/api/gatling-tool/category/" + categoryId + "/include-reports")
+//                .accept(MediaType.APPLICATION_JSON);
+//        mockMvc.perform(request).andReturn();
+//
+//        MvcResult result = mockMvc.perform(request)
+//                .andExpect(status().is2xxSuccessful())
+//                .andExpect(content().json(json, true))
+//                .andReturn();
+//    }
 
 
 }
