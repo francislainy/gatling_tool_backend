@@ -3,7 +3,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-/src/test/java/com/francislainy/gatling_tool/HttpRequest.http
+/backend/src/test/java/com/francislainy/gatling_tool/HttpRequest.http
 
 ### STS ###
 .apt_generated
@@ -36,3 +36,5 @@ build/
 /index.html
 /stats2.json
 /index_o.html
+
+/node_modules
