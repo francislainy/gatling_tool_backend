@@ -94,13 +94,11 @@ public class HtmlHelper {
             for (String s : userTimesList) {
                 if (i != 0) { //First item is messed up because of line break so removing it from the list as it's not a number
 
-                    if (i == userTimesList.size()-1) { // Last item on list is breaking line
+                    if (i == userTimesList.size() - 1) { // Last item on list is breaking line
                         if (userTimesList.get(i).contains("]\n]")) {
                             s = s.replace("]\n]", "");
                         }
                     }
-
-
 
 
                     usersList.add(s.split(",")[1]);

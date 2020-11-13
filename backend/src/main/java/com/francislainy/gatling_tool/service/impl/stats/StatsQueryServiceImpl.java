@@ -114,9 +114,9 @@ public class StatsQueryServiceImpl implements StatsQueryService {
         stats.setMaxResponseTime(maxResponseTime);
 
         MeanNumberOfRequestsPerSecond meanNumberOfRequestsPerSecond = new MeanNumberOfRequestsPerSecond();
-        meanNumberOfRequestsPerSecond.setKo(statsEntity.getMeanResponseTimeKo());
-        meanNumberOfRequestsPerSecond.setOk(statsEntity.getMeanResponseTimeOk());
-        meanNumberOfRequestsPerSecond.setTotal(statsEntity.getMeanResponseTimeTotal());
+        meanNumberOfRequestsPerSecond.setKo(statsEntity.getMeanNumberOfRequestsPerSecondKo());
+        meanNumberOfRequestsPerSecond.setOk(statsEntity.getMeanNumberOfRequestsPerSecondOk());
+        meanNumberOfRequestsPerSecond.setTotal(statsEntity.getMeanNumberOfRequestsPerSecondTotal());
 
         stats.setMeanNumberOfRequestsPerSecond(meanNumberOfRequestsPerSecond);
 

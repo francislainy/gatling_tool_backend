@@ -1,18 +1,12 @@
 package com.francislainy.gatling_tool.helper;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.francislainy.gatling_tool.model.entity.JsonTutorial;
-import com.francislainy.gatling_tool.model.entity.Tutorial;
 import com.francislainy.gatling_tool.model.entity.Tutorials;
 import com.google.gson.Gson;
 import org.apache.commons.csv.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
 public class JsonHelper {

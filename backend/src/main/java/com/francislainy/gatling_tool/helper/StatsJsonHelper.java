@@ -130,6 +130,7 @@ public class StatsJsonHelper {
         statsEntity.setMinResponseTimeTotal(stats.minResponseTime.total);
 
         statsEntity.setName(stats.name);
+
         statsEntity.setNumberOfRequestsKo(stats.numberOfRequests.ko);
         statsEntity.setNumberOfRequestOk(stats.numberOfRequests.ok);
         statsEntity.setNumberOfRequestsTotal(stats.numberOfRequests.total);
@@ -153,7 +154,6 @@ public class StatsJsonHelper {
         statsEntity.setStandardDeviationKo(stats.standardDeviation.ko);
         statsEntity.setStandardDeviationOk(stats.standardDeviation.ok);
         statsEntity.setStandardDeviationTotal(stats.standardDeviation.total);
-
 
 
         statsEntity.setReport(new Report(id));

@@ -137,7 +137,6 @@ export default function StatsTable({match, onRetrieveInfo}) {
     const getHeader = function () {
         return (
             <tr>
-                {/*<th scope="col">Category</th>*/}
                 <th scope="col">Request</th>
                 <th scope="col">Endpoint</th>
                 <th scope="col">RPS</th>
@@ -159,7 +158,6 @@ export default function StatsTable({match, onRetrieveInfo}) {
                 {/*First item is the global info already displayed on the top of the page*/}
                 {stats.name !== 'Global Information' &&
                 <tr>
-                    {/*<td scope="col">Set category name here</td>*/}
                     <td scope="col">{stats.name}</td>
                     <td scope="col">{handleEndpoint(stats.endpoint)}</td>
                     <td scope="col">{stats.meanNumberOfRequestsPerSecond.total}</td>
@@ -169,6 +167,7 @@ export default function StatsTable({match, onRetrieveInfo}) {
                     <td scope="col">{stats.percentiles4.ok}</td>
                     <td scope="col">{stats.numberOfRequests.total}</td>
                     <td scope="col">{stats.numberOfRequests.ko}</td>
+                    <td>
                     <IconButton onClick={() => {
                         handleDeletePopUp(stats.id)
                     }}>
@@ -192,6 +191,7 @@ export default function StatsTable({match, onRetrieveInfo}) {
                         <Cancel/>
                     </IconButton>
                     }
+                    </td>
                 </tr>
                 }
                 </tbody>
