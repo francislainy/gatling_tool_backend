@@ -3,7 +3,7 @@ import React from "react";
 import '../css/CustomStyle.css'
 
 const MyIconButton = ({children}) => (
-    <IconButton className="IconButton">{children}</IconButton>
+    <IconButton className="iconButton">{children}</IconButton>
 )
 
 export default MyIconButton

@@ -136,13 +136,13 @@ const Report = ({match}) => {
         setData(data)
     }
 
-    return <div style={{margin: '10px 10px'}}>
+    return <div className="margin10">
         <div style={{display: 'flex', marginBottom: '10px'}}>
-            <Card style={{width: '18rem'}}>
+            <Card className="cardReportInfo">
                 {report.id !== '' &&
                 <Card.Body>
                     <Card.Title>Report Details
-                        <IconButton className="IconButton" onClick={() => handleShow()}>
+                        <IconButton className="iconButton" onClick={() => handleShow()}>
                             <Settings/>
                         </IconButton>
                         <ReportPopup
@@ -166,7 +166,7 @@ const Report = ({match}) => {
                 </Card.Body>
                 }
             </Card>
-            <Card style={{width: '18rem', marginLeft: '10px', alignSelf: 'baseline'}}>
+            <Card className='cardReportInfo'>
                 {report.id !== '' &&
                 <Card.Body>
                     <Card.Title>Information</Card.Title>
@@ -178,7 +178,7 @@ const Report = ({match}) => {
                 </Card.Body>
                 }
             </Card>
-            <Card style={{width: '18rem', marginLeft: '10px', alignSelf: 'baseline'}}>
+            <Card className='cardReportInfo'>
                 {report.id !== '' &&
                 <Card.Body>
                     <Card.Title>Actions</Card.Title>

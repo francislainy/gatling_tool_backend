@@ -2,7 +2,7 @@
     outline: none;
 }
 
-.IconButton:focus {
+.iconButton:focus {
     outline: none;
 }
 
@@ -14,14 +14,12 @@ table, td, th, tr {
     margin: 10px;
 }
 
-.tableReport td
-{
+.tableReport td {
     text-align: left;
     vertical-align: middle;
 }
 
-.tableStats td
-{
+.tableStats td {
     text-align: center;
     vertical-align: middle;
 }
@@ -47,4 +45,10 @@ select {
     display: inline-block;
     vertical-align: middle;
     float: right;
+}
+
+.cardReportInfo {
+    width: 18rem;
+    margin-left: 10px;
+    align-self: baseline;
 }
