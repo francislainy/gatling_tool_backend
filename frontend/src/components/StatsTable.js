@@ -168,29 +168,29 @@ export default function StatsTable({match, onRetrieveInfo}) {
                     <td scope="col">{stats.numberOfRequests.total}</td>
                     <td scope="col">{stats.numberOfRequests.ko}</td>
                     <td>
-                    <IconButton onClick={() => {
-                        handleDeletePopUp(stats.id)
-                    }}>
-                        <Delete/>
-                    </IconButton>
-                    {!showInputEndpoint && <IconButton onClick={() => {
-                        handleShowUpdateStats()
-                    }}>
-                        <Edit/>
-                    </IconButton>
-                    }
-                    {showInputEndpoint && <IconButton onClick={() => {
-                        updateStats(stats.id)
-                    }}>
-                        <Save/>
-                    </IconButton>
-                    }
-                    {showInputEndpoint && <IconButton onClick={() => {
-                        handleShowUpdateStats()
-                    }}>
-                        <Cancel/>
-                    </IconButton>
-                    }
+                        <IconButton onClick={() => {
+                            handleDeletePopUp(stats.id)
+                        }}>
+                            <Delete/>
+                        </IconButton>
+                        {!showInputEndpoint && <IconButton onClick={() => {
+                            handleShowUpdateStats()
+                        }}>
+                            <Edit/>
+                        </IconButton>
+                        }
+                        {showInputEndpoint && <IconButton onClick={() => {
+                            updateStats(stats.id)
+                        }}>
+                            <Save/>
+                        </IconButton>
+                        }
+                        {showInputEndpoint && <IconButton onClick={() => {
+                            handleShowUpdateStats()
+                        }}>
+                            <Cancel/>
+                        </IconButton>
+                        }
                     </td>
                 </tr>
                 }
