@@ -5,7 +5,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './simple-sidebar.css'
 import Report from "./components/Report";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 
 function App() {
 

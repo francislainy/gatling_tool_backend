@@ -1,10 +1,7 @@
 import React, {useCallback, useEffect, useState} from "react";
 import Dropdown from "react-bootstrap/Dropdown";
-import api from "../api/api";
 import {createCategory, retrieveCategories} from "../api";
-
-const url = "http://localhost"
-const port = 8081
+import {url, port} from "../helper/Helper";
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
@@ -60,13 +57,13 @@ export function CustomDropdown(props) {
 
             if (payload.title !== '') {
 
-                const urlAndPort = {
+                const axiosParams = {
                     url: url,
                     port: port,
                     payload: payload
                 }
 
-                createCategory(urlAndPort).then(res => {
+                createCategory(axiosParams).then(res => {
                     setRes({data: res.data, isLoading: false});
                 }).catch((error) => {
                     setRes({data: null, isLoading: false});
@@ -81,12 +78,12 @@ export function CustomDropdown(props) {
             try {
                 setData({categories: data.categories, isFetching: true});
 
-                const urlAndPort = {
+                const axiosParams = {
                     url: url,
                     port: port,
                 }
 
-                retrieveCategories(urlAndPort)
+                retrieveCategories(axiosParams)
                     .then(response => setData({categories: response.data.categories, isFetching: false}))
 
             } catch (e) {

@@ -4,9 +4,8 @@ import * as PropTypes from "prop-types";
 export class TablePagination extends React.Component {
     render() {
         return <div>
-            <button className="paging" onClick={this.props.onClick} disabled={!this.props.canPreviousPage}>
-                {"<<"}
-            </button>
+            <button className="paging" onClick={this.props.onClick}
+                    disabled={!this.props.canPreviousPage}>{"<<"}</button>
             {" "}
             <button onClick={this.props.onClick1} disabled={!this.props.canPreviousPage}>
                 {"<"}

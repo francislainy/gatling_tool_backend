@@ -1,49 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import Button from "react-bootstrap/Button";
-import Popup from "./Popup";
-import ReportTable from "./ReportTable";
+import Popup from "../components/Popup";
+import ReportTable from "../components/ReportTable";
 import api from "../api/api";
 import {createReport, deleteReport, retrieveReports} from "../api";
-import ConfirmationModal from "./ConfirmationModal";
+import ConfirmationModal from "../components/ConfirmationModal";
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
+import {url, port} from "../helper/Helper";
 
 const {useHistory} = require('react-router-dom')
 
 const moment = require("moment");
-const url = "http://localhost"
-const port = 8081
-
-class Navbar extends React.Component {
-    render() {
-        return <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div><a href="#" className="navbar-brand">Gatling Reporting Tool</a></div>
-            <button className="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"/>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul className="navbar-nav mr-auto">
-                    <li className="nav-item active">
-                        <a className="nav-link" href="#">Dashboard</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>;
-    }
-}
-
-class Sidebar extends React.Component {
-    render() {
-        return <div className="bg-light border-right" id="sidebar-wrapper">
-            <div className="sidebar-heading">Start Bootstrap</div>
-            <div className="list-group list-group-flush">
-                <a href="#" className="list-group-item list-group-item-action bg-light">Dashboard</a>
-                <a href="#" className="list-group-item list-group-item-action bg-light">Shortcuts</a>
-                <a href="#" className="list-group-item list-group-item-action bg-light">Overview</a>
-            </div>
-        </div>;
-    }
-}
 
 function Home() {
     let history = useHistory();
@@ -119,13 +87,13 @@ function Home() {
             }
         }
 
-        const urlAndPort = {
+        const axiosParams = {
             url: url,
             port: port,
             payload: values
         }
 
-        createReport(urlAndPort)
+        createReport(axiosParams)
 
             .then((response) => {
 
@@ -157,13 +125,13 @@ function Home() {
 
     const onConfirmDelete = () => {
 
-        const urlAndPort = {
-            url: "http://localhost",
-            port: 8081,
+        const axiosParams = {
+            url: url,
+            port: port,
             id: idSelected
         }
 
-        deleteReport(urlAndPort).then(() => {
+        deleteReport(axiosParams).then(() => {
 
             const del = reports.filter(report => idSelected !== report.id)
             setReports(del)
@@ -174,12 +142,12 @@ function Home() {
 
     useEffect(() => {
 
-        const urlAndPort = {
+        const axiosParams = {
             url: url,
             port: port,
         }
 
-        retrieveReports(urlAndPort)
+        retrieveReports(axiosParams)
 
             .then(({data}) => {
                     setDataTableObj({...data, isFetching: true})

@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import api from "../api/api";
 import {IconButton} from "@material-ui/core";
 import {Edit, Delete, Save, Cancel} from "@material-ui/icons";
 import ConfirmationModal from "./ConfirmationModal";
 import {deleteStats, retrieveStatsForReport, updateStatsEndpoint} from "../api";
-
-const url = "http://localhost"
-const port = 8081
+import {url, port} from "../helper/Helper";
 
 export default function StatsTable({match, onRetrieveInfo}) {
 
@@ -59,13 +56,13 @@ export default function StatsTable({match, onRetrieveInfo}) {
 
     useEffect(() => {
 
-        const urlAndPort = {
+        const axiosParams = {
             url: url,
             port: port,
             id: match.params.id
         }
 
-        retrieveStatsForReport(urlAndPort)
+        retrieveStatsForReport(axiosParams)
 
             .then(({data}) => {
 
@@ -86,14 +83,14 @@ export default function StatsTable({match, onRetrieveInfo}) {
 
         setShowInputEndpoint(true)
 
-        const urlAndPort = {
+        const axiosParams = {
             url: url,
             port: port,
             id: idSelected,
             payload: endpoint
         }
 
-        updateStatsEndpoint(urlAndPort, endpoint)
+        updateStatsEndpoint(axiosParams, endpoint)
 
             .then((response) => {
                     setEndpoint(endpoint);
@@ -111,13 +108,13 @@ export default function StatsTable({match, onRetrieveInfo}) {
 
     const onConfirmDelete = () => {
 
-        const urlAndPort = {
+        const axiosParams = {
             url: url,
             port: port,
             id: idSelected
         }
 
-        deleteStats(urlAndPort).then(() => {
+        deleteStats(axiosParams).then(() => {
 
             const del = stats.stats.filter(stats => idSelected !== stats.id)
 
