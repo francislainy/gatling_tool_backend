@@ -39,3 +39,5 @@ build/
 
 /node_modules
 /frontend/node_modules/
+/backend/index.html
+/backend/stats.json
