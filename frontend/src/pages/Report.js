@@ -1,18 +1,19 @@
 import React, {useEffect, useState} from "react";
 import {Card} from "react-bootstrap";
-import {Settings} from "@material-ui/icons";
+import {Delete, Settings} from "@material-ui/icons";
 import '../css/CustomStyle.css'
-import StatsTable from "./StatsTable";
-import ReportPopup from "./ReportPopup";
+import StatsTable from "../components/StatsTable";
+import ReportPopup from "../components/ReportPopup";
 import {CSVLink} from "react-csv";
 import {retrieveReportItem, updateReport} from "../api";
 import IconButton from "@material-ui/core/IconButton";
 import {headers, url, port} from "../helper/Helper";
+import ConfirmationModal from "../components/ConfirmationModal";
 
 
 const moment = require("moment");
 
-const Report = ({match}) => {
+const Report = ({match, handleDeletePopUp, showConfirmationModal, onHide, onConfirmDelete }) => {
 
     const [data, setData] = useState()
 
@@ -145,6 +146,9 @@ const Report = ({match}) => {
                         <IconButton className="iconButton" onClick={() => handleShow()}>
                             <Settings/>
                         </IconButton>
+                        <IconButton style={{alignSelf: 'baseline'}} onClick={() => handleDeletePopUp()}>
+                            <Delete/>
+                        </IconButton>
                         <ReportPopup
                             show={show}
                             onHide={handleHide}
@@ -195,6 +199,15 @@ const Report = ({match}) => {
                 </Card.Body>
                 }
             </Card>
+            <ConfirmationModal
+                showHeader={false}
+                show={showConfirmationModal}
+                onHide={() => onHide("delete")}
+                onConfirm={() => onConfirmDelete(match.params.id)}
+                ok={'OK'}
+                cancel={'Cancel'}
+                body={'Are you sure you want to delete this item?'}
+            />
         </div>
         <StatsTable match={match} onRetrieveInfo={onRetrieveInfo}/>
     </div>;
