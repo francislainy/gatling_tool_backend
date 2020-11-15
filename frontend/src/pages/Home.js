@@ -21,6 +21,7 @@ function Home() {
     const [showImportModal, setShowImportModal] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
+    const [textAlert, setTextAlert] = useState('')
     const [file, setFile] = useState()
     const [idSelected, setIdSelected] = useState(0);
 
@@ -105,9 +106,16 @@ function Home() {
 
                     new api().submitJsonStats(reportId, file).then((response) => {
                             console.log('report id ' + reportId + ' successfully created')
-                            new api().submitHtmlIndex(reportId, file).then((response) => {
+                            new api().submitHtmlIndex(reportId, file).then(async (response) => {
                                     console.log('report id ' + reportId + ' successfully created')
                                     onHide('import')
+
+                                    setTextAlert('Item successfully added')
+                                    setShowAlert(true)
+                                    await delay(2000)
+
+                                    setShowAlert(false)
+
                                 }
                             ).catch(reason => {
                                 console.log(reason + ' reason here')
@@ -142,6 +150,7 @@ function Home() {
 
             setShowConfirmationModal(false)
 
+            setTextAlert('Item successfully deleted')
             setShowAlert(true)
 
             await delay(2000)
@@ -177,7 +186,8 @@ function Home() {
     return (
         <div>
             <div>
-                {showAlert && <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">Item successfully deleted</Alert>}
+                {showAlert &&
+                <Alert icon={<CheckIcon fontSize="inherit"/>} severity="success">{textAlert}</Alert>}
                 <div className="d-flex" id="wrapper">
                     {/*<Sidebar/>*/}
                     <div id="page-content-wrapper">

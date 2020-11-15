@@ -194,7 +194,6 @@ exports.submitJsonStats = endpoint => {
     const id = endpoint.id
     const payload = endpoint.payload
 
-
     return axios.request({
         method: "POST",
         baseURL: `${url}:${port}`,
