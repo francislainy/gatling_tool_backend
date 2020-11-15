@@ -8,18 +8,22 @@ import ConfirmationModal from "../components/ConfirmationModal";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import {url, port} from "../helper/Helper";
+import Alert from "@material-ui/lab/Alert";
+import CheckIcon from "@material-ui/icons/Check";
 
 const {useHistory} = require('react-router-dom')
-
 const moment = require("moment");
+const delay = ms => new Promise(res => setTimeout(res, ms));
 
 function Home() {
     let history = useHistory();
 
     const [showImportModal, setShowImportModal] = useState(false);
     const [showConfirmationModal, setShowConfirmationModal] = useState(false)
+    const [showAlert, setShowAlert] = useState(false)
     const [file, setFile] = useState()
     const [idSelected, setIdSelected] = useState(0);
+
     const handleClick = (id) => {
         history.push(`/report/${id}`);
     }
@@ -131,12 +135,18 @@ function Home() {
             id: idSelected
         }
 
-        deleteReport(axiosParams).then(() => {
+        deleteReport(axiosParams).then(async () => {
 
             const del = reports.filter(report => idSelected !== report.id)
             setReports(del)
 
             setShowConfirmationModal(false)
+
+            setShowAlert(true)
+
+            await delay(2000)
+
+            setShowAlert(false)
         })
     }
 
@@ -167,6 +177,7 @@ function Home() {
     return (
         <div>
             <div>
+                {showAlert && <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">Item successfully deleted</Alert>}
                 <div className="d-flex" id="wrapper">
                     {/*<Sidebar/>*/}
                     <div id="page-content-wrapper">
