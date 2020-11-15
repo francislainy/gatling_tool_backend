@@ -9,11 +9,12 @@ import {retrieveReportItem, updateReport} from "../api";
 import IconButton from "@material-ui/core/IconButton";
 import {headers, url, port} from "../helper/Helper";
 import ConfirmationModal from "../components/ConfirmationModal";
-
+import Alert from "@material-ui/lab/Alert";
+import CheckIcon from '@material-ui/icons/Check';
 
 const moment = require("moment");
 
-const Report = ({match, handleDeletePopUp, showConfirmationModal, onHide, onConfirmDelete }) => {
+const Report = ({match, handleDeletePopUp, showConfirmationModal, onHide, onConfirmDelete, showAlert}) => {
 
     const [data, setData] = useState()
 
@@ -138,6 +139,7 @@ const Report = ({match, handleDeletePopUp, showConfirmationModal, onHide, onConf
     }
 
     return <div className="margin10">
+        {showAlert && <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">Item successfully deleted</Alert>}
         <div style={{display: 'flex', marginBottom: '10px'}}>
             <Card className="cardReportInfo">
                 {report.id !== '' &&

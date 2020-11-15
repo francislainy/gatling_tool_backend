@@ -12,6 +12,8 @@ import {deleteReport} from "./api";
 function App() {
 
     const [showConfirmationModal, setShowConfirmationModal] = useState(false)
+    const [showAlert, setShowAlert] = useState(false)
+    const delay = ms => new Promise(res => setTimeout(res, ms));
 
     const handleDeletePopUp = () => {
 
@@ -26,10 +28,16 @@ function App() {
             id: props.match.params.id
         }
 
-        props.history.goBack()
-
-        deleteReport(axiosParams).then(() => {
+        deleteReport(axiosParams).then(async () => {
             setShowConfirmationModal(false)
+
+            setShowAlert(true)
+
+            await delay(2000)
+            props.history.goBack()
+
+            setShowAlert(false)
+
         })
     }
 
@@ -48,6 +56,7 @@ function App() {
                 <Route path="/" exact component={Home}/>
                 <Route path="/report/:id" exact render={props => <Report
                     onConfirmDelete={() => onConfirmDelete(props)}
+                    showAlert={showAlert}
                     handleDeletePopUp={handleDeletePopUp}
                     showConfirmationModal={showConfirmationModal}
                     onHide={onHide}
