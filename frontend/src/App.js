@@ -18,13 +18,15 @@ function App() {
         setShowConfirmationModal(true)
     }
 
-    const onConfirmDelete = (id) => {
+    const onConfirmDelete = (props) => {
 
         const axiosParams = {
             url: url,
             port: port,
-            id: id
+            id: props.match.params.id
         }
+
+        props.history.goBack()
 
         deleteReport(axiosParams).then(() => {
             setShowConfirmationModal(false)
@@ -45,7 +47,7 @@ function App() {
             <Switch>
                 <Route path="/" exact component={Home}/>
                 <Route path="/report/:id" exact render={props => <Report
-                    onConfirmDelete={onConfirmDelete}
+                    onConfirmDelete={() => onConfirmDelete(props)}
                     handleDeletePopUp={handleDeletePopUp}
                     showConfirmationModal={showConfirmationModal}
                     onHide={onHide}
