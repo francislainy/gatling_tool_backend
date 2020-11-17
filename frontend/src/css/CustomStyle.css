@@ -19,6 +19,10 @@ table, td, th, tr {
     vertical-align: middle;
 }
 
+table input {
+    color: black;
+}
+
 .tableStats td {
     text-align: center;
     vertical-align: middle;
