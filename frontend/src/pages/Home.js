@@ -194,9 +194,11 @@ function Home() {
                         <Navbar/>
                         {/*<div style={{width: "25%"}}>Hi</div>*/}
                         <div>
-                            <div style={{padding: 10}}>
+                            <div style={{padding: 10, marginLeft: "3%"}}>
                                 <Button variant="warning" onClick={onShow}>Import Gatling Report</Button>
                             </div>
+
+                            <div style={{marginLeft: "6%", marginRight: "6%"}}>
                             <Popup
                                 show={showImportModal}
                                 onHide={() => onHide("import")}
@@ -206,6 +208,7 @@ function Home() {
                             {/*if at least one item we can try and populate the table..*/}
                             {reports[0].id !== "" &&
                             <ReportTable
+                                // style={{marginLeft: "10%", marginRight: "10%"}} //todo: pass style from here
                                 data={reports}
                                 handleClick={handleClick}
                                 handleDeletePopUp={handleDeletePopUp}
@@ -220,6 +223,7 @@ function Home() {
                                 cancel={'Cancel'}
                                 body={'Are you sure you want to delete this item?'}
                             />
+                        </div>
                         </div>
                     </div>
                 </div>
