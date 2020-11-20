@@ -192,32 +192,35 @@ function Home() {
                     {/*<Sidebar/>*/}
                     <div id="page-content-wrapper">
                         <Navbar/>
-                        <div style={{padding: 10}}>
-                            <Button variant="warning" onClick={onShow}>Import Gatling Report</Button>
+                        {/*<div style={{width: "25%"}}>Hi</div>*/}
+                        <div>
+                            <div style={{padding: 10}}>
+                                <Button variant="warning" onClick={onShow}>Import Gatling Report</Button>
+                            </div>
+                            <Popup
+                                show={showImportModal}
+                                onHide={() => onHide("import")}
+                                onConfirm={onConfirm}
+                                onFileAdded={onFileAdded}
+                            />
+                            {/*if at least one item we can try and populate the table..*/}
+                            {reports[0].id !== "" &&
+                            <ReportTable
+                                data={reports}
+                                handleClick={handleClick}
+                                handleDeletePopUp={handleDeletePopUp}
+                            />
+                            }
+                            <ConfirmationModal
+                                showHeader={false}
+                                show={showConfirmationModal}
+                                onHide={() => onHide("delete")}
+                                onConfirm={onConfirmDelete}
+                                ok={'OK'}
+                                cancel={'Cancel'}
+                                body={'Are you sure you want to delete this item?'}
+                            />
                         </div>
-                        <Popup
-                            show={showImportModal}
-                            onHide={() => onHide("import")}
-                            onConfirm={onConfirm}
-                            onFileAdded={onFileAdded}
-                        />
-                        {/*if at least one item we can try and populate the table..*/}
-                        {reports[0].id !== "" &&
-                        <ReportTable
-                            data={reports}
-                            handleClick={handleClick}
-                            handleDeletePopUp={handleDeletePopUp}
-                        />
-                        }
-                        <ConfirmationModal
-                            showHeader={false}
-                            show={showConfirmationModal}
-                            onHide={() => onHide("delete")}
-                            onConfirm={onConfirmDelete}
-                            ok={'OK'}
-                            cancel={'Cancel'}
-                            body={'Are you sure you want to delete this item?'}
-                        />
                     </div>
                 </div>
             </div>

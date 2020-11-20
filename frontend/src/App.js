@@ -8,6 +8,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./pages/Home";
 import {port, url} from "./helper/Helper";
 import {deleteReport} from "./api";
+import Settings from "./pages/Settings";
 
 function App() {
 
@@ -62,6 +63,7 @@ function App() {
                     onHide={onHide}
                     {...props}/>}/>
                 <Route path="/report" exact component={Report}/>
+                <Route path="/settings" exact component={Settings}/>
             </Switch>
         </Router>
     );
