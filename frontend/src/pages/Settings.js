@@ -50,7 +50,7 @@ function Settings({handleDeletePopUp, showConfirmationModal, onConfirmDelete, on
                 showHeader={false}
                 show={showConfirmationModal}
                 onHide={() => onHide("delete")}
-                onConfirm={() => onConfirmDelete(categories.categories[10].id)}
+                onConfirm={onConfirmDelete}
                 ok={'OK'}
                 cancel={'Cancel'}
                 body={'Are you sure you want to delete this item?'}
