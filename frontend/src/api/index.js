@@ -2,18 +2,6 @@
 
 const axios = require("axios")
 
-exports.getMeCategory = endpoint => {
-    const url = endpoint.url
-    const port = endpoint.port
-
-    return axios.request({
-        method: "GET",
-        baseURL: `${url}:${port}`,
-        url: "/category/cdb02322-a8a6-4acf-9644-ddf8b24af9e6",
-        headers: {Accept: "application/json"},
-    })
-}
-
 exports.getMeCategoryIncludeReports = endpoint => {
     const url = endpoint.url
     const port = endpoint.port
@@ -188,6 +176,19 @@ exports.updateCategory = endpoint => {
     })
 }
 
+exports.deleteCategory = endpoint => {
+    const url = endpoint.url
+    const port = endpoint.port
+    const id = endpoint.id
+
+    return axios.request({
+        method: "DELETE",
+        baseURL: `${url}:${port}`,
+        url: `api/gatling-tool/category/${id}`,
+        headers: {Accept: "application/json"},
+    })
+}
+
 exports.submitJsonStats = endpoint => {
     const url = endpoint.url
     const port = endpoint.port
@@ -235,6 +236,18 @@ exports.getMeDog = endpoint => {
         method: "GET",
         baseURL: `${url}:${port}`,
         url: "/dogs/1",
+        headers: {Accept: "application/json"},
+    })
+}
+
+exports.getMeCategory = endpoint => {
+    const url = endpoint.url
+    const port = endpoint.port
+
+    return axios.request({
+        method: "GET",
+        baseURL: `${url}:${port}`,
+        url: "/category/cdb02322-a8a6-4acf-9644-ddf8b24af9e6",
         headers: {Accept: "application/json"},
     })
 }

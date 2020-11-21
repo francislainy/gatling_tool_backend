@@ -1,21 +1,60 @@
 import React, {useEffect, useState} from 'react';
-import Button from "react-bootstrap/Button";
-import Popup from "../components/Popup";
-import ReportTable from "../components/ReportTable";
-import api from "../api/api";
-import {createReport, deleteReport, retrieveReports} from "../api";
+import {retrieveCategories} from "../api";
 import ConfirmationModal from "../components/ConfirmationModal";
-import Sidebar from "../components/Sidebar";
-import Navbar from "../components/Navbar";
 import {url, port} from "../helper/Helper";
 import Alert from "@material-ui/lab/Alert";
+import CategoryTable from "../components/CategoryTable";
 import CheckIcon from "@material-ui/icons/Check";
 
-function Settings() {
+function Settings({handleDeletePopUp, showConfirmationModal, onConfirmDelete, onHide, showAlert}) {
+
+    const [categories, setCategories] = useState({
+        categories: [
+            {
+                id: "",
+                title: ""
+            }
+        ]
+        , isFetching: false
+    })
+
+    useEffect(() => {
+
+        const axiosParams = {
+            url: url,
+            port: port,
+        }
+
+        retrieveCategories(axiosParams)
+
+            .then(({data}) => {
+                    setCategories({...data, isFetching: true})
+                }
+            ).catch(reason => {
+            console.log(reason + ' reason for failure on retrieving category table items')
+        })
+
+    }, [!showAlert])
 
     return (
         <div>
-            Hello from settings
+            <h3 className="margin10">Categories</h3>
+            {showAlert && <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">Item successfully deleted</Alert>}
+            {categories !== undefined && categories.categories !== undefined &&
+            <CategoryTable
+                data={categories.categories}
+                handleDeletePopUp={handleDeletePopUp}
+            />
+            }
+            <ConfirmationModal
+                showHeader={false}
+                show={showConfirmationModal}
+                onHide={() => onHide("delete")}
+                onConfirm={() => onConfirmDelete(categories.categories[10].id)}
+                ok={'OK'}
+                cancel={'Cancel'}
+                body={'Are you sure you want to delete this item?'}
+            />
         </div>
     );
 }

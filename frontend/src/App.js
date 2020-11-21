@@ -7,7 +7,7 @@ import Report from "./pages/Report";
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import Home from "./pages/Home";
 import {port, url} from "./helper/Helper";
-import {deleteReport} from "./api";
+import {deleteReport, deleteCategory} from "./api";
 import Settings from "./pages/Settings";
 
 function App() {
@@ -15,8 +15,12 @@ function App() {
     const [showConfirmationModal, setShowConfirmationModal] = useState(false)
     const [showAlert, setShowAlert] = useState(false)
     const delay = ms => new Promise(res => setTimeout(res, ms));
+    const [id, setId] = useState()
 
-    const handleDeletePopUp = () => {
+    const handleDeletePopUp = (id) => {
+
+        console.log("id here " + id)
+        setId(id)
 
         setShowConfirmationModal(true)
     }
@@ -37,6 +41,25 @@ function App() {
             await delay(2000)
             props.history.goBack()
 
+            setShowAlert(false)
+
+        })
+    }
+
+    const onConfirmDeleteCategory = () => {
+
+        const axiosParams = {
+            url: url,
+            port: port,
+            id: id
+        }
+
+        deleteCategory(axiosParams).then(async () => {
+            setShowConfirmationModal(false)
+
+            setShowAlert(true)
+
+            await delay(2000)
             setShowAlert(false)
 
         })
@@ -63,7 +86,13 @@ function App() {
                     onHide={onHide}
                     {...props}/>}/>
                 <Route path="/report" exact component={Report}/>
-                <Route path="/settings" exact component={Settings}/>
+                <Route path="/settings" exact render={props => <Settings
+                    onConfirmDelete={onConfirmDeleteCategory}
+                    showAlert={showAlert}
+                    handleDeletePopUp={handleDeletePopUp}
+                    showConfirmationModal={showConfirmationModal}
+                    onHide={onHide}
+                    {...props}/>}/>
             </Switch>
         </Router>
     );

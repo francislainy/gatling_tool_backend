@@ -26,3 +26,20 @@ export const columns = [
         accessor: 'actions',
     },
 ];
+
+export const columnsCategory = [
+    {
+        Header: 'ID',
+        accessor: 'id',
+        filter: "text"
+    },
+    {
+        Header: 'Name',
+        accessor: 'title',
+        filter: "text"
+    },
+    {
+        Header: 'Actions',
+        accessor: 'actions',
+    },
+];
