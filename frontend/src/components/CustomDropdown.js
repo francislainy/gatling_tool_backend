@@ -5,14 +5,16 @@ import {url, port} from "../helper/Helper";
 
 // The forwardRef is important!!
 // Dropdown needs access to the DOM node in order to position the Menu
-const CustomToggle = React.forwardRef(({children, onClick}, ref) => (
+const CustomToggle = React.forwardRef(({children, onClick, setShow, onChange}, ref) => (
     <a
         style={{color: "orange", textDecoration: "none"}}
         href=""
         ref={ref}
         onClick={(e) => {
             e.preventDefault();
+            onChange()
             onClick(e);
+            setShow(prevState => !prevState)
         }}
     >
         {children}
@@ -48,6 +50,7 @@ export function CustomDropdown(props) {
 
     const [data, setData] = useState({categories: [], isFetching: false});
     const [input, setInput] = useState('');
+    const [show, setShow] = useState(false)
 
     const useFetchData = ({payload}) => {
         const [res, setRes] = useState({data: null, isLoading: false});
@@ -65,6 +68,9 @@ export function CustomDropdown(props) {
 
                 createCategory(axiosParams).then(res => {
                     setRes({data: res.data, isLoading: false});
+
+                    setShow(false)
+                    // props.onHandleChangeCategory(payload.title, payload.id)
                 }).catch((error) => {
                     setRes({data: null, isLoading: false});
                 })
@@ -92,32 +98,35 @@ export function CustomDropdown(props) {
             }
         };
         fetchData().then(r => console.log(r))
-    }, []);
+    }, [show]);
 
     const handleChange = (e) => {
 
-        setInput(e.currentTarget.value);
-        console.log(e.currentTarget.value)
+        if (e !== '') {
+            setInput(e.currentTarget.value);
+        } else {
+            setInput('')
+        }
     }
 
     const [, addCategory] = useFetchData({payload: {"title": `${input}`}});
 
     return (
         <div>
-            {/*<input type="text" value={testInput} onChange={handleChangeTest}/>*/}
-
-            <Dropdown>
-                <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components">
+            <Dropdown show={show}>
+                <Dropdown.Toggle
+                    setShow={setShow}
+                    onChange={() => handleChange('')}
+                    as={CustomToggle} id="dropdown-custom-components">
                     Report Category
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu as={CustomMenu}>
                     {data.categories.map((item, i) => {
                         return <Dropdown.Item
                             onClick={() => props.onHandleChangeCategory(item.title, item.id)}>{item.title}</Dropdown.Item>
                     })}
-                    <div style={{margin: "10px"}}>
-                        <input type="text" onChange={handleChange}/>
+                    <div className="margin10">
+                        <input type="text" onChange={handleChange} value={input}/>
                         <button style={{backgroundColor: "orange", color: "white"}} onClick={() => {
                             addCategory()
                         }} type="button">+

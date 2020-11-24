@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.francislainy</groupId>
-    <artifactId>gatling_tool</artifactId>
+    <artifactId>backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>gatling_tool</name>
     <description>Demo project for Spring Boot</description>
