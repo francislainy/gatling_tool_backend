@@ -29,3 +29,4 @@ public interface ReportRepository extends CrudRepository<Report, UUID> {
     Report findReportItemWithCategoryName(@Param("id") UUID id);
 
 }
+

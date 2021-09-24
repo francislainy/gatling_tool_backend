@@ -27,11 +27,7 @@ public class CsvHelper {
 
     public static boolean hasCSVFormat(MultipartFile file) {
 
-        if (!TYPE.equals(file.getContentType())) {
-            return false;
-        }
-
-        return true;
+        return TYPE.equals(file.getContentType());
     }
 
     public static List<Tutorial> csvToTutorials(InputStream is) {
@@ -39,7 +35,7 @@ public class CsvHelper {
              CSVParser csvParser = new CSVParser(fileReader,
                      CSVFormat.DEFAULT.withDelimiter(',').withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim())) {
 
-            List<Tutorial> tutorials = new ArrayList<Tutorial>();
+            List<Tutorial> tutorials = new ArrayList<>();
 
             List<CSVRecord> csvRecords = csvParser.getRecords();
 
@@ -64,7 +60,7 @@ public class CsvHelper {
         final CSVFormat format = CSVFormat.DEFAULT.withQuoteMode(QuoteMode.MINIMAL);
 
         try (ByteArrayOutputStream out = new ByteArrayOutputStream();
-             CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format);) {
+             CSVPrinter csvPrinter = new CSVPrinter(new PrintWriter(out), format)) {
             for (StatsEntity statsEntity : statsEntityList) {
                 List<String> data = Arrays.asList(
                         String.valueOf(statsEntity.getId()),

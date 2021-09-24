@@ -199,8 +199,8 @@
                 <version>${pact.version}</version>
                 <configuration>
                     <pactDirectory>target/pacts</pactDirectory>
-                    <pactBrokerUrl>https://fcampos.pactflow.io/</pactBrokerUrl>
-                    <pactBrokerToken>jBQLotqEIjcrzr8ybO_tBw</pactBrokerToken>
+                    <pactBrokerUrl>https://hmhco.pact.dius.com.au/</pactBrokerUrl>
+                    <pactBrokerToken>6hRt5C7Hg82hlGIShd7Ipw</pactBrokerToken>
                     <projectVersion>${project.version}</projectVersion>
                     <trimSnapshot>true</trimSnapshot>
                 </configuration>
